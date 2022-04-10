@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body%}
+    <main id="content" role="main" class="main pointer-event">
+        <!-- Content -->
+        <div class="content container-fluid">
+          {% block page_content %}
+
+            {% endblock %}
+        </div>
+        <!-- End Content -->
+
+        <!-- Footer -->
+        {% include 'admin/_includes/footer.html.twig' %}
+        <!-- End Footer -->
+    </main>
+
+{% endblock %}

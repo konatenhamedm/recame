@@ -1,0 +1,34 @@
+<table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+           data-hs-datatables-options='{
+                     "columnDefs": [{
+                      
+                        "orderable": false
+                      }],
+                     "order": [],
+                     "info": {
+                       "totalQty": "#datatableWithPaginationInfoTotalQty"
+                     },
+                     "search": "#datatableSearch",
+                     "entries": "#datatableEntries",
+                     "pageLength": 7,
+                     "isResponsive": false,
+                     "isShowPaging": false,
+                     "pagination": "datatablePagination"
+                   }'>
+        <thead class="thead-light">
+        <tr>
+            <th scope="col" class="table-column-pr-0">
+                <div class="custom-control custom-checkbox">
+                    <input id="datatableCheckAll" type="checkbox" class="custom-control-input">
+                    <label class="custom-control-label" for="datatableCheckAll"></label>
+                </div>
+            </th>
+
+
+            {% for ent in tableau %}
+                <th class="table-column-pl-1" >{{ ent }}</th>
+            {% endfor %}
+            <th>Status</th>
+            <th class="" rowspan="1" colspan="1" aria-label="" style="width: 74.512px;">Actions</th>
+        </tr>
+        </thead>

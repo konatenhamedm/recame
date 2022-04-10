@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from htmlstream.com/front-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Feb 2022 12:00:58 GMT -->
+<head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block titre %}Dashboard | Front - Admin &amp; Dashboard Template{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-set/style.css') }}">
+
+
+
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="{{ asset('assets/css/theme.minc619.css?v=1.0') }}">
+</head>
+
+<body class="   footer-offset">
+
+<script src="{{ asset('assets/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js') }}"></script>
+
+<!-- Builder -->
+<div id="styleSwitcherDropdown" class="hs-unfold-content sidebar sidebar-bordered sidebar-box-shadow" style="width: 35rem;">
+    <div class="card card-lg border-0 h-100">
+        <div class="card-header align-items-start">
+            <div class="mr-2">
+                <h3 class="card-header-title">INFOS ENTREPRISE </h3>
+                <p>Customize your overview page layout. Choose the one that best fits your needs.</p>
+            </div>
+
+            <!-- Toggle Button -->
+            <a class="js-hs-unfold-invoker btn btn-icon btn-xs btn-ghost-dark" href="javascript:;"
+               data-hs-unfold-options='{
+                  "target": "#styleSwitcherDropdown",
+                  "type": "css-animation",
+                  "animationIn": "fadeInRight",
+                  "animationOut": "fadeOutRight",
+                  "hasOverlay": true,
+                  "smartPositionOff": true
+                 }'>
+                <i class="tio-clear tio-lg"></i>
+            </a>
+            <!-- End Toggle Button -->
+        </div>
+
+        <!-- Body -->
+        <div class="card-body sidebar-scrollbar">
+            <h4 class="mb-1">Layout skins <span id="js-builder-disabled" class="badge badge-soft-danger" style="opacity: 0">Disabled</span></h4>
+            <p>3 kinds of layout skins to choose from.</p>
+
+            <div class="row gx-2 mb-5">
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="layoutSkinsRadio" id="layoutSkinsRadio1" checked value="default">
+                            <label class="custom-checkbox-card-label" for="layoutSkinsRadio1">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/layouts-sidebar-default.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Default</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="layoutSkinsRadio" id="layoutSkinsRadio2" value="navbar-dark">
+                            <label class="custom-checkbox-card-label" for="layoutSkinsRadio2">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/layouts-sidebar-dark.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Dark</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="layoutSkinsRadio" id="layoutSkinsRadio3"  value="navbar-light">
+                            <label class="custom-checkbox-card-label" for="layoutSkinsRadio3">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/layouts-sidebar-light.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Light</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+            </div>
+            <!-- End Row -->
+
+            <h4 class="mb-1">Sidebar layout options</h4>
+            <p>Choose between standard navigation sizing, mini or even compact with icons.</p>
+
+            <div class="row gx-2 mb-5">
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="sidebarLayoutOptions" id="sidebarLayoutOptions1" checked value="default">
+                            <label class="custom-checkbox-card-label" for="sidebarLayoutOptions1">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/sidebar-default-classic.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Default</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="sidebarLayoutOptions" id="sidebarLayoutOptions2" value="navbar-vertical-aside-compact-mode">
+                            <label class="custom-checkbox-card-label" for="sidebarLayoutOptions2">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/sidebar-compact.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Compact</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="sidebarLayoutOptions" id="sidebarLayoutOptions3" value="navbar-vertical-aside-mini-mode">
+                            <label class="custom-checkbox-card-label" for="sidebarLayoutOptions3">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/sidebar-mini.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Mini</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+            </div>
+            <!-- End Row -->
+
+            <h4 class="mb-1">Header layout options</h4>
+            <p>Choose the primary navigation of your header layout.</p>
+
+            <div class="row gx-2">
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="headerLayoutOptions" id="headerLayoutOptions1" value="single">
+                            <label class="custom-checkbox-card-label" for="headerLayoutOptions1">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/header-default-fluid.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Default (Fluid)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="headerLayoutOptions" id="headerLayoutOptions2" value="single-container">
+                            <label class="custom-checkbox-card-label" for="headerLayoutOptions2">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/header-default-container.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Default (Container)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="headerLayoutOptions" id="headerLayoutOptions3" value="double">
+                            <label class="custom-checkbox-card-label" for="headerLayoutOptions3">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/header-double-line-fluid.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Double line (Fluid)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+
+                <!-- Custom Radio -->
+                <div class="col-4 text-center mt-2">
+                    <div class="text-center">
+                        <div class="custom-checkbox-card mb-2">
+                            <input type="radio" class="custom-checkbox-card-input" name="headerLayoutOptions" id="headerLayoutOptions4" value="double-container">
+                            <label class="custom-checkbox-card-label" for="headerLayoutOptions4">
+                                <img class="custom-checkbox-card-img" src="{{ asset('assets/svg/layouts/header-double-line-container.svg') }}" alt="Image Description">
+                            </label>
+                            <span class="custom-checkbox-card-text">Double line (Container)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Custom Radio -->
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Body -->
+
+        <!-- Footer -->
+        <div class="card-footer">
+            <div class="row gx-2">
+                <div class="col">
+                    <button type="button" id="js-builder-reset" class="btn btn-block btn-lg btn-white">
+                        <i class="tio-restore"></i> Reset
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" id="js-builder-preview" class="btn btn-block btn-lg btn-primary">
+                        <i class="tio-visible"></i> Preview
+                    </button>
+                </div>
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Footer -->
+    </div>
+</div>
+<!-- End Builder -->
+
+<!-- Builder Toggle -->
+<div class="d-none d-md-block position-fixed bottom-0 right-0 mr-5 mb-10" style="z-index: 3;">
+    <div style="position: fixed; top: 50%; right: 0; margin-right: -.25rem; transform: translateY(-50%); writing-mode: vertical-rl; text-orientation: sideways;">
+        <div class="hs-unfold">
+            <a id="builderPopover" class="js-hs-unfold-invoker btn btn-sm btn-soft-dark py-3" href="javascript:;" data-template='<div class="d-none d-md-block popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>' data-toggle="popover" data-placement="left" title="<div class='d-flex align-items-center'>Front Builder <a href='#!' class='close close-light ml-auto'><i id='closeBuilderPopover' class='tio-clear'></i></a></div>" data-content="Customize your overview page layout. Choose the one that best fits your needs." data-html="true"
+               data-hs-unfold-options='{
+                "target": "#styleSwitcherDropdown",
+                "type": "css-animation",
+                "animationIn": "fadeInRight",
+                "animationOut": "fadeOutRight",
+                "hasOverlay": true,
+                "smartPositionOff": true
+               }'>
+                <i class="tio-tune mr-2"></i>
+                <span class="font-weight-bold text-uppercase">A PROPOS</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- JS Preview mode only -->
+{% include 'admin/_includes/header.html.twig' %}
+<div id="sidebarMain" class="d-none">
+    {% include 'admin/_includes/aside1.html.twig' %}
+</div>
+<div id="sidebarCompact" class="d-none">
+  {#{% include 'admin/_includes/aside.html.twig' %}#}
+</div>
+
+<script src="{{ asset('assets/js/demo.js') }}"></script>
+
+<!-- END ONLY DEV -->
+
+<!-- Search Form -->
+<div id="searchDropdown" class="hs-unfold-content dropdown-unfold search-fullwidth d-md-none">
+    <form class="input-group input-group-merge input-group-borderless">
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+                <i class="tio-search"></i>
+            </div>
+        </div>
+
+        <input class="form-control rounded-0" type="search" placeholder="Search in front" aria-label="Search in front">
+
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker" href="javascript:;"
+                       data-hs-unfold-options='{
+                   "target": "#searchDropdown",
+                   "type": "css-animation",
+                   "animationIn": "fadeIn",
+                   "hasOverlay": "rgba(46, 52, 81, 0.1)",
+                   "closeBreakpoint": "md"
+                 }'>
+                        <i class="tio-clear tio-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- End Search Form -->
+
+<!-- ========== HEADER ========== -->
+{% block body %}
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+{% endblock %}
+
+<!-- ========== END HEADER ========== -->
+
+<!-- ========== MAIN CONTENT ========== -->
+
+<!-- JS Implementing Plugins -->
+<script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/chart.js.extensions/chartjs-extensions.js') }}"></script>
+<script src="{{ asset('assets/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js') }}"></script>
+
+
+
+<!-- JS Front -->
+<script src="{{ asset('assets/js/theme.min.js') }}"></script>
+
+<!-- JS Plugins Init. -->
+<script>
+    $(document).on('ready', function () {
+        // ONLY DEV
+        // =======================================================
+
+        if (window.localStorage.getItem('hs-builder-popover') === null) {
+            $('#builderPopover').popover('show')
+                .on('shown.bs.popover', function () {
+                    $('.popover').last().addClass('popover-dark')
+                });
+
+            $(document).on('click', '#closeBuilderPopover' , function() {
+                window.localStorage.setItem('hs-builder-popover', true);
+                $('#builderPopover').popover('dispose');
+            });
+        } else {
+            $('#builderPopover').on('show.bs.popover', function () {
+                return false
+            });
+        }
+
+        // END ONLY DEV
+        // =======================================================
+
+
+        // BUILDER TOGGLE INVOKER
+        // =======================================================
+        $('.js-navbar-vertical-aside-toggle-invoker').click(function () {
+            $('.js-navbar-vertical-aside-toggle-invoker i').tooltip('hide');
+        });
+
+
+        // INITIALIZATION OF MEGA MENU
+        // =======================================================
+        var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
+            desktop: {
+                position: 'left'
+            }
+        }).init();
+
+
+
+        // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
+        // =======================================================
+        var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
+
+
+        // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
+        // =======================================================
+        $('.js-nav-tooltip-link').tooltip({ boundary: 'window' })
+
+        $(".js-nav-tooltip-link").on("show.bs.tooltip", function(e) {
+            if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
+                return false;
+            }
+        });
+
+
+        // INITIALIZATION OF UNFOLD
+        // =======================================================
+        $('.js-hs-unfold-invoker').each(function () {
+            var unfold = new HSUnfold($(this)).init();
+        });
+
+
+        // INITIALIZATION OF FORM SEARCH
+        // =======================================================
+        $('.js-form-search').each(function () {
+            new HSFormSearch($(this)).init()
+        });
+
+
+        // INITIALIZATION OF SELECT2
+        // =======================================================
+        $('.js-select2-custom').each(function () {
+            var select2 = $.HSCore.components.HSSelect2.init($(this));
+        });
+
+
+        // INITIALIZATION OF CHARTJS
+        // =======================================================
+        Chart.plugins.unregister(ChartDataLabels);
+
+        $('.js-chart').each(function () {
+            $.HSCore.components.HSChartJS.init($(this));
+        });
+
+        var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'));
+
+        // CALL WHEN TAB IS CLICKED
+        // =======================================================
+        $('[data-toggle="chart-bar"]').click(function(e) {
+            let keyDataset = $(e.currentTarget).attr('data-datasets')
+
+            if (keyDataset === 'lastWeek') {
+                updatingChart.data.labels = ["Apr 22", "Apr 23", "Apr 24", "Apr 25", "Apr 26", "Apr 27", "Apr 28", "Apr 29", "Apr 30", "Apr 31"];
+                updatingChart.data.datasets = [
+                    {
+                        "data": [120, 250, 300, 200, 300, 290, 350, 100, 125, 320],
+                        "backgroundColor": "#377dff",
+                        "hoverBackgroundColor": "#377dff",
+                        "borderColor": "#377dff"
+                    },
+                    {
+                        "data": [250, 130, 322, 144, 129, 300, 260, 120, 260, 245, 110],
+                        "backgroundColor": "#e7eaf3",
+                        "borderColor": "#e7eaf3"
+                    }
+                ];
+                updatingChart.update();
+            } else {
+                updatingChart.data.labels = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
+                updatingChart.data.datasets = [
+                    {
+                        "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
+                        "backgroundColor": "#377dff",
+                        "hoverBackgroundColor": "#377dff",
+                        "borderColor": "#377dff"
+                    },
+                    {
+                        "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
+                        "backgroundColor": "#e7eaf3",
+                        "borderColor": "#e7eaf3"
+                    }
+                ]
+                updatingChart.update();
+            }
+        })
+
+
+        // INITIALIZATION OF BUBBLE CHARTJS WITH DATALABELS PLUGIN
+        // =======================================================
+        $('.js-chart-datalabels').each(function () {
+            $.HSCore.components.HSChartJS.init($(this), {
+                plugins: [ChartDataLabels],
+                options: {
+                    plugins: {
+                        datalabels: {
+                            anchor: function(context) {
+                                var value = context.dataset.data[context.dataIndex];
+                                return value.r < 20 ? 'end' : 'center';
+                            },
+                            align: function(context) {
+                                var value = context.dataset.data[context.dataIndex];
+                                return value.r < 20 ? 'end' : 'center';
+                            },
+                            color: function(context) {
+                                var value = context.dataset.data[context.dataIndex];
+                                return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
+                            },
+                            font: function(context) {
+                                var value = context.dataset.data[context.dataIndex],
+                                    fontSize = 25;
+
+                                if (value.r > 50) {
+                                    fontSize = 35;
+                                }
+
+                                if (value.r > 70) {
+                                    fontSize = 55;
+                                }
+
+                                return {
+                                    weight: 'lighter',
+                                    size: fontSize
+                                };
+                            },
+                            offset: 2,
+                            padding: 0
+                        }
+                    }
+                },
+            });
+        });
+
+
+        // INITIALIZATION OF DATERANGEPICKER
+        // =======================================================
+        $('.js-daterangepicker').daterangepicker();
+
+        $('.js-daterangepicker-times').daterangepicker({
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'M/DD hh:mm A'
+            }
+        });
+
+        var start = moment();
+        var end = moment();
+
+        function cb(start, end) {
+            $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
+        }
+
+        $('#js-daterangepicker-predefined').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+
+        cb(start, end);
+
+
+        // INITIALIZATION OF DATATABLES
+        // =======================================================
+        var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
+            select: {
+                style: 'multi',
+                selector: 'td:first-child input[type="checkbox"]',
+                classMap: {
+                    checkAll: '#datatableCheckAll',
+                    counter: '#datatableCounter',
+                    counterInfo: '#datatableCounterInfo'
+                }
+            },
+            language: {
+                zeroRecords: '<div class="text-center p-4">' +
+                    '<img class="mb-3" src="{{ asset('assets/svg/illustrations/sorry.svg') }}" alt="Image Description" style="width: 7rem;">' +
+                    '<p class="mb-0">Il n y a aucune données</p>' +
+                    '</div>'
+            }
+        });
+
+        $('.js-datatable-filter').on('change', function() {
+            var $this = $(this),
+                elVal = $this.val(),
+                targetColumnIndex = $this.data('target-column-index');
+
+            datatable.column(targetColumnIndex).search(elVal).draw();
+        });
+
+        $('#datatableSearch').on('mouseup', function (e) {
+            var $input = $(this),
+                oldValue = $input.val();
+
+            if (oldValue == "") return;
+
+            setTimeout(function(){
+                var newValue = $input.val();
+
+                if (newValue == ""){
+                    // Gotcha
+                    datatable.search('').draw();
+                }
+            }, 1);
+        });
+
+
+        // INITIALIZATION OF CLIPBOARD
+        // =======================================================
+        $('.js-clipboard').each(function() {
+            var clipboard = $.HSCore.components.HSClipboard.init(this);
+        });
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        $(".modal").on('show.bs.modal', function (e) {
+            let $target = $(e.relatedTarget);
+            console.log($target)
+            //alert("fffff");
+            const $this = $(this);
+
+            const options = $this.data('options');
+
+            if ($target.attr('href') && $target.attr('href')[0] != '#') {
+                $this.find('.modal-content').load($target.attr('href'));
+                //$this.find('.modal-header').css('background','blue').show();
+
+            }
+
+        });
+
+
+    });
+
+</script>
+<div class="modal fade" id="exampleModalSizeSm1" data-backdrop="static" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalSizeSm" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">
+                <span> &nbsp;&nbsp;Chargement des données... </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalTitle"
+     aria-hidden="true" data-backdrop="static"
+     aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h4 id="editUserModalTitle" class="modal-title"><span> &nbsp;&nbsp;Veillez patienter svp... </span></h4>
+
+                <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal"
+                        aria-label="Close">
+                    <i class="tio-clear tio-lg"></i>
+                </button>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body -->
+            <div class="modal-body text-center">
+                <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">
+                <span> &nbsp;&nbsp;Chargement des données... </span>
+            </div>
+            <!-- End Body -->
+        </div>
+    </div>
+</div>
+
+<!-- IE Support -->
+<script>
+    if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="{{ asset('assets/vendor/babel-polyfill/polyfill.min.js') }}"><\/script>');
+</script>
+</body>
+
+<!-- Mirrored from htmlstream.com/front-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Feb 2022 12:01:55 GMT -->
+</html>

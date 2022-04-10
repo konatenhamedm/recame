@@ -1,0 +1,88 @@
+{% set titre=titre %}
+<div class="card-header">
+    <div class="row justify-content-between align-items-center flex-grow-1">
+        <div class="col-12 col-md">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header-title">Liste des {{ titre  }}s</h5>
+
+                <!-- Datatable Info -->
+                <div id="datatableCounterInfo" style="display: none;">
+                    <div class="d-flex align-items-center">
+                      <span class="font-size-sm mr-3">
+                        <span id="datatableCounter">0</span>
+                        Selected
+                      </span>
+                        <a class="btn btn-sm btn-outline-danger" href="javascript:;">
+                            <i class="tio-delete-outlined"></i> Delete
+                        </a>
+                    </div>
+                </div>
+                <!-- End Datatable Info -->
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <!-- Filter -->
+            <div class="row align-items-sm-center">
+                <div class="col-sm-auto">
+                    <div class="d-flex align-items-center mr-2">
+                        <span class="text-secondary mr-2">Status:</span>
+
+                        <!-- Select -->
+                        <select class="js-select2-custom js-datatable-filter custom-select-sm" size="1" style="opacity: 0;"
+                                data-target-column-index="2"
+                                data-hs-select2-options='{
+                                "minimumResultsForSearch": "Infinity",
+                                "customClass": "custom-select custom-select-sm custom-select-borderless",
+                                "dropdownAutoWidth": true,
+                                "width": true
+                              }'>
+                            <option value="">All</option>
+                            <option value="2">2</option>
+                            <option value="overdue">Overdue</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                        <!-- End Select -->
+                    </div>
+                </div>
+
+                <div class="col-sm-auto">
+                    <div class="d-flex align-items-center mr-2">
+                        <span class="text-secondary mr-2">Signed up:</span>
+
+                        <!-- Select -->
+                        <select class="js-select2-custom js-datatable-filter custom-select-sm" size="1" style="opacity: 0;"
+                                data-target-column-index="5"
+                                data-hs-select2-options='{
+                                "minimumResultsForSearch": "Infinity",
+                                "customClass": "custom-select custom-select-sm custom-select-borderless",
+                                "dropdownAutoWidth": true,
+                                "width": true
+                              }'>
+                            <option value="">All</option>
+                            <option value="1 year ago">1 year ago</option>
+                            <option value="6 months ago">6 months ago</option>
+                        </select>
+                        <!-- End Select -->
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <form>
+                        <!-- Search -->
+                        <div class="input-group input-group-merge input-group-flush">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="tio-search"></i>
+                                </div>
+                            </div>
+                            <input id="datatableSearch" type="search" class="form-control" placeholder="Recherche..." aria-label="Search users">
+                        </div>
+                        <!-- End Search -->
+                    </form>
+                </div>
+            </div>
+            <!-- End Filter -->
+        </div>
+    </div>
+</div>

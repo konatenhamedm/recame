@@ -1,0 +1,74 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}{{ menu.getRoute }}{% endblock %}
+
+{% block page_content %}
+    {% set new=menu.getRoute %}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <h1 class="page-header-title">Membres</h1>
+            </div>
+
+            <div class="col-sm-auto">
+                <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                    <i class="tio-user-add mr-1"></i>Nouveau
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <div class="card mb-3 mb-lg-5">
+        {% include 'admin/tableau/card.html.twig'  with {'titre':new } %}
+        <div class="table-responsive datatable-custom">
+            {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
+            <tbody class="tbody">
+            {% for data in pagination %}
+
+                <tr class="tr">
+                    <td class="table-column-pr-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
+                            <label class="custom-control-label" for="usersDataCheck4"></label>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="avatar avatar-sm avatar-circle mr-2">
+                            <img class="avatar-img" src="{{ asset('uploads/images/' ~ data.photo) }}" alt="Image Description">
+                        </div>
+                       {# {{ data.photo }}#}
+                    </td>
+                    <td >
+                        {{ data.nom }}
+                    </td>
+                    <td >
+                        {{ data.prenoms }}
+                    </td>
+                    <td >
+                        {{ data.departement.libDepartement }}
+                    </td>
+                    <td >
+                        {{ data.email }}
+                    </td>
+                    <td >
+                        {{ data.region.libelle }}
+                    </td>
+                    <td class="">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span>Activé
+                        {% else%}<span class="legend-indicator bg-danger"></span>Désactivé {% endif %}</td>
+
+                    {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
