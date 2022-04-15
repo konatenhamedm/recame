@@ -32,21 +32,23 @@ class DepartementController extends AbstractController
             'pagination' => $pagination,
             'tableau' => [
                 'Libelle'=> 'Libelle',
-                'Abrege departement'=> 'Abrege departement',
-                'Code departement'=> 'Code departement',
                 'Date'=> 'Date',
+                'village'=> 'village',
 
             ],
             'modal'=>'modal',
             'critereTitre'=>'',
         ]);
     }
+
     /**
      * @Route("/departement/{id}/show", name="departement_show", methods={"GET"})
+     * @param Departement $departement
+     * @return Response
      */
     public function show(Departement $departement): Response
     {
-        $form = $this->createForm(departementType::class,$departement, [
+        $form = $this->createForm(DepartementType::class,$departement, [
             'method' => 'POST',
             'action' => $this->generateUrl('departement_show',[
                 'id'=>$departement->getId(),
@@ -58,8 +60,12 @@ class DepartementController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/departement/new", name="departement_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
     public function new(Request $request, EntityManagerInterface  $em): Response
     {
@@ -104,6 +110,10 @@ class DepartementController extends AbstractController
 
     /**
      * @Route("/departement/{id}/edit", name="departement_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Departement $departement
+     * @param EntityManagerInterface $em
+     * @return Response
      */
     public function edit(Request $request,Departement $departement, EntityManagerInterface  $em): Response
     {
@@ -151,6 +161,10 @@ class DepartementController extends AbstractController
 
     /**
      * @Route("/departement/delete/{id}", name="departement_delete", methods={"POST","GET","DELETE"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Departement $departement
+     * @return Response
      */
     public function delete(Request $request, EntityManagerInterface $em,Departement $departement): Response
     {
@@ -204,10 +218,8 @@ class DepartementController extends AbstractController
     /**
      * @Route("/departement/{id}/active", name="departement_active", methods={"GET"})
      */
-    public function active($id,Departement $parent, SerializerInterface $serializer): Response
+    public function active($id,Departement $parent, SerializerInterface $serializer,EntityManagerInterface $entityManager): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
 
         if ($parent->getActive() == 1){
 
@@ -218,7 +230,7 @@ class DepartementController extends AbstractController
             $parent->setActive(1);
 
         }
-        $json = $serializer->serialize($parent, 'json', ['groups' => ['normal']]);
+      /*  $json = $serializer->serialize($parent, 'json', ['groups' => ['normal']]);*/
         $entityManager->persist($parent);
         $entityManager->flush();
         return $this->json([

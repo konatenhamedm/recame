@@ -20,5 +20,9 @@
             <i class="tio-stop-circle"><span class="path1"></span><span class="path2"></span></i>
         {% endif %}
     </a>
-
+	{% if action =="membre" %}
+	<a class=" btn btn-sm btn-outline-warning"  id="exporter" href="{{ path('fiche',{'id':data.id}) }}" target="__blank" >
+		<i class="tio-download-to mr-1"></i>
+	</a>
+	{% endif %}
 </td>

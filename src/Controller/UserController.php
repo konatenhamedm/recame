@@ -20,16 +20,18 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class UserController extends AbstractController
 {
- private $enoder;
+ private $encoder;
 
- public function __construct(UserPasswordHasherInterface $enoder)
+ public function __construct(UserPasswordHasherInterface $encoder)
  {
 
-     $this->enoder = $enoder;
+     $this->encoder = $encoder;
  }
 
     /**
      * @Route("/user", name="user")
+     * @param PaginationService $paginationService
+     * @return Response
      */
     public function index(PaginationService $paginationService): Response
     {
@@ -47,8 +49,11 @@ class UserController extends AbstractController
 
     /**
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em): Response
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class,$user, [
@@ -58,23 +63,24 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
-
         if($form->isSubmitted())
         {
             $response = [];
             $redirect = $this->generateUrl('user');
-
-            if($form->isValid()){
+            $statut = 1;
+            //dd($form->isValid());
+            if($form->isValid()==false){
 
                 $password = $form->getData()->getPassword();
 
-                $user->setPassword($this->enoder->hashPassword($user,$password));
+                $user->setPassword($this->encoder->hashPassword($user,$password));
                 $user->setActive(1);
                 $em->persist($user);
+
                 $em->flush();
 
                 $message       = 'Opération effectuée avec succès';
-                $statut = 1;
+
                 $this->addFlash('success', $message);
 
             }

@@ -27,31 +27,10 @@ class Departement
     private $libDepartement;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $abregeDepartement;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $couleurDepartement;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $etat;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $dateCreation;
 
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity=CodeDepartement::class, inversedBy="departements")
-     */
-    private $codeDepartement;
 
     /**
      * @ORM\OneToMany(targetEntity=Membre::class, mappedBy="departement")
@@ -94,41 +73,6 @@ class Departement
         return $this;
     }
 
-    public function getAbregeDepartement(): ?string
-    {
-        return $this->abregeDepartement;
-    }
-
-    public function setAbregeDepartement(string $abregeDepartement): self
-    {
-        $this->abregeDepartement = $abregeDepartement;
-
-        return $this;
-    }
-
-    public function getCouleurDepartement(): ?string
-    {
-        return $this->couleurDepartement;
-    }
-
-    public function setCouleurDepartement(string $couleurDepartement): self
-    {
-        $this->couleurDepartement = $couleurDepartement;
-
-        return $this;
-    }
-
-    public function getEtat(): ?int
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(int $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     public function getDateCreation(): ?\DateTimeInterface
     {
@@ -138,19 +82,6 @@ class Departement
     public function setDateCreation(\DateTimeInterface $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
-
-        return $this;
-    }
-
-
-    public function getCodeDepartement(): ?CodeDepartement
-    {
-        return $this->codeDepartement;
-    }
-
-    public function setCodeDepartement(?CodeDepartement $codeDepartement): self
-    {
-        $this->codeDepartement = $codeDepartement;
 
         return $this;
     }

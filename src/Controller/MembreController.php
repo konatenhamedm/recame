@@ -2,33 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\CodeDepartement;
-use App\Entity\Departement;
-use App\Entity\Localite;
 use App\Entity\Membre;
-use App\Entity\ModuleParent;
-use App\Entity\Profession;
 use App\Form\MembreType;
 use App\Repository\DepartementRepository;
-use App\Repository\LocaliteRepository;
 use App\Repository\MembreRepository;
 use App\Services\PaginationService;
 use App\Services\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\FormEvents;
 
 
 /**
@@ -315,7 +300,7 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/fiche/{id}", name="imprimer", methods={"GET","POST"})
+     * @Route("/fiche/{id}", name="fiche", methods={"GET","POST"})
      */
     public function imprimer($id,Request $request,MembreRepository $repository)
     {
@@ -333,7 +318,7 @@ class MembreController extends AbstractController
         // dd( $data);
         // }
 
-        $html = $this->renderView('admin/membre/test.html.twig',[
+        $html = $this->renderView('admin/membre/imprime.html.twig',[
             'data'=>$data
         ]);
 

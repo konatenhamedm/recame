@@ -1,0 +1,42 @@
+{% block page_content %}
+    {% form_theme form 'widget/fields-block.html.twig' %}
+    <div class="modal-header">
+        <h4 id="editUserModalTitle" class="modal-title">Ajouter catégorie</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </div>
+    <hr>
+    {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
+    <div class="modal-body ">
+        {# {{ include('includes/ajax/response.html.twig') }} #}
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">LIBELLE</label>
+                {{ form_widget(form.libelle,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Libelle','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">PRESENCE</label>
+                {{ form_widget(form.status,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Status'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">PHOTO</label>
+                {{ form_widget(form.image,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Image','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12 mb-2">
+                <label class="sr-onl" for="userinput1">DESCRIPTION</label>
+                {{ form_widget(form.description,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Description','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger text-left" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn btn-primary ">Valider</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

@@ -7,7 +7,7 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col-sm mb-2 mb-sm-0">
-                <h1 class="page-header-title">village</h1>
+                <h1 class="page-header-title">Catégorie</h1>
             </div>
 
             <div class="col-sm-auto">
@@ -25,21 +25,24 @@
             <tbody class="tbody">
             {% for data in pagination %}
 
-                <tr>
+                <tr class="tr">
                     <td class="table-column-pr-0">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
                             <label class="custom-control-label" for="usersDataCheck4"></label>
                         </div>
                     </td>
-                    <td class="">
-                        {{ data.libDepartement }}
+
+                    <td >
+                        <div class="avatar avatar-sm avatar-circle mr-2">
+                            <img class="avatar-img" src="{{ asset('uploads/images/' ~ data.image) }}" alt="Image Description">
+                        </div>
                     </td>
-                    <td class="">
-                        {{ data.dateCreation | date('Y/m/d')}}
+                    <td >
+                        {{ data.libelle }}
                     </td>
-                    <td class="">
-                        {{ data.region.libelle | date('Y/m/d')}}
+                    <td >
+                        {{ data.status }}
                     </td>
                     <td class="active">
                         {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
@@ -53,5 +56,10 @@
         </div>
         {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 
 {% endblock %}
