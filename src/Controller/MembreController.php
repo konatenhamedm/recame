@@ -315,6 +315,50 @@ class MembreController extends AbstractController
     }
 
     /**
+     * @Route("/fiche/{id}", name="imprimer", methods={"GET","POST"})
+     */
+    public function imprimer($id,Request $request,MembreRepository $repository)
+    {
+
+
+        /*if($request->isXmlHttpRequest())
+        { // pour vérifier la présence d'une requete Ajax*/
+
+        /* $id = "";
+         $id = $request->get('id');*/
+
+        //if ($id) {
+
+        $data = $repository->find($id);
+        // dd( $data);
+        // }
+
+        $html = $this->renderView('admin/membre/test.html.twig',[
+            'data'=>$data
+        ]);
+
+
+
+        //}
+        $mpdf = new \Mpdf\Mpdf([
+
+            'mode' => 'utf-8', 'format' => 'A4'
+        ]);
+        $mpdf->PageNumSubstitutions[] = [
+            'from' => 1,
+            'reset' => 0,
+            'type' => 'I',
+            'suppress' => 'on'
+        ];
+
+        $mpdf->WriteHTML($html);
+        $mpdf->SetFontSize(6);
+        $mpdf->Output();
+
+
+    }
+
+    /**
      * @Route("/membre/{id}/active", name="membre_active", methods={"GET"})
      */
     public function active($id,Membre $parent, SerializerInterface $serializer): Response

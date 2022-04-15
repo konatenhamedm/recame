@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Groupe;
+use App\Entity\Icons;
 use App\Entity\Module;
 use App\Entity\ModuleParent;
 use App\Entity\User;
@@ -38,14 +39,26 @@ class AppFixtures extends Fixture
         $user->setEmail("achi@gmail.com");
         $manager->persist($user);
 
-       /* $mod = new Module();
-        $mod->setTitre('test');
+        $icon1 = new Icons();
+
+        $icon1->setCode("tio-circle");
+
+        $manager->persist($icon1);
+
+        $icon = new Icons();
+
+        $icon->setCode("tio-apps");
+
+        $manager->persist($icon);
+
+       $mod = new Module();
+        $mod->setTitre('Général');
         $mod->setOrdre(1);
         $mod->setActive(1);
-        $mod->setIcon('yyyy');
-        $mod->setParent( $parent );
+        $mod->setIcon($icon);
+        $mod->setParent($parent);
 
-        $manager->persist($mod);*/
+        $manager->persist($mod);
       /*  $user = new User();
 
         $user->setName('konate')
