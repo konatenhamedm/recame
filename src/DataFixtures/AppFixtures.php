@@ -42,12 +42,14 @@ class AppFixtures extends Fixture
         $icon1 = new Icons();
 
         $icon1->setCode("tio-circle");
+        $icon1->setImage("");
 
         $manager->persist($icon1);
 
         $icon = new Icons();
 
         $icon->setCode("tio-apps");
+        $icon->setImage("");
 
         $manager->persist($icon);
 
