@@ -66,14 +66,15 @@ class Services
     public function listeLien()
     {
         $array = [
-            'utilisateur'=>'utilisateur',
             'module'=>'module',
-            'service'=>'service',
+            'membre'=>'membre',
             'groupe'=>'groupe',
             'parent'=>'parent',
             'parametre'=>'parametre',
-            'client'=>'client',
-            'abonnement'=>'abonnement',
+            'localite'=>'localite',
+            'profession'=>'profession',
+            'user'=>'user',
+            'departement'=>'departement',
         ];
      /*   foreach ($this->container as $el=> $params) {
           $resultat=  $params->getDefaults();

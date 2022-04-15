@@ -46,6 +46,11 @@ class Produit
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $active;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -135,6 +140,18 @@ class Produit
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getActive(): ?int
+    {
+        return $this->active;
+    }
+
+    public function setActive(int $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
