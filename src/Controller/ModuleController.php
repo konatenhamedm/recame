@@ -31,6 +31,7 @@ class ModuleController extends AbstractController
             'tableau' => ['titre'=> 'titre','parent'=> 'parent','ordre'=> 'ordre'],
             'modal' => '',
             'titre' => 'Liste des modules',
+            'critereTitre'=>'',
 
         ]);
     }

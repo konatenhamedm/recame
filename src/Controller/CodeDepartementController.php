@@ -28,7 +28,8 @@ class CodeDepartementController extends AbstractController
         return $this->render('admin/code_departement/index.html.twig', [
             'pagination' => $pagination,
             'tableau' => ['libelle'=> 'Libelle'],
-            'modal'=>'modal'
+            'modal'=>'modal',
+            'critereTitre'=>'',
 
 
         ]);
@@ -190,7 +191,7 @@ class CodeDepartementController extends AbstractController
         ]);
     }
     /**
-     * @Route("/parent/{id}/active", name="code_departement_active", methods={"GET"})
+     * @Route("/code_departement/{id}/active", name="code_departement_active", methods={"GET"})
      */
     public function active($id,EntityManagerInterface $em,CodeDepartement $parent, SerializerInterface $serializer): Response
     {

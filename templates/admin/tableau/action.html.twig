@@ -1,7 +1,7 @@
 <td table-column-pr-1>
 	{% set action=module %}
 	<a class="btn btn-sm btn-primary" href="{{ path( action ~ '_show',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
-		<i class="tio-egg"></i>
+		<i class="tio-visible-outlined"></i>
 	</a>
 	<a class="btn btn-sm btn-white" href="{{ path( action ~ '_edit',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
 		<i class="tio-edit"></i>

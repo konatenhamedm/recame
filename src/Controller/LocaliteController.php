@@ -31,6 +31,7 @@ class LocaliteController extends AbstractController
             'tableau' => ['libelle'=> 'Libelle'],
             'modal' => 'modal',
             'titre' => 'Liste des localite',
+            'critereTitre'=>'',
 
         ]);
     }
@@ -195,7 +196,7 @@ class LocaliteController extends AbstractController
     }
 
     /**
-     * @Route("/parent/{id}/active", name="localite_active", methods={"GET"})
+     * @Route("/localite/{id}/active", name="localite_active", methods={"GET"})
      */
     public function active($id,Localite $parent, SerializerInterface $serializer): Response
     {

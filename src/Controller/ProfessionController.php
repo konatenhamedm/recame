@@ -30,6 +30,7 @@ class ProfessionController extends AbstractController
             'tableau' => ['libelle'=> 'Libelle'],
             'modal' => 'modal',
             'titre' => 'Liste des professions',
+            'critereTitre'=>'',
 
         ]);
     }
@@ -194,7 +195,7 @@ class ProfessionController extends AbstractController
     }
 
     /**
-     * @Route("/parent/{id}/active", name="profession_active", methods={"GET"})
+     * @Route("/profession/{id}/active", name="profession_active", methods={"GET"})
      */
     public function active($id,Profession $parent, SerializerInterface $serializer): Response
     {

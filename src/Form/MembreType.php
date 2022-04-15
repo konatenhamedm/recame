@@ -49,15 +49,14 @@ class MembreType extends AbstractType
                      'choice_label'=>'libDepartement',
                      'choices'=>$departement,
                      'disabled'=>false,
-                     'placeholder'=>'Selectionnez un departement',
-                     'constraints'=>new NotBlank(['message'=>'Selectionnez un departement']),
+                     'placeholder'=>'Selectionnez un village',
+                     'constraints'=>new NotBlank(['message'=>'Selectionnez un village']),
                  ])   ;
              })
 
             ->add('nom')
             ->add('prenoms')
             ->add('cellule')
-            ->add('numero')
             ->add('codeParrainnage')
             ->add('quartier')
             ->add('sexe',ChoiceType::class,
@@ -123,7 +122,8 @@ class MembreType extends AbstractType
             ])
             ->add('region', EntityType::class, [
                 'class' => Localite::class,
-                'placeholder'=>'Selectionnez une region',
+                'placeholder'=>'Selectionnez une departement',
+                'attr' => ['class' => 'js-select2-custom'],
                 // 'disabled'=>true,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
@@ -143,7 +143,7 @@ class MembreType extends AbstractType
             ])
             ->add('departement', EntityType::class, [
                 'class' => Departement::class,
-                'placeholder'=>'Selectionnez un departement',
+                'placeholder'=>'Selectionnez un village',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'DESC');

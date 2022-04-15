@@ -38,6 +38,7 @@ class DepartementController extends AbstractController
 
             ],
             'modal'=>'modal',
+            'critereTitre'=>'',
         ]);
     }
     /**
@@ -201,7 +202,7 @@ class DepartementController extends AbstractController
     }
 
     /**
-     * @Route("/parent/{id}/active", name="departement_active", methods={"GET"})
+     * @Route("/departement/{id}/active", name="departement_active", methods={"GET"})
      */
     public function active($id,Departement $parent, SerializerInterface $serializer): Response
     {

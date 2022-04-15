@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entity\Departement;
 use App\Entity\Groupe;
 use App\Entity\Parametre;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,11 +50,11 @@ class Services
         return $repo;
     }
 
-   /* public function listeIcon($val)
+    public function getDepartements()
     {
-        $repo = $this->em->getRepository(Icon::class)->findIcon($val);
+        $repo = $this->em->getRepository(Departement::class)->findAll();
         return $repo;
-    }*/
+    }
 
     public function listeParent()
     {

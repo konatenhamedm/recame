@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">#}
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Document</title>
+    <style>
+
+        body {font-family: sans-serif;
+            font-size: 10pt;
+        }
+        .items th{
+
+            border: 1px solid #cccccc;
+            border-top: none;
+            text-align: left;
+            padding: 8px 3px;
+            font-size: 0.9em;
+
+        }
+        .info{
+            margin-left: 410px;
+            margin-top: -40px;
+        }
+        .info_dossier_facture{
+            margin-left: 380px;
+        }
+        p {	margin: 0pt; }
+        table.items {
+            border: 0.1mm solid #000000;
+        }
+        td { vertical-align: top; }
+        .items td {
+            border-left: 0.1mm solid #000000;
+            border-right: 0.1mm solid #000000;
+        }
+        table thead td { background-color: #EEEEEE;
+            text-align: center;
+            border: 0.1mm solid #000000;
+            font-variant: small-caps;
+        }
+        .items td.blanktotal {
+            background-color: #EEEEEE;
+            border: 0.1mm solid #000000;
+            background-color: #FFFFFF;
+            border: 0mm none #000000;
+            border-top: 0.1mm solid #000000;
+            border-right: 0.1mm solid #000000;
+        }
+        .items td.totals {
+            text-align: right;
+            border: 0.1mm solid #000000;
+        }
+        .items td.cost {
+            text-align:  right;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="Titre" style="border: 1px solid #cccccc">
+            <h1 style="text-align: center">MINUTE DE FACTURE</h1>
+        </div>
+        <br>
+        <div class="Info_dossier" >
+            <strong>N°MINUTE:</strong><span> ffff</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>N°DOSSIER:</strong><span> ffff</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>DATE:</strong><span> 12/12/2000 </span>
+        </div><br>
+        <div class="Info_client" style="border: 1px solid #cccccc">
+            <strong> Client:</strong><span> ff</span><br>
+            <strong> Adresse:</strong><span> fff </span><br>
+            <strong> Compte:</strong><span> ff</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>C/C:</strong><span> fffff </span>
+
+        </div>
+        <br>
+        {#        <div class="Info_dossier" >#}
+        {#            <strong>Poids net:</strong><span></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+        {#            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Poids brute:</strong><span></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>Volume:</strong><span></span>#}
+        {#        </div><br>#}
+        {#        <div class="Info_dossier" >#}
+        {#            <strong>Destination:</strong><span></span>#}
+        {#        </div>#}
+        <div class="row" style="margin-top: 20px">
+            <table class="items" width="100%" style="font-size: 9pt; border-collapse: collapse; " cellpadding="8">
+                <thead>
+                <tr>
+                    <td width="50%"><b>Libelle</b></td>
+                    <td width="25%"><b>Non Taxable</b></td>
+                    <td width="25%"><b>Taxable</b></td>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- ITEMS HERE -->
+                {% for facture in 0..70 %}
+                    <tr>
+                        <td >fffff</td>
+                        <td class="cost"> 0 </td>
+                        <td class="cost">fff</td>
+                    </tr>
+                {% endfor %}
+
+                <tr>
+
+                    <td class="totals"><b>Total HT:</b></td>
+                    <td class="totals cost"><b>0</b></td>
+                    <td class="totals cost"><b>ffff</b></td>
+                </tr>
+                <tr>
+                    <td class="totals"><b>TVA 18% TVA / PRESTATION :</b></td>
+
+                    <td class="totals cost" colspan="2"><b>fffff</b></td>
+                </tr>
+                <tr>
+                    <td class="totals"><b>MINUTE NON EXONEREE MONTANT TTC:</b></td>
+                    <td class="totals cost" colspan="2"><b>fffff</b></td>
+                </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <div class="montantlettre">
+                <p><strong>Arrêtée la présente facture à la somme de :</strong></p>
+                <strong>55555 FCFA</strong>
+                {#<strong>uuid.Conversion(55555)</strong>#}
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

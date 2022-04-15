@@ -34,6 +34,7 @@ class ParametreController extends AbstractController
             'tableau' => ['logo'=> 'logo','titre'=> 'titre','couleur header'=> 'couleur header'],
             'modal' => 'modal',
             'titre' => 'Liste des parametres',
+            'critereTitre'=>'',
 
         ]);
     }

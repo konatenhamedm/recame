@@ -5,16 +5,20 @@ namespace App\DataFixtures;
 use App\Entity\Groupe;
 use App\Entity\Module;
 use App\Entity\ModuleParent;
+use App\Entity\User;
 use App\Repository\ModuleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
     private $module;
-    public function __construct(ModuleRepository $repository)
+    private $encode;
+    public function __construct(ModuleRepository $repository,UserPasswordHasherInterface $encode)
     {
         $this->module = $repository->find(17);
+        $this->encode = $encode;
     }
 
     public function load(ObjectManager $manager): void
@@ -25,14 +29,23 @@ class AppFixtures extends Fixture
         $parent->setActive(1);
         $manager->persist($parent);
 
-        $mod = new Module();
+        $user = new User();
+        $password = "achi";
+        $user->setPassword($this->encode->hashPassword($user,$password));
+        $user->setActive(1);
+        $user->setNom("Achi");
+        $user->setPrenoms("Achi");
+        $user->setEmail("achi@gmail.com");
+        $manager->persist($user);
+
+       /* $mod = new Module();
         $mod->setTitre('test');
         $mod->setOrdre(1);
         $mod->setActive(1);
         $mod->setIcon('yyyy');
         $mod->setParent( $parent );
 
-        $manager->persist($mod);
+        $manager->persist($mod);*/
       /*  $user = new User();
 
         $user->setName('konate')
@@ -40,7 +53,7 @@ class AppFixtures extends Fixture
             ->setPassword('$2y$13$qo4/UPpc/bBO5ru6zXxnFuDwJxxnf5x1BbqvX5ugyLodW9rzqSY2S')
             ->setActive(1);*/
 
-        $mod = new Module();
+      /*  $mod = new Module();
         for ($i = 1; $i <= 2000; $i++) {
          $group[$i] = new Groupe();
          $group[$i]->setIcon("menu-bullet menu-bullet-line");
@@ -49,7 +62,7 @@ class AppFixtures extends Fixture
            // $group[$i]->setModule($mod);
             $group[$i]->setTitre('parent');
             $manager->persist($group[$i]);
-        }
+        }*/
 
 
        // $manager->persist($user);

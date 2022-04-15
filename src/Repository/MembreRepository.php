@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Membre;
+use App\Entity\Module;
+use App\Entity\ModuleParent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -45,6 +47,30 @@ class MembreRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLastChrono($departement){
+        return $this->createQueryBuilder("m")
+            ->select("m")
+            ->join("m.departement","d")
+            ->where("d.libDepartement = :departement")
+            ->setParameter("departement", $departement)
+            ->getQuery()
+            ->getResult();
+
+        /*return $this->createQueryBuilder('i')
+            ->innerJoin('i.customer','c')
+            ->andWhere('c.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+            ;*/
+    }
+
+    public function getNombre(){
+        return $this->createQueryBuilder("m")
+            ->select("count(m.id)")
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
     // /**
     //  * @return Membre[] Returns an array of Membre objects

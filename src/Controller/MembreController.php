@@ -53,7 +53,10 @@ class MembreController extends AbstractController
                 'Email'=> 'Email',
                 'region'=>'region'
             ],
+            'critereTitre'=>'Departements',
             'modal' => '',
+            'position' => 4,
+            'active'=> 7,
             'titre' => 'Liste des membres',
 
         ]);
@@ -78,13 +81,15 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre/new", name="membre_new", methods={"GET","POST"})
      */
-    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,DepartementRepository $departementRepository,LocaliteRepository $localiteRepository): Response
+    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,MembreRepository $repository): Response
     {
         $membre = new Membre();
         $form = $this->createForm(MembreType::class,$membre ,[
             'method' => 'POST',
             'action' => $this->generateUrl('membre_new')
         ]);
+
+        $numero = 'RCM-'.$repository->getNombre();
 
         $form->handleRequest($request);
 
@@ -105,6 +110,7 @@ class MembreController extends AbstractController
                     $membre->setPhoto($newFilename);
                 }
                 $membre->setActive(1);
+                $membre->setNumero($numero);
                 $em->persist($membre);
                 $em->flush();
 
@@ -265,7 +271,51 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/parent/{id}/active", name="membre_active", methods={"GET"})
+     * @Route("/liste_membre", name="imprimer", methods={"GET","POST"})
+     */
+    public function imprime(Request $request,MembreRepository $repository)
+    {
+
+
+        /*if($request->isXmlHttpRequest())
+        { // pour vérifier la présence d'une requete Ajax*/
+
+           /* $id = "";
+            $id = $request->get('id');*/
+
+            //if ($id) {
+
+                $data = $repository->findAll();
+       // dd( $data);
+           // }
+
+            $html = $this->renderView('admin/membre/test.html.twig',[
+                'data'=>$data
+            ]);
+
+
+
+        //}
+        $mpdf = new \Mpdf\Mpdf([
+
+            'mode' => 'utf-8', 'format' => 'A4'
+        ]);
+        $mpdf->PageNumSubstitutions[] = [
+            'from' => 1,
+            'reset' => 0,
+            'type' => 'I',
+            'suppress' => 'on'
+        ];
+
+        $mpdf->WriteHTML($html);
+        $mpdf->SetFontSize(6);
+        $mpdf->Output();
+
+
+    }
+
+    /**
+     * @Route("/membre/{id}/active", name="membre_active", methods={"GET"})
      */
     public function active($id,Membre $parent, SerializerInterface $serializer): Response
     {
@@ -290,7 +340,6 @@ class MembreController extends AbstractController
             'active'=>$parent->getActive(),
         ],200);
 
-
     }
-
 }
+  

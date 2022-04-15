@@ -36,9 +36,9 @@
                     <td class="table-column-pr-0">
                         {{ data.libelle }}
                     </td>
-                    <td class="">
-                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span>Activé
-                        {% else%}<span class="legend-indicator bg-danger"></span>Désactivé {% endif %}</td>
+                    <td class="active">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                        {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
 
                     {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
                 </tr>

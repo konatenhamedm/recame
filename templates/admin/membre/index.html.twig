@@ -12,14 +12,17 @@
 
             <div class="col-sm-auto">
                 <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
-                    <i class="tio-user-add mr-1"></i>Nouveau
+                    <i class="tio-add mr-1"></i>Nouveau
                 </a>
+{#
+                <a class="btn btn-primary btn-md"  href="{{ path('imprimer', {'id': 123, '_format': 'pdf'}) }}" target="__blank">
+                    <span class="d-md-block d-none"><i class="fa fa-print fa-1x"></i> imprimer</span></a>#}
             </div>
         </div>
     </div>
     <!-- Card -->
     <div class="card mb-3 mb-lg-5">
-        {% include 'admin/tableau/card.html.twig'  with {'titre':new } %}
+        {% include 'admin/tableau/card.html.twig'  with {'titre':new,'position': position,'data':menu.getDepartements,'critereTitre':critereTitre,'active':active } %}
         <div class="table-responsive datatable-custom">
             {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
             <tbody class="tbody">
@@ -53,9 +56,9 @@
                     <td >
                         {{ data.region.libelle }}
                     </td>
-                    <td class="">
-                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span>Activé
-                        {% else%}<span class="legend-indicator bg-danger"></span>Désactivé {% endif %}</td>
+                    <td class="active">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                        {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
 
                     {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
                 </tr>
@@ -69,6 +72,26 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+    <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#Departements").click(function (e) {
+                e.preventDefault();
+                var a = $(this).val();
+                $("#exporter").click()
+              /*  $.ajax({
+                    url:        '/admin/liste_membre',
+                    type:       'POST',
+                    data:     {id: a },
+                    dataType:   'json',
+                });*/
+
+
+            });
+        })
+       // $('select').select2();
+    </script>
 
 {% endblock %}

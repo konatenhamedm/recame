@@ -12,7 +12,7 @@
 
             <div class="col-sm-auto">
                 <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
-                    <i class="tio-user-add mr-1"></i>Nouveau
+                    <i class="tio-add mr-1"></i>Nouveau
                 </a>
             </div>
         </div>
@@ -32,21 +32,21 @@
                             <label class="custom-control-label" for="usersDataCheck4"></label>
                         </div>
                     </td>
-                    <td class="table-column-pr-0">
+                    <td class="">
                         {{ data.libDepartement }}
                     </td>
-                    <td class="table-column-pr-0">
+                    <td class="">
                         {{ data.abregeDepartement }}
                     </td>
-                    <td class="table-column-pr-0">
+                    <td class="">
                         {{ data.codeDepartement.libelle }}
                     </td>
-                    <td class="table-column-pr-0">
+                    <td class="">
                         {{ data.dateCreation | date('Y/m/d')}}
                     </td>
-                    <td class="">
-                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span>Activé
-                        {% else%}<span class="legend-indicator bg-danger"></span>Désactivé {% endif %}</td>
+                    <td class="active">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                        {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
 
                     {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
                 </tr>

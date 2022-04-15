@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Parametre;
 use App\Services\PaginationService;
 use App\Services\Services;
 use App\Entity\ModuleParent;
 use App\Form\ModuleParentType;
-use App\Repository\ModuleParentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +31,9 @@ class ParentController extends AbstractController
            'pagination'=>$pagination,
             'tableau'=>['titre'=>'titre','ordre'=>'ordre'],
             'modal' => 'modal',
+
             'titre' => 'Liste des parents',
+            'critereTitre'=>'',
         ]);
     }
 

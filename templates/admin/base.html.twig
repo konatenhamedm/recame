@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <!-- Mirrored from htmlstream.com/front-dashboard/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Feb 2022 12:00:58 GMT -->
 <head>
     <!-- Required Meta Tags Always Come First -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block titre %}Dashboard | Front - Admin &amp; Dashboard Template{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>{% block titre %}Dashboard | Recam{% endblock %}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -241,15 +242,15 @@
         <div class="hs-unfold">
             <a id="builderPopover" class="js-hs-unfold-invoker btn btn-sm btn-soft-dark py-3" href="javascript:;" data-template='<div class="d-none d-md-block popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>' data-toggle="popover" data-placement="left" title="<div class='d-flex align-items-center'>Front Builder <a href='#!' class='close close-light ml-auto'><i id='closeBuilderPopover' class='tio-clear'></i></a></div>" data-content="Customize your overview page layout. Choose the one that best fits your needs." data-html="true"
                data-hs-unfold-options='{
-                "target": "#styleSwitcherDropdown",
+                "target": "#styleSwitcherDropdownd",
                 "type": "css-animation",
                 "animationIn": "fadeInRight",
                 "animationOut": "fadeOutRight",
                 "hasOverlay": true,
                 "smartPositionOff": true
                }'>
-                <i class="tio-tune mr-2"></i>
-                <span class="font-weight-bold text-uppercase">A PROPOS</span>
+               {# <i class="tio-tune mr-2"></i>
+                <span class="font-weight-bold text-uppercase">A PROPOS</span>#}
             </a>
         </div>
     </div>
@@ -308,7 +309,8 @@
 {% block javascripts %}
 
 {% endblock %}
-
+<script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+<script src="{{ asset('assets/admin/js/active.js') }}"></script>
 <!-- ========== END HEADER ========== -->
 
 <!-- ========== MAIN CONTENT ========== -->
@@ -318,6 +320,7 @@
 <script src="{{ asset('assets/vendor/chart.js/dist/Chart.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/chart.js.extensions/chartjs-extensions.js') }}"></script>
 <script src="{{ asset('assets/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js') }}"></script>
+
 
 
 
@@ -623,7 +626,7 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">
+              {#  <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">#}
                 <span> &nbsp;&nbsp;Chargement des données... </span>
             </div>
         </div>
@@ -648,7 +651,7 @@
 
             <!-- Body -->
             <div class="modal-body text-center">
-                <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">
+               {# <img src="{{ asset('admin/assets/global/img/loading-spinner-grey.gif') }}" alt="" class="loading">#}
                 <span> &nbsp;&nbsp;Chargement des données... </span>
             </div>
             <!-- End Body -->
