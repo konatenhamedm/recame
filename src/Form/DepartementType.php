@@ -20,9 +20,6 @@ class DepartementType extends AbstractType
     {
         $builder
             ->add('libDepartement')
-            ->add('abregeDepartement')
-            ->add('couleurDepartement')
-
             ->add('etat',ChoiceType::class,
                 [
                     'expanded'     => false,
@@ -48,15 +45,6 @@ class DepartementType extends AbstractType
             ])
             ->add('region', EntityType::class, [
                 'class' => Localite::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.id', 'DESC');
-                },
-                'choice_label' => 'libelle',
-
-            ])
-            ->add('codeDepartement', EntityType::class, [
-                'class' => CodeDepartement::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->orderBy('u.id', 'DESC');
