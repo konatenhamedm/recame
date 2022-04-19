@@ -47,7 +47,7 @@ class ProduitType extends AbstractType
                 'choice_label' => 'libelle',
 
             ])
-            ->add('description',TextareaType::class)
+            ->add('description',TextType::class)
         ;
     }
 

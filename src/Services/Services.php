@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entity\Categorie;
 use App\Entity\Departement;
 use App\Entity\Groupe;
 use App\Entity\Parametre;
@@ -62,7 +63,11 @@ class Services
 
         return $repo;
     }
+    public function listeCategorie(){
+        $repo = $this->em->getRepository(Categorie::class)->findAll();
 
+        return $repo;
+    }
     public function listeLien()
     {
         $array = [
@@ -71,7 +76,7 @@ class Services
             'groupe'=>'groupe',
             'parent'=>'parent',
             'parametre'=>'parametre',
-            'localite'=>'localite',
+            'village'=>'village',
             'profession'=>'profession',
             'user'=>'user',
             'departement'=>'departement',

@@ -61,25 +61,4 @@
 
 {% block javascripts %}
     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
-    <script>
-
-        $(document).ready(function () {
-
-            $("#Departements").click(function (e) {
-                e.preventDefault();
-                var a = $(this).val();
-                $("#exporter").click()
-              /*  $.ajax({
-                    url:        '/admin/liste_membre',
-                    type:       'POST',
-                    data:     {id: a },
-                    dataType:   'json',
-                });*/
-
-
-            });
-        })
-       // $('select').select2();
-    </script>
-
 {% endblock %}

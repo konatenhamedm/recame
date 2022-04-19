@@ -18,9 +18,22 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
-    public function affiche_produit_all()
+    public function affiche_produit_all($categorie)
     {
-        $conn = $this->getEntityManager()
+
+        return $this->createQueryBuilder('p')
+            /*->select('p.libelle as titre','p.id','p.date_ajout','c.libelle')*/
+            ->andWhere('p.active = 1')
+            ->innerJoin('p.categorie','c')
+            ->andWhere('c.active = 1')
+            ->andWhere('p.categorie = :val')
+            ->setParameter('val', $categorie)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+
+       /* $conn = $this->getEntityManager()
             ->getConnection();
         $sql = "
             SELECT p.libelle as titre,p.id,p.date_ajout,c.libelle
@@ -30,7 +43,7 @@ class ProduitRepository extends ServiceEntityRepository
             ";
         $stmt = $conn->prepare($sql);
         $stmt->executeQuery();
-        return $stmt->executeStatement();
+        return $stmt->executeStatement();*/
     }
     // /**
     //  * @return Produit[] Returns an array of Produit objects

@@ -83,20 +83,14 @@ class ProduitController extends AbstractController
             $redirect = $this->generateUrl('produit');
 
             if($form->isValid()){
-
                 $brochureFile = $form->get('image')->getData(); //get('image_prod')->getData();
-
+             //   dd($form->getData());
                 foreach ($brochureFile as $image) {
-                    dd($image->getPath());
-                    if ($image) {
-                        $newFilename = $uploaderHelper->uploadImage($image->getPath());
-                        $image->setPhoto($newFilename);
-                    }
-                   /* $file = new File($image->getPath());
+                    $file = new File($image->getPath());
                     $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
                     // $fileName = md5(uniqid()).'.'.$file->guessExtension();
                     $file->move($this->getParameter('images_directory'), $newFilename);
-                    $image->setPath($newFilename);*/
+                    $image->setPath($newFilename);
                 }
                 $produit->setActive(1);
                 $em->persist($produit);

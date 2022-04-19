@@ -3,10 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Image;
-use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,10 +18,10 @@ class ImageType extends AbstractType
                 'label' => 'insert image', "label" => false,
                 'required' => false,
                 'data_class' => null,
-                'mapped' => false,
+                'mapped' => true,
             ))
-            ->add('titre', \Symfony\Component\Form\Extension\Core\Type\TextType::class, ["label" => false,])
-            ->add('description', TextareaType::class, ["label" => false,]);
+            ->add('titre', TextType::class, ["label" => false,])
+            ->add('description', TextType::class, ["label" => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

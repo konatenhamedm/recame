@@ -91,7 +91,14 @@ class Categorie
         }
         return $rest;
     }
+   public function getNombre(){
+        $i=0;
+        foreach ($this->produits as $e){
 
+           $i++;
+        }
+       return $i;
+   }
     public function addProduit(Produit $produit): self
     {
         if (!$this->produits->contains($produit)) {

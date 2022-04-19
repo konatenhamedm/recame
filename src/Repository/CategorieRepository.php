@@ -53,17 +53,13 @@ class CategorieRepository extends ServiceEntityRepository
 
     public function listeCategorie()
     {
-        $conn = $this->getEntityManager()
-            ->getConnection();
-        $sql = '
-            SELECT c.`libelle`,c.`status`,c.`description`,p.`libelle`
-            FROM `categorie` AS c 
-            left JOIN `produit` AS p ON p.`categorie_id`=c.`id`
-            GROUP BY c.`libelle`
-            ';
-        $stmt = $conn->prepare($sql);
-        $stmt->executeQuery();
-        return $stmt->executeStatement();
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.active = :val')
+            ->setParameter('val', 1)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
     // /**
     //  * @return Categorie[] Returns an array of Categorie objects

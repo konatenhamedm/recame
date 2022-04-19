@@ -36,7 +36,7 @@ class MembreController extends AbstractController
                 'Prenom'=> 'Prenom',
                 'Departement'=> 'Departement',
                 'Email'=> 'Email',
-                'region'=>'region'
+                'contact'=>'contact'
             ],
             'critereTitre'=>'Departements',
             'modal' => '',
@@ -302,24 +302,13 @@ class MembreController extends AbstractController
     /**
      * @Route("/fiche/{id}", name="fiche", methods={"GET","POST"})
      */
-    public function imprimer($id,Request $request,MembreRepository $repository)
+    public function imprimer($id,Request $request)
     {
 
 
-        /*if($request->isXmlHttpRequest())
-        { // pour vérifier la présence d'une requete Ajax*/
-
-        /* $id = "";
-         $id = $request->get('id');*/
-
-        //if ($id) {
-
-        $data = $repository->find($id);
-        // dd( $data);
-        // }
-
         $html = $this->renderView('admin/membre/imprime.html.twig',[
-            'data'=>$data
+
+            'client'=>''
         ]);
 
 
