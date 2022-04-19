@@ -33,7 +33,7 @@ class DepartementController extends AbstractController
             'tableau' => [
                 'Libelle'=> 'Libelle',
                 'Date'=> 'Date',
-                'village'=> 'village',
+                'departement'=> 'departement',
 
             ],
             'modal'=>'modal',

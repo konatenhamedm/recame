@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\CodeDepartement;
 use App\Entity\Departement;
 use App\Entity\Localite;
 use App\Entity\Profession;
@@ -11,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,22 +19,10 @@ class DepartementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('libDepartement')
-            ->add('etat',ChoiceType::class,
-                [
-                    'expanded'     => false,
-                    'placeholder' => 'Choisir un etat',
-                    'required'     => true,
-                    // 'attr' => ['class' => 'select2_multiple'],
-                    'multiple' => false,
-                    //'choices_as_values' => true,
+            ->add('libDepartement',TextType::class,[
+                'label'=>"Libelle",
+            ])
 
-                    'choices'  => array_flip([
-                        'OK'        => 'OK',
-                        'NON'       => 'NON',
-
-                    ]),
-                ])
             ->add('dateCreation',DateType::Class, [
                 "required" => false,
                 "widget" => 'single_text',
@@ -44,6 +32,7 @@ class DepartementType extends AbstractType
                 'label'=>"Date creation",
             ])
             ->add('region', EntityType::class, [
+                'label'=>"Departement",
                 'class' => Localite::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
