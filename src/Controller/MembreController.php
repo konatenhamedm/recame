@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Membre;
+use App\Entity\Profession;
 use App\Form\MembreType;
 use App\Repository\DepartementRepository;
 use App\Repository\MembreRepository;
@@ -26,6 +27,7 @@ class MembreController extends AbstractController
      */
     public function index(PaginationService $paginationService): Response
     {
+
         $pagination = $paginationService->setEntityClass(Membre::class)->getData();
 
         return $this->render('admin/membre/index.html.twig', [
@@ -63,8 +65,14 @@ class MembreController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/membre/new", name="membre_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UploaderHelper $uploaderHelper
+     * @param MembreRepository $repository
+     * @return Response
      */
     public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,MembreRepository $repository): Response
     {

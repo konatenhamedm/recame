@@ -22,7 +22,7 @@ class DepartementType extends AbstractType
             ->add('libDepartement',TextType::class,[
                 'label'=>"Libelle",
             ])
-
+/*
             ->add('dateCreation',DateType::Class, [
                 "required" => false,
                 "widget" => 'single_text',
@@ -30,7 +30,7 @@ class DepartementType extends AbstractType
                 "by_reference" => true,
                 "empty_data" => '',
                 'label'=>"Date creation",
-            ])
+            ])*/
             ->add('region', EntityType::class, [
                 'label'=>"Departement",
                 'class' => Localite::class,

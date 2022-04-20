@@ -11,9 +11,9 @@
             </div>
 
             <div class="col-sm-auto">
-               {# <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                <a class="btn btn-primary"  href="{{ path('membre_new') }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
                     <i class="tio-user-add mr-1"></i>Nouveau
-                </a>#}
+                </a>
               {#  <a class="btn btn-primary btn-md"  href="{{ path('imprimer') }}" target="__blank">
                     <span class="d-md-block d-none"><i class="fa fa-print fa-1x"></i> imprimer</span></a>#}
             </div>

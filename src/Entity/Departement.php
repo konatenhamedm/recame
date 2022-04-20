@@ -27,12 +27,6 @@ class Departement
     private $libDepartement;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateCreation;
-
-
-    /**
      * @ORM\OneToMany(targetEntity=Membre::class, mappedBy="departement")
      */
     private $membres;
@@ -69,19 +63,6 @@ class Departement
     public function setLibDepartement(string $libDepartement): self
     {
         $this->libDepartement = $libDepartement;
-
-        return $this;
-    }
-
-
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->dateCreation;
-    }
-
-    public function setDateCreation(\DateTimeInterface $dateCreation): self
-    {
-        $this->dateCreation = $dateCreation;
 
         return $this;
     }
