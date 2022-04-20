@@ -40,7 +40,7 @@ class MembreType extends AbstractType
 
                  $departement = $this->departementRepository->createQueryBuilder('d')
                      ->andWhere('d.region =:localite')
-                     ->setParameter('localite',5)
+                     ->setParameter('localite',1)
                      ->orderBy('d.libDepartement','ASC')
                      ->getQuery()
                      ->getResult();
@@ -62,7 +62,7 @@ class MembreType extends AbstractType
             ->add('sexe',ChoiceType::class,
                 [
                     'expanded'     => false,
-                    'placeholder' => 'Votre sexe',
+                    'placeholder' => 'VOTRE SEXE',
                     'required'     => true,
                     // 'attr' => ['class' => 'select2_multiple'],
                     'multiple' => false,
@@ -85,7 +85,23 @@ class MembreType extends AbstractType
             ])
             ->add('lieuNaissance')
             ->add('niveauEtude')
-            ->add('naturePiece')
+            ->add('naturePiece',ChoiceType::class,
+                [
+                    'expanded'     => false,
+                    'placeholder' => 'Nature piece',
+                    'required'     => true,
+                    // 'attr' => ['class' => 'select2_multiple'],
+                    'multiple' => false,
+                    //'choices_as_values' => true,
+
+                    'choices'  => array_flip([
+                        'CNI'        => 'CNI',
+                        'EXTRAIT'       => 'EXTRAIT',
+                        'PASSEPORT'       => 'PASSEPORT',
+                        'PERMIS'       => 'PERMIS DE CONDUIT',
+
+                    ]),
+                ])
             ->add('numeroPiece')
             ->add('lieuVote')
             ->add('preocupation',ChoiceType::class,
@@ -98,10 +114,10 @@ class MembreType extends AbstractType
                     //'choices_as_values' => true,
 
                     'choices'  => array_flip([
-                        'AIDE'        => 'Aide',
-                        'EMPLOI_STAGE'       => 'Emploi/Stage',
-                        'FINANCEMENT'       => 'Financement',
-                        'AUTRE'       => 'Autre',
+                        'AIDE'        => 'AID',
+                        'EMPLOI_STAGE'       => 'EMPLOI/STAGE',
+                        'FINANCEMENT'       => 'FINANCEMENT',
+                        'AUTRE'       => 'AUTRE',
 
                     ]),
                 ])

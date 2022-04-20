@@ -8,23 +8,54 @@
                 maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *{
+        body{
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            line-height:30px;
+            line-height: 30px;
             font-weight: bold;
 
         }
 
+        h2 {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            size: 15px;
+            text-decoration: underline;
+        }
 
-        .autre{
+        .rect1 {
+            border: solid black 3px;
+            width: 180px;
+            height: 100px;
+
+        }
+
+        table td .rect2 {
+            border: 2px solid black !important;
+            width: 200px;
+            height: 100px;
+        }
+
+        table {
+            margin-left: 60px;
+        }
+
+
+        .ligne20, .ligne21{
+            text-align: center;
+        }
+        .ligne20 .ligne20_1, .ligne21 .ligne21_1{
+            margin-left: 25px;
+        }
+        .autre {
             border: 2px solid black;
-            width: 80px;
-            height: 90px;
+            width: 100px;
+            height: 60px;
             text-align: center;
             align-content: center;
             float: right;
@@ -32,93 +63,111 @@
             padding: 10px;
 
         }
+        .date{
+            margin-left: 40%;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div style="margin-bottom: -10px">
-       <h2 style="text-align: center"> <img src="{{ asset('assets/admin/image/IMG_20220416_231844.jpg') }}" class="displayed" width="60" height="60" align="center"></h2>
+        <h3 style="text-align: center"><img src="{{ asset('assets/admin/image/IMG_20220416_231844.jpg') }}"
+                                            class="displayed" width="60" height="60" align="center"></h3>
     </div>
 
     <div class="row">
         <div class="Titre" style="
             color: black;">
             <p>
-            <h3 style="text-align: center;text-decoration: underline;">FICHES D'INSCRIPTION DES MEMBRES - CELLULES RECAME</h3>
+            <h2 style="text-align: center;text-decoration: underline;">FICHES D'INSCRIPTION DES MEMBRES - CELLULES
+                RECAME</h2>
             </p>
         </div>
-        <hr>
-         <div class="Info_client" style="
+        <br>
+        <div class="Info_client" style="
             font-size: 15px;">
-             <div class="row">
-                 <div class="col-md-4 autre">
-                     <p  class="photo" align="left">
-                         PHOTO
-                     </p>
-                 </div>
-                 <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4 autre">
+                    <p class="photo" align="left">
+                        <img class="avatar-img" src="{{ asset('uploads/images/' ~ client.photo) }}" alt="Image Description">
+                    </p>
+                </div>
+                <div class="col-md-8">
 
-                     <h3>N° : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CODE DE PARRAINNAGE : </h3>
-                     <h3>DEPARTEMENT: </h3>
-                     <h3>COMMUNE/VILLAGE : </h3>
-                     <h3>CELLULE :</h3>
-                     <h3>QUARTIER :</h3>
-                     <h3>NOM :</h3>
-                     <h3>PRENOMS:</h3>
-                     <h3>DATE DE NAISSANCE :</h3>
-                     <h3>LIEU DE NAISSANCE :</h3>
-                     <h3>SEXE :</h3>
-                     <h3>NIVEAU D’ETUDES :</h3>
-                     <h3>PROFESSION/FONCTION :</h3>
-                     <h3>NATURE ET NUMERO DE LA PIECE D’IDENTITE :</h3>
-                     <h3>LIEU DE VOTE :</h3>
-                     <h3>NUMERO CARTE D’ELECTEUR  :</h3>
-                     <h3>VOTRE PREOCCUPATION  :</h3>
-                     <h3>CONTACTS   :</h3>
-                     <h3>EMAIL   :</h3>
-                 </div>
+                    <h3>N° : {{ client.numero }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;CODE DE PARRAINNAGE : {{ client.codeParrainnage }}</h3>
+                    <h3>DEPARTEMENT: {{ client.region.libelle }}</h3>
+                    <h3>COMMUNE/VILLAGE : {{ client.departement.libDepartement }}</h3>
+                    <h3>CELLULE : {{ client.cellule }}</h3>
+                    <h3>QUARTIER : {{ client.quartier }}</h3>
+                    <h3>NOM : {{ client.nom }}</h3>
+                    <h3>PRENOMS: {{ client.prenoms }}</h3>
+                    <h3>DATE DE NAISSANCE : {{ client.dateNaissance | date("m-d-Y") }}</h3>
+                    <h3>LIEU DE NAISSANCE : {{ client.lieuNaissance }}</h3>
+                    <h3>SEXE : {{ client.sexe }}</h3>
+                    <h3>NIVEAU D’ETUDES : {{ client.niveauEtude }}</h3>
+                    <h3>PROFESSION/FONCTION : {{ client.profession.libelle }}</h3>
+                    <h3>NATURE ET NUMERO DE LA PIECE D’IDENTITE : {{ client.naturePiece }} {{ client.numeroPiece }}</h3>
+                    <h3>LIEU DE VOTE : {{ client.lieuVote }}</h3>
+                    <h3>NUMERO CARTE D’ELECTEUR : {{ client.numeroCarteElecteur }}</h3>
+                    <h3>VOTRE PREOCCUPATION : {{ client.preocupation }}</h3>
+                    <h3>CONTACTS : {{ client.contacts }}</h3>
+                    <h3>EMAIL : {{ client.email }}</h3>
+                </div>
+                <p class="date">fait à Abidjan, le {{ client.dateCreation | date("m-d-Y") }}</p>
+                <table width="1283">
+                    <tr>
+                        <td width="196" height="136" align="center">
+                            <h3> ADHERENT<br>
+                            </h3>
+                            <p class="rect1"></p>
+                        </td>
+                        <td></td>
+                        <td width="378" align="center">
+                            <h3>COORDINATEUR COMMUNAL/LOCAL
+                                <br>
+                            </h3>
+                            <p class="rect2" style="border: 1px solid black !important;"></p>
+                        </td>
+                    </tr>
+                    <tr>
 
+                        <td width="196" height="18">
 
-             </div>
-            {#  <table>
-                  <tr>
-                      <td>CLIENT</td>
-                      <td>konate</td>
-                  </tr>
-                  <tr>
-                      <td>PERIODE</td>
-                      <td>Mois de 5555 ${month.year}</td>
-                  </tr>
-                  <tr>
-                      <td>MONTANT TOTAL</td>
-                      <td>55555 Fcfa</td>
-                  </tr>
-                  <tr>
-                      <td>NOMBRE TOTAL TRANS.</td>
-                      <td>5555</td>
-                  </tr>
-              </table>#}
-          </div>
-        <div class="row" style="margin-top: 10px">
+                        </td>
+                        <td width="693"></td>
 
-            <br>
-             <div style="text-align: justify;">
-                 KALIKAN certifie que le client konate à bien
-                 effectué les transactions ci-dessus mentionnées
-                 dont le montant total est 55555 FCFA dans le mois de 74444 2021.
-                 Ainsi le client peut faire valoir ce que de droit.
-             </div>
-             <br><br>
-             <div style="text-align:right; padding-right: 20px;">
-                 <p>KALIKAN</p>
-             </div>
+                        <td width="378">
+
+                        </td>
+                    <tr>
+                        <td></td>
+                        <td>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <td height="2">
+                        </tr>
+                </table>
+
+                <br>
+                <br>
+
+                <div class="ligne20">
+                    <p>(00225) 27 22 207 938 - 05 86 010 593 - 07 68 510 393 <span class="ligne20_1">recame2020@yhoo.com</span></p>
+                </div>
+                <div class="ligne21">
+                    <p>ABIDJAN/COCODY ANGRE - 8eme Tranche <span class="ligne21_1">Immeuble YAHA - non loinde de la Pharmacie LES ARUMS</span></p>
+
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
+</div>
+
 </body>
-<!-- JavaScript Bundle with Popper -->
+
 
 </html>

@@ -309,14 +309,20 @@ class MembreController extends AbstractController
 
     /**
      * @Route("/fiche/{id}", name="fiche", methods={"GET","POST"})
+     * @param $id
+     * @param Request $request
+     * @param Membre $membre
+     * @param MembreRepository $membreRepository
+     * @throws \Mpdf\MpdfException
      */
-    public function imprimer($id,Request $request)
+    public function imprimer($id,Request $request,MembreRepository $membreRepository)
     {
 
+//dd($membreRepository->find($id));
 
         $html = $this->renderView('admin/membre/imprime.html.twig',[
 
-            'client'=>''
+            'client'=>$membreRepository->find($id),
         ]);
 
 
