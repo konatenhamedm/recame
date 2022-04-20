@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class DepartementController extends AbstractController
 {
     /**
-     * @Route("/departement", name="departement")
+     * @Route("/departement", name="village")
      */
     public function index(DepartementRepository  $repository, PaginationService $paginationService): Response
     {
@@ -32,7 +32,6 @@ class DepartementController extends AbstractController
             'pagination' => $pagination,
             'tableau' => [
                 'Libelle'=> 'Libelle',
-                'Date'=> 'Date',
                 'departement'=> 'departement',
 
             ],
