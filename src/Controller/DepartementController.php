@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class DepartementController extends AbstractController
 {
     /**
-     * @Route("/departement", name="departement")
+     * @Route("/village", name="village")
      */
     public function index(DepartementRepository  $repository, PaginationService $paginationService): Response
     {
@@ -41,7 +41,7 @@ class DepartementController extends AbstractController
     }
 
     /**
-     * @Route("/departement/{id}/show", name="departement_show", methods={"GET"})
+     * @Route("/village/{id}/show", name="village_show", methods={"GET"})
      * @param Departement $departement
      * @return Response
      */
@@ -49,19 +49,19 @@ class DepartementController extends AbstractController
     {
         $form = $this->createForm(DepartementType::class,$departement, [
             'method' => 'POST',
-            'action' => $this->generateUrl('departement_show',[
+            'action' => $this->generateUrl('village_show',[
                 'id'=>$departement->getId(),
             ])
         ]);
 
         return $this->render('admin/departement/voir.html.twig', [
-            'departement' => $departement,
+            'village' => $departement,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/departement/new", name="departement_new", methods={"GET","POST"})
+     * @Route("/village/new", name="village_new", methods={"GET","POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @return Response
@@ -71,7 +71,7 @@ class DepartementController extends AbstractController
         $departement = new Departement();
         $form = $this->createForm(DepartementType::class,$departement, [
             'method' => 'POST',
-            'action' => $this->generateUrl('departement_new')
+            'action' => $this->generateUrl('village_new')
         ]);
         $form->handleRequest($request);
 
@@ -80,7 +80,7 @@ class DepartementController extends AbstractController
         if($form->isSubmitted())
         {
             $response = [];
-            $redirect = $this->generateUrl('departement');
+            $redirect = $this->generateUrl('village');
 
             if($form->isValid()){
                 $departement->setActive(1);
@@ -102,13 +102,13 @@ class DepartementController extends AbstractController
         }
 
         return $this->render('admin/departement/new.html.twig', [
-            'departement' => $departement,
+            'village' => $departement,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/departement/{id}/edit", name="departement_edit", methods={"GET","POST"})
+     * @Route("/village/{id}/edit", name="village_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Departement $departement
      * @param EntityManagerInterface $em
@@ -119,7 +119,7 @@ class DepartementController extends AbstractController
 
         $form = $this->createForm(DepartementType::class,$departement, [
             'method' => 'POST',
-            'action' => $this->generateUrl('departement_edit',[
+            'action' => $this->generateUrl('village_edit',[
                 'id'=>$departement->getId(),
             ])
         ]);
@@ -131,7 +131,7 @@ class DepartementController extends AbstractController
         {
 
             $response = [];
-            $redirect = $this->generateUrl('departement');
+            $redirect = $this->generateUrl('village');
 
             if($form->isValid()){
                 $em->persist($departement);
@@ -153,13 +153,13 @@ class DepartementController extends AbstractController
         }
 
         return $this->render('admin/departement/edit.html.twig', [
-            'departement' => $departement,
+            'village' => $departement,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/departement/delete/{id}", name="departement_delete", methods={"POST","GET","DELETE"})
+     * @Route("/village/delete/{id}", name="village_delete", methods={"POST","GET","DELETE"})
      * @param Request $request
      * @param EntityManagerInterface $em
      * @param Departement $departement
@@ -172,7 +172,7 @@ class DepartementController extends AbstractController
         $form = $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'departement_delete'
+                    'village_delete'
                     ,   [
                         'id' => $departement->getId()
                     ]
@@ -187,7 +187,7 @@ class DepartementController extends AbstractController
             $em->remove($departement);
             $em->flush();
 
-            $redirect = $this->generateUrl('departement');
+            $redirect = $this->generateUrl('village');
 
             $message = 'Opération effectuée avec succès';
 
@@ -209,13 +209,18 @@ class DepartementController extends AbstractController
 
         }
         return $this->render('admin/departement/delete.html.twig', [
-            'departement' => $departement,
+            'village' => $departement,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/departement/{id}/active", name="departement_active", methods={"GET"})
+     * @Route("/village/{id}/active", name="village_active", methods={"GET"})
+     * @param $id
+     * @param Departement $parent
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
     public function active($id,Departement $parent, SerializerInterface $serializer,EntityManagerInterface $entityManager): Response
     {

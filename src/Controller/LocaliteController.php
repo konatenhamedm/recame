@@ -20,7 +20,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 class LocaliteController extends AbstractController
 {
     /**
-     * @Route("/localite", name="localite")
+     * @Route("/departement", name="departement")
+     * @param LocaliteRepository $repository
+     * @param PaginationService $paginationService
+     * @return Response
      */
     public function index(LocaliteRepository  $repository, PaginationService $paginationService): Response
     {
@@ -30,37 +33,40 @@ class LocaliteController extends AbstractController
             'pagination' => $pagination,
             'tableau' => ['libelle'=> 'Libelle'],
             'modal' => 'modal',
-            'titre' => 'Liste des localite',
+            'titre' => 'Liste des departement',
             'critereTitre'=>'',
 
         ]);
     }
+
     /**
-     * @Route("/localite/{id}/show", name="localite_show", methods={"GET"})
+     * @Route("/departement/{id}/show", name="departement_show", methods={"GET"})
+     * @param Localite $localite
+     * @return Response
      */
     public function show(Localite $localite): Response
     {
         $form = $this->createForm(LocaliteType::class,$localite, [
             'method' => 'POST',
-            'action' => $this->generateUrl('localite_show',[
+            'action' => $this->generateUrl('departement_show',[
                 'id'=>$localite->getId(),
             ])
         ]);
 
         return $this->render('admin/localite/voir.html.twig', [
-            'localite' => $localite,
+            'departement' => $localite,
             'form' => $form->createView(),
         ]);
     }
     /**
-     * @Route("/localite/new", name="localite_new", methods={"GET","POST"})
+     * @Route("/departement/new", name="departement_new", methods={"GET","POST"})
      */
     public function new(Request $request, EntityManagerInterface  $em): Response
     {
         $localite = new Localite();
-        $form = $this->createForm(localiteType::class,$localite, [
+        $form = $this->createForm(LocaliteType::class,$localite, [
             'method' => 'POST',
-            'action' => $this->generateUrl('localite_new')
+            'action' => $this->generateUrl('departement_new')
         ]);
         $form->handleRequest($request);
 
@@ -69,7 +75,7 @@ class LocaliteController extends AbstractController
         if($form->isSubmitted())
         {
             $response = [];
-            $redirect = $this->generateUrl('localite');
+            $redirect = $this->generateUrl('departement');
 
             if($form->isValid()){
                 $localite->setActive(1);
@@ -91,20 +97,20 @@ class LocaliteController extends AbstractController
         }
 
         return $this->render('admin/localite/new.html.twig', [
-            'localite' => $localite,
+            'departement' => $localite,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/localite/{id}/edit", name="localite_edit", methods={"GET","POST"})
+     * @Route("/departement/{id}/edit", name="departement_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request,localite $localite, EntityManagerInterface  $em): Response
+    public function edit(Request $request,Localite $localite, EntityManagerInterface  $em): Response
     {
 
-        $form = $this->createForm(localiteType::class,$localite, [
+        $form = $this->createForm(LocaliteType::class,$localite, [
             'method' => 'POST',
-            'action' => $this->generateUrl('localite_edit',[
+            'action' => $this->generateUrl('departement_edit',[
                 'id'=>$localite->getId(),
             ])
         ]);
@@ -116,7 +122,7 @@ class LocaliteController extends AbstractController
         {
 
             $response = [];
-            $redirect = $this->generateUrl('localite');
+            $redirect = $this->generateUrl('departement');
 
             if($form->isValid()){
                 $em->persist($localite);
@@ -138,22 +144,26 @@ class LocaliteController extends AbstractController
         }
 
         return $this->render('admin/localite/edit.html.twig', [
-            'localite' => $localite,
+            'departement' => $localite,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/localite/delete/{id}", name="localite_delete", methods={"POST","GET","DELETE"})
+     * @Route("/departement/delete/{id}", name="departement_delete", methods={"POST","GET","DELETE"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Localite $localite
+     * @return Response
      */
-    public function delete(Request $request, EntityManagerInterface $em,localite $localite): Response
+    public function delete(Request $request, EntityManagerInterface $em,Localite $localite): Response
     {
 
 
         $form = $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'localite_delete'
+                    'departement_delete'
                     ,   [
                         'id' => $localite->getId()
                     ]
@@ -168,7 +178,7 @@ class LocaliteController extends AbstractController
             $em->remove($localite);
             $em->flush();
 
-            $redirect = $this->generateUrl('localite');
+            $redirect = $this->generateUrl('departement');
 
             $message = 'Opération effectuée avec succès';
 
@@ -190,17 +200,21 @@ class LocaliteController extends AbstractController
 
         }
         return $this->render('admin/localite/delete.html.twig', [
-            'localite' => $localite,
+            'departement' => $localite,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/localite/{id}/active", name="localite_active", methods={"GET"})
+     * @Route("/departement/{id}/active", name="departement_active", methods={"GET"})
+     * @param $id
+     * @param Localite $parent
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
-    public function active($id,Localite $parent, SerializerInterface $serializer): Response
+    public function active($id,Localite $parent, SerializerInterface $serializer,EntityManagerInterface $entityManager): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
 
 
         if ($parent->getActive() == 1){

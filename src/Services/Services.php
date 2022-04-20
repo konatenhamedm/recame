@@ -76,7 +76,7 @@ class Services
             'groupe'=>'groupe',
             'parent'=>'parent',
             'parametre'=>'parametre',
-            'localite'=>'localite',
+            'village'=>'village',
             'profession'=>'profession',
             'user'=>'user',
             'departement'=>'departement',
