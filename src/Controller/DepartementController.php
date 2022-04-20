@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class DepartementController extends AbstractController
 {
     /**
-     * @Route("/departement", name="village")
+     * @Route("/departement", name="departement")
      */
     public function index(DepartementRepository  $repository, PaginationService $paginationService): Response
     {
