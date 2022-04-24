@@ -79,7 +79,9 @@ class Services
             'village'=>'village',
             'profession'=>'profession',
             'user'=>'user',
-            'departement'=>'departement',
+            'produit'=>'produit',
+            'partenaire'=>'partenaire',
+            'catégorie'=>'catégorie',
         ];
      /*   foreach ($this->container as $el=> $params) {
           $resultat=  $params->getDefaults();

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Membre;
 use App\Repository\CategorieRepository;
 use App\Repository\GroupeRepository;
+use App\Repository\PartenaireRepository;
 use App\Repository\ProduitRepository;
 use App\Services\PaginationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/siteweb", name="home", methods={"GET", "POST"})
+     * @Route("/", name="home", methods={"GET", "POST"})
      */
     public function index(Request $request, CategorieRepository $categorieRepository)
     {
@@ -26,6 +27,19 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/about", name="about", methods={"GET", "POST"})
+     * @param PartenaireRepository $partenaireRepository
+     * @return Response
+     */
+    public function about(PartenaireRepository $partenaireRepository)
+    {
+
+
+        return $this->render('fils/about.html.twig',[
+            'listePartenaires'=>$partenaireRepository->findAll()
+        ]);
+    }
     /**
      * @param $id
      * @param ProduitRepository $produitRepository
