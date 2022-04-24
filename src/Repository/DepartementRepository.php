@@ -44,6 +44,12 @@ class DepartementRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    public function getListe(){
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.libDepartement','ASC')
+            ->getQuery()
+            ->getResult();
+    }
     public function listeDepartement($id){
         return $this->createQueryBuilder('d')
             ->andWhere('d.region =:localite')

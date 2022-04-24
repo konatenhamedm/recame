@@ -15,30 +15,35 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            line-height: 30px;
-            font-weight: bold;
+            line-height: 35px;
+            background-image: url("{{ asset('assets/admin/image/bg.jpeg') }}");
+            background-repeat: no-repeat;
+          /*  font-weight: bold;*/
 
         }
 
+        h1 {
+              text-transform: uppercase;
+              font-weight: bold;
+              text-align: center;
+              size: 35px;
+              text-decoration: underline;
+          }
         h2 {
-            text-transform: uppercase;
+
             font-weight: bold;
             text-align: center;
-            size: 15px;
-            text-decoration: underline;
+            size: 35px;
+
         }
 
         .rect1 {
-            border: solid black 3px;
-            width: 180px;
-            height: 100px;
+            border: 2px solid black;
 
         }
 
         table td .rect2 {
             border: 2px solid black !important;
-            width: 200px;
-            height: 100px;
         }
 
         table {
@@ -55,80 +60,81 @@
         .autre {
             border: 2px solid black;
             width: 100px;
-            height: 60px;
+            height: 100px;
             text-align: center;
-            align-content: center;
             float: right;
             padding-top: 2px;
             padding: 10px;
 
         }
         .date{
-            margin-left: 40%;
+            margin-left: 60%;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div style="margin-bottom: -10px">
+  {#  <div style="margin-bottom: -10px">
         <h3 style="text-align: center"><img src="{{ asset('assets/admin/image/IMG_20220416_231844.jpg') }}"
                                             class="displayed" width="60" height="60" align="center"></h3>
     </div>
-
+#}
+    <br><br><br>
     <div class="row">
-        <div class="Titre" style="
-            color: black;">
-            <p>
-            <h2 style="text-align: center;text-decoration: underline;">FICHES D'INSCRIPTION DES MEMBRES - CELLULES
-                RECAME</h2>
+
+            <p >
+            <h1 >FICHES D'INSCRIPTION DES MEMBRES - CELLULES
+                RECAME</h1>
             </p>
-        </div>
+
         <br>
         <div class="Info_client" style="
             font-size: 15px;">
             <div class="row">
                 <div class="col-md-4 autre">
                     <p class="photo" align="left">
-                        <img class="avatar-img" src="{{ asset('uploads/images/' ~ client.photo) }}" alt="Image Description">
+                        <img class="avatar-img" height="100" width="100" src="{{ asset('uploads/images/' ~ client.photo) }}" alt="Image Description">
                     </p>
                 </div>
                 <div class="col-md-8">
 
-                    <h3>N° : {{ client.numero }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h3>N° : <span style="font-weight: bold">{{ client.numero }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;CODE DE PARRAINNAGE : {{ client.codeParrainnage }}</h3>
-                    <h3>DEPARTEMENT: {{ client.region.libelle }}</h3>
-                    <h3>COMMUNE/VILLAGE : {{ client.departement.libDepartement }}</h3>
-                    <h3>CELLULE : {{ client.cellule }}</h3>
-                    <h3>QUARTIER : {{ client.quartier }}</h3>
-                    <h3>NOM : {{ client.nom }}</h3>
-                    <h3>PRENOMS: {{ client.prenoms }}</h3>
-                    <h3>DATE DE NAISSANCE : {{ client.dateNaissance | date("m-d-Y") }}</h3>
-                    <h3>LIEU DE NAISSANCE : {{ client.lieuNaissance }}</h3>
-                    <h3>SEXE : {{ client.sexe }}</h3>
-                    <h3>NIVEAU D’ETUDES : {{ client.niveauEtude }}</h3>
-                    <h3>PROFESSION/FONCTION : {{ client.profession.libelle }}</h3>
-                    <h3>NATURE ET NUMERO DE LA PIECE D’IDENTITE : {{ client.naturePiece }} {{ client.numeroPiece }}</h3>
-                    <h3>LIEU DE VOTE : {{ client.lieuVote }}</h3>
-                    <h3>NUMERO CARTE D’ELECTEUR : {{ client.numeroCarteElecteur }}</h3>
-                    <h3>VOTRE PREOCCUPATION : {{ client.preocupation }}</h3>
-                    <h3>CONTACTS : {{ client.contacts }}</h3>
-                    <h3>EMAIL : {{ client.email }}</h3>
+                        &nbsp;&nbsp;CODE DE PARRAINNAGE : <span style="font-weight: bold">{{ client.codeParrainnage }}</span></h3>
+                    <h3>DEPARTEMENT: <span style="font-weight: bold">{{ client.region.libelle }}</span></h3>
+                    <h3>COMMUNE/VILLAGE : <span style="font-weight: bold">{{ client.departement.libDepartement }}</span></h3>
+                    <h3>CELLULE : <span style="font-weight: bold">{{ client.cellule }}</span></h3>
+                    <h3>QUARTIER : <span style="font-weight: bold">{{ client.quartier }}</span></h3>
+                    <h3>NOM : <span style="font-weight: bold">{{ client.nom }}</span></h3>
+                    <h3>PRENOMS: <span style="font-weight: bold">{{ client.prenoms }}</span></h3>
+                    <h3>DATE DE NAISSANCE : <span style="font-weight: bold">{{ client.dateNaissance | date("m-d-Y") }}</span></h3>
+                    <h3>LIEU DE NAISSANCE : <span style="font-weight: bold">{{ client.lieuNaissance }}</span></h3>
+                    <h3>SEXE : <span style="font-weight: bold">{{ client.sexe }}</span></h3>
+                    <h3>NIVEAU D’ETUDES : <span style="font-weight: bold">{{ client.niveauEtude }}</span></h3>
+                    <h3>PROFESSION/FONCTION : <span style="font-weight: bold">{{ client.profession.libelle }}</span></h3>
+                    <h3>NATURE ET NUMERO DE LA PIECE D’IDENTITE : <span>{{ client.naturePiece }} {{ client.numeroPiece }}</span></h3>
+                    <h3>LIEU DE VOTE : <span style="font-weight: bold">{{ client.lieuVote }}</span></h3>
+                    <h3>NUMERO CARTE D’ELECTEUR : <span style="font-weight: bold">{{ client.numeroCarteElecteur }}</span></h3>
+                    <h3>VOTRE PREOCCUPATION : <span style="font-weight: bold">{{ client.preocupation }}</span></h3>
+                    <h3>CONTACTS : <span style="font-weight: bold">{{ client.contacts }}</span></h3>
+                    <h3>EMAIL : <span style="font-weight: bold">{{ client.email }}</span></h3>
                 </div>
-                <p class="date">fait à Abidjan, le {{ client.dateCreation | date("m-d-Y") }}</p>
+                <p class="date">fait à Abidjan, le <span>{{ client.dateCreation | date("m-d-Y") }}</span></p>
+                <br>
+                <br>
                 <table width="1283">
                     <tr>
-                        <td width="196" height="136" align="center">
-                            <h3> ADHERENT<br>
-                            </h3>
+                        <td  align="center">
+                            <h2> ADHERENT<br>
+                            </h2>
                             <p class="rect1"></p>
                         </td>
                         <td></td>
                         <td width="378" align="center">
-                            <h3>COORDINATEUR COMMUNAL/LOCAL
+                            <h2>COORDINATEUR COMMUNAL/LOCAL
                                 <br>
-                            </h3>
+                            </h2>
                             <p class="rect2" style="border: 1px solid black !important;"></p>
                         </td>
                     </tr>
@@ -152,16 +158,13 @@
                         </tr>
                 </table>
 
-                <br>
-                <br>
-
-                <div class="ligne20">
+                {#<div class="ligne20">
                     <p>(00225) 27 22 207 938 - 05 86 010 593 - 07 68 510 393 <span class="ligne20_1">recame2020@yhoo.com</span></p>
                 </div>
                 <div class="ligne21">
-                    <p>ABIDJAN/COCODY ANGRE - 8eme Tranche <span class="ligne21_1">Immeuble YAHA - non loinde de la Pharmacie LES ARUMS</span></p>
+                    <span>ABIDJAN/COCODY ANGRE - 8eme Tranche <span class="ligne21_1">Immeuble YAHA - non loinde de la Pharmacie LES ARUMS</span></span>
 
-                </div>
+                </div>#}
             </div>
         </div>
     </div>

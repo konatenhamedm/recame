@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Classe\Search;
 use App\Entity\Membre;
 use App\Entity\Profession;
 use App\Form\MembreType;
+use App\Form\SearchType;
 use App\Repository\DepartementRepository;
 use App\Repository\MembreRepository;
 use App\Services\PaginationService;
@@ -25,38 +27,73 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre", name="membre")
      */
-    public function index(PaginationService $paginationService): Response
+    public function index(PaginationService $paginationService, Request $request, MembreRepository $repository): Response
     {
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+//dd($form->get('village')->getViewData());
+
+
+            $data = $repository->findLastChrono($form->get('village')->getViewData()[0]);
+            // dd( $data);
+            // }
+
+            $html = $this->renderView('admin/membre/test.html.twig', [
+                'data' => $data
+            ]);
+
+
+            //}
+            $mpdf = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8', 'format' => 'A4'
+            ]);
+            $mpdf->PageNumSubstitutions[] = [
+                'from' => 1,
+                'reset' => 0,
+                'type' => 'I',
+                'suppress' => 'on'
+            ];
+
+            $mpdf->WriteHTML($html);
+            $mpdf->SetFontSize(6);
+            $mpdf->Output();
+        }
         $pagination = $paginationService->setEntityClass(Membre::class)->getData();
 
         return $this->render('admin/membre/index.html.twig', [
+            'form' => $form->createView(),
             'pagination' => $pagination,
             'tableau' => [
-                'photo'=> 'photo',
-                'Nom'=> 'Nom',
-                'Prenom'=> 'Prenom',
-                'Departement'=> 'Departement',
-                'Email'=> 'Email',
-                'contact'=>'contact'
+                'photo' => 'photo',
+                'Nom' => 'Nom',
+                'Prenom' => 'Prenom',
+                'Departement' => 'Departement',
+                'Email' => 'Email',
+                'contact' => 'contact'
             ],
-            'critereTitre'=>'Departements',
+            'critereTitre' => 'VILLAGES',
             'modal' => '',
             'position' => 4,
-            'active'=> 7,
-            'titre' => 'Liste des membres',
+            'active' => 7,
+            'titre' => 'LISTE DES MEMBRES',
 
         ]);
     }
+
     /**
      * @Route("/membre/{id}/show", name="membre_show", methods={"GET"})
      */
     public function show(Membre $membre): Response
     {
-        $form = $this->createForm(MembreType::class,$membre, [
+        $form = $this->createForm(MembreType::class, $membre, [
             'method' => 'POST',
-            'action' => $this->generateUrl('membre_show',[
-                'id'=>$membre->getId(),
+            'action' => $this->generateUrl('membre_show', [
+                'id' => $membre->getId(),
             ])
         ]);
 
@@ -74,27 +111,26 @@ class MembreController extends AbstractController
      * @param MembreRepository $repository
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,MembreRepository $repository): Response
+    public function new(Request $request, EntityManagerInterface $em, UploaderHelper $uploaderHelper, MembreRepository $repository): Response
     {
         $membre = new Membre();
-        $form = $this->createForm(MembreType::class,$membre ,[
+        $form = $this->createForm(MembreType::class, $membre, [
             'method' => 'POST',
             'action' => $this->generateUrl('membre_new')
         ]);
 
-        $numero = 'RCM-'.$repository->getNombre();
+        $numero = 'RCM-' . $repository->getNombre();
 
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
 
-        if($form->isSubmitted())
-        {
+        if ($form->isSubmitted()) {
             $response = [];
             $statut = 1;
             $redirect = $this->generateUrl('membre');
 
-            if($form->isValid()){
+            if ($form->isValid()) {
 
                 $uploadedFile = $form['photo']->getData();
 //dd($uploadedFile);
@@ -107,13 +143,13 @@ class MembreController extends AbstractController
                 $em->persist($membre);
                 $em->flush();
 
-                $message       = 'Opération effectuée avec succès';
+                $message = 'Opération effectuée avec succès';
 
                 $this->addFlash('success', $message);
 
             }
             if ($isAjax) {
-                return $this->json( compact('statut', 'message', 'redirect'));
+                return $this->json(compact('statut', 'message', 'redirect'));
             } else {
                 if ($statut == 1) {
                     return $this->redirect($redirect);
@@ -130,37 +166,36 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre/{id}/edit", name="membre_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request,Membre $membre, EntityManagerInterface  $em): Response
+    public function edit(Request $request, Membre $membre, EntityManagerInterface $em): Response
     {
 
-        $form = $this->createForm(MembreType::class,$membre, [
+        $form = $this->createForm(MembreType::class, $membre, [
             'method' => 'POST',
-            'action' => $this->generateUrl('membre_edit',[
-                'id'=>$membre->getId(),
+            'action' => $this->generateUrl('membre_edit', [
+                'id' => $membre->getId(),
             ])
         ]);
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
 
-        if($form->isSubmitted())
-        {
+        if ($form->isSubmitted()) {
 
             $response = [];
             $redirect = $this->generateUrl('membre');
 
-            if($form->isValid()){
+            if ($form->isValid()) {
                 $em->persist($membre);
                 $em->flush();
 
-                $message       = 'Opération effectuée avec succès';
+                $message = 'Opération effectuée avec succès';
                 $statut = 1;
                 $this->addFlash('success', $message);
 
             }
 
             if ($isAjax) {
-                return $this->json( compact('statut', 'message', 'redirect'));
+                return $this->json(compact('statut', 'message', 'redirect'));
             } else {
                 if ($statut == 1) {
                     return $this->redirect($redirect);
@@ -177,7 +212,7 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre/delete/{id}", name="membre_delete", methods={"POST","GET","DELETE"})
      */
-    public function delete(Request $request, EntityManagerInterface $em,Membre $membre): Response
+    public function delete(Request $request, EntityManagerInterface $em, Membre $membre): Response
     {
 
 
@@ -185,7 +220,7 @@ class MembreController extends AbstractController
             ->setAction(
                 $this->generateUrl(
                     'membre_delete'
-                    ,   [
+                    , [
                         'id' => $membre->getId()
                     ]
                 )
@@ -204,8 +239,8 @@ class MembreController extends AbstractController
             $message = 'Opération effectuée avec succès';
 
             $response = [
-                'statut'   => 1,
-                'message'  => $message,
+                'statut' => 1,
+                'message' => $message,
                 'redirect' => $redirect,
             ];
 
@@ -218,7 +253,6 @@ class MembreController extends AbstractController
             }
 
 
-
         }
         return $this->render('admin/membre/delete.html.twig', [
             'membre' => $membre,
@@ -229,11 +263,10 @@ class MembreController extends AbstractController
     /**
      * @Route("/liste_tarife", name="liste_tarife_index", methods={"GET","POST"})
      */
-    public function remplirSelect2Action(Request $request,DepartementRepository $repository,EntityManagerInterface  $em):Response
+    public function remplirSelect2Action(Request $request, DepartementRepository $repository, EntityManagerInterface $em): Response
     {
         $response = new Response();
-        if($request->isXmlHttpRequest())
-        { // pour vérifier la présence d'une requete Ajax
+        if ($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
 
             $id = "";
             $id = $request->get('id');
@@ -244,7 +277,7 @@ class MembreController extends AbstractController
 
                 $arrayCollection = array();
 
-                foreach($ensembles as $item) {
+                foreach ($ensembles as $item) {
                     $arrayCollection[] = array(
                         'id' => $item->getId(),
                         'libelle' => $item->getLibDepartement(),
@@ -264,28 +297,31 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/liste_membre", name="imprimer", methods={"GET","POST"})
+     * @Route("/liste_membre/{mot}", name="imprimer", methods={"GET","POST"})
+     * @param $mot
+     * @param Request $request
+     * @param MembreRepository $repository
+     * @throws \Mpdf\MpdfException
      */
-    public function imprime(Request $request,MembreRepository $repository)
+    public function imprime($mot, Request $request, MembreRepository $repository)
     {
 
 
         /*if($request->isXmlHttpRequest())
         { // pour vérifier la présence d'une requete Ajax*/
 
-           /* $id = "";
-            $id = $request->get('id');*/
+        /* $id = "";
+         $id = $request->get('id');*/
+        dd($repository->findLastChrono('village1'));
+        //if ($id) {
 
-            //if ($id) {
+        $data = $repository->findAll();
+        // dd( $data);
+        // }
 
-                $data = $repository->findAll();
-       // dd( $data);
-           // }
-
-            $html = $this->renderView('admin/membre/test.html.twig',[
-                'data'=>$data
-            ]);
-
+        $html = $this->renderView('admin/membre/test.html.twig', [
+            'data' => $data
+        ]);
 
 
         //}
@@ -315,16 +351,15 @@ class MembreController extends AbstractController
      * @param MembreRepository $membreRepository
      * @throws \Mpdf\MpdfException
      */
-    public function imprimer($id,Request $request,MembreRepository $membreRepository)
+    public function imprimer($id, Request $request, MembreRepository $membreRepository)
     {
 
 //dd($membreRepository->find($id));
 
-        $html = $this->renderView('admin/membre/imprime.html.twig',[
+        $html = $this->renderView('admin/membre/imprime.html.twig', [
 
-            'client'=>$membreRepository->find($id),
+            'client' => $membreRepository->find($id),
         ]);
-
 
 
         //}
@@ -349,16 +384,16 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre/{id}/active", name="membre_active", methods={"GET"})
      */
-    public function active($id,Membre $parent, SerializerInterface $serializer): Response
+    public function active($id, Membre $parent, SerializerInterface $serializer): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
 
-        if ($parent->getActive() == 1){
+        if ($parent->getActive() == 1) {
 
             $parent->setActive(0);
 
-        }else{
+        } else {
 
             $parent->setActive(1);
 
@@ -367,10 +402,10 @@ class MembreController extends AbstractController
         $entityManager->persist($parent);
         $entityManager->flush();
         return $this->json([
-            'code'=>200,
-            'message'=>'ça marche bien',
-            'active'=>$parent->getActive(),
-        ],200);
+            'code' => 200,
+            'message' => 'ça marche bien',
+            'active' => $parent->getActive(),
+        ], 200);
 
     }
 }

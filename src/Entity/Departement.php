@@ -123,11 +123,4 @@ class Departement
     }
 
 
-
-   
-
-
-
-
-
 }

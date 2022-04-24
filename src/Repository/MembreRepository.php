@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Classe\Search;
 use App\Entity\Membre;
 use App\Entity\Module;
 use App\Entity\ModuleParent;
@@ -47,12 +48,12 @@ class MembreRepository extends ServiceEntityRepository
         }
     }
 
-    public function findLastChrono($departement){
+    public function findLastChrono($id){
         return $this->createQueryBuilder("m")
             ->select("m")
             ->join("m.departement","d")
-            ->where("d.libDepartement = :departement")
-            ->setParameter("departement", $departement)
+            ->where("d.id = :id")
+            ->setParameter("id", $id)
             ->getQuery()
             ->getResult();
 

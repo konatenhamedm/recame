@@ -25,7 +25,7 @@
             <!-- Filter -->
             <div class="row align-items-sm-center">
                 <div class="col-sm-auto">
-                    {% if critereTitre == "Departements" %}
+                    {% if critereTitre == "VILLAGES" %}
                     <div class="d-flex align-items-center mr-2">
                         <span class="text-secondary mr-2">{{ critereTitre }}:</span>
 
@@ -40,7 +40,11 @@
                               }' id="{{ critereTitre }}">
                             <option value="">Tous</option>
                             {% for data in data %}
-                                <option value="{{ data.libDepartement }}">{{ data.libDepartement | capitalize }}</option>
+                                <option value="{{ data.libDepartement }}">{{ data.libDepartement | capitalize }}
+                                    <a class=" btn btn-sm btn-outline-warning"  id="exporte" href="{{ path('imprimer',{'mot':data.libDepartement } ) }}" target="__blank" >
+                                        <i class="tio-download-to mr-1"></i>
+                                    </a>
+                                </option>
                             {% endfor %}
 
                             {#<option value="Ouattara">Ouattara</option>
@@ -50,8 +54,8 @@
                     </div>
                     {% endif %}
                 </div>
-                {% if critereTitre == "Departements" %}
-                <div class="col-sm-auto">
+                {% if critereTitre == "VILLAGES" %}
+            {#    <div class="col-sm-auto">
                     <div class="d-flex align-items-center mr-2">
                         <span class="text-secondary mr-2">Status:</span>
 
@@ -70,11 +74,24 @@
                         </select>
                         <!-- End Select -->
                     </div>
-                </div>
+                </div>#}
+                    {{ form_start(form) }}
+                    <div class="col-sm-auto">
+                        <div class="d-flex align-items-center mr-2">
+                            <span class="text-secondary mr-2">VILLAGES:</span>
+
+
+                            {{ form_widget(form.village,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NOM','required':'required'}}) }}
+                            &nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary" style="height: 40px">
+                                <i class="tio-download-to mr-1 mt-1" ></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
                 {#{% endif %}#}
-                <a class="text-body mr-3"  id="exporter" href="{{ path('imprimer') }}" target="__blank" >
-                    <i class="tio-download-to mr-1"></i> Export
-                </a>
+
                 {% endif %}
                 <div class="col-md">
                     <form>

@@ -3,11 +3,13 @@
 {% block titre %}{{ menu.getRoute }}{% endblock %}
 
 {% block page_content %}
+    {% form_theme form 'widget/fields-block.html.twig' %}
     {% set new=menu.getRoute %}
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col-sm mb-2 mb-sm-0">
                 <h1 class="page-header-title">Membres</h1>
+
             </div>
 
             <div class="col-sm-auto">
@@ -41,19 +43,19 @@
                         </div>
                        {# {{ data.photo }}#}
                     </td>
-                    <td >
+                    <td class="table-column-pr-0">
                         {{ data.nom }}
                     </td>
-                    <td >
+                    <td class="table-column-pr-0">
                         {{ data.prenoms }}
                     </td>
-                    <td >
+                    <td class="table-column-pr-0">
                         {{ data.departement.libDepartement }}
                     </td>
-                    <td >
+                    <td class="table-column-pr-0">
                         {{ data.email }}
                     </td>
-                    <td >
+                    <td class="table-column-pr-0">
                         {{ data.contacts }}
                     </td>
                     <td class="active">
@@ -74,19 +76,25 @@
 {% block javascripts %}
     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
     <script>
-
+        $(document).ready(function() {
+            $('#village').select2();
+            $('#village').select();
+        });
         $(document).ready(function () {
 
-            $("#Departements").click(function (e) {
-                e.preventDefault();
+            $("#VILLAGES").change(function (e) {
+              //  e.preventDefault();
+
+             //   alert('ffff')
                 var a = $(this).val();
-                $("#exporter").click()
-              /*  $.ajax({
-                    url:        '/admin/liste_membre',
+
+
+               $.ajax({
+                    url:        '/admin/membre',
                     type:       'POST',
                     data:     {id: a },
                     dataType:   'json',
-                });*/
+                });
 
 
             });
