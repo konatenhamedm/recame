@@ -17,6 +17,9 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="home", methods={"GET", "POST"})
+     * @param Request $request
+     * @param CategorieRepository $categorieRepository
+     * @return Response
      */
     public function index(Request $request, CategorieRepository $categorieRepository)
     {
@@ -34,8 +37,6 @@ class DefaultController extends AbstractController
      */
     public function about(PartenaireRepository $partenaireRepository)
     {
-
-
         return $this->render('fils/about.html.twig',[
             'listePartenaires'=>$partenaireRepository->findAll()
         ]);
