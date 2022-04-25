@@ -69,8 +69,34 @@
     </div>
 
 {% endblock %}
-
 {% block javascripts %}
-    {{ parent() }}
+    <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#village').select2();
+            $('#village').select();
+        });
+        $(document).ready(function () {
+
+            $("#VILLAGES").change(function (e) {
+                //  e.preventDefault();
+
+                //   alert('ffff')
+                var a = $(this).val();
+
+
+                $.ajax({
+                    url:        '/admin/membre',
+                    type:       'POST',
+                    data:     {id: a },
+                    dataType:   'json',
+                });
+
+
+            });
+        })
+        // $('select').select2();
+        </script>
 
 {% endblock %}
+

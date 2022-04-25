@@ -52,13 +52,13 @@ class SearchType extends AbstractType
                 // used to render a select box, check boxes or radios
                 'multiple' => true,
                  'expanded' => false,
-                 'attr' => ['class' => 'custom-select border-primary'],
+                 'attr' => ['class' => 'custom-select select2 border-primary'],
             ])
           ->add('type',ChoiceType::class,
               [
                   'label'=>false,
                   'expanded'     => false,
-                  'placeholder' => 'Choisir une préocupation',
+                  'placeholder' => 'Choisissez un type',
                   'required'     => true,
                   // 'attr' => ['class' => 'select2_multiple'],
                   'multiple' => false,

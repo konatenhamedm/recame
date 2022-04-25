@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Classe\Search;
 use App\Entity\Membre;
+use App\Form\SearchType;
 use App\Repository\CategorieRepository;
 use App\Repository\GroupeRepository;
+use App\Repository\MembreRepository;
 use App\Repository\PartenaireRepository;
 use App\Repository\ProduitRepository;
 use App\Services\PaginationService;
@@ -88,11 +91,76 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/admin/dashbord", name="admin", methods={"GET", "POST"})
+     * @param PaginationService $paginationService
+     * @param Request $request
+     * @param MembreRepository $repository
+     * @return Response
      */
-    public function dashboard(PaginationService $paginationService): Response
+    public function dashboard(PaginationService $paginationService, Request $request, MembreRepository $repository): Response
     {
+        $search = new Search();
+        $form = $this->createForm(SearchType::class, $search);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $repository->findLastChrono($form->get('village')->getViewData()[0]);
+
+            if($form->get('type')->getViewData() == "PDF")
+            {
+
+                $html = $this->renderView('admin/membre/test.html.twig', [
+                    'data' => $data
+                ]);
+
+
+                //}
+                $mpdf = new \Mpdf\Mpdf([
+
+                    'mode' => 'utf-8', 'format' => 'A4'
+                ]);
+                $mpdf->PageNumSubstitutions[] = [
+                    'from' => 1,
+                    'reset' => 0,
+                    'type' => 'I',
+                    'suppress' => 'on'
+                ];
+
+                $mpdf->WriteHTML($html);
+                $mpdf->SetFontSize(6);
+                $mpdf->Output();
+            }else{
+
+                $myVariableCSV = "Nom ; Prenom ; Contacts ; Email ; Departement ; Village ; Sexe ; Profession\n";
+                //Ajout de données (avec le . devant pour ajouter les données à la variable existante)
+
+                foreach ($data as $item) {
+                    //  dd(  $item);
+                    $myVariableCSV .= $item['nom'] . ";" . $item['prenoms'] . ";" . $item['contacts'] . ";" . $item['email'] . ";" . $item['libelle'] . ";" . $item['libDepartement']. ";" . $item['sexe']. ";" . $item['profession'] .";\n";
+                }
+
+                //Si l'on souhaite ajouter un espace
+                //$myVariableCSV .= " ; ; ; \n";
+                //Autre donnée
+                ///  $myVariableCSV .= "Chuck; Norris; 80;\n";
+                //On donne la variable en string à la response, nous définissons le code HTTP à 200
+                return new Response(
+                    $myVariableCSV,
+                    200,
+                    [
+                        //Définit le contenu de la requête en tant que fichier Excel
+                        'Content-Type' => 'application/vnd.ms-excel',
+                        //On indique que le fichier sera en attachment donc ouverture de boite de téléchargement ainsi que le nom du fichier
+                        "Content-disposition" => "attachment; filename=Tutoriel.csv"
+                    ]
+                );
+            }
+
+        }
+
         $pagination = $paginationService->setEntityClass(Membre::class)->getData();
         return $this->render('admin/_includes/dashboard.html.twig', [
+            'form' => $form->createView(),
             'pagination' => $pagination,
             'tableau' => [
                 'photo' => 'photo',
