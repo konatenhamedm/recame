@@ -21,7 +21,7 @@
                         <!-- TOP-CATEGORY-SINGLE-PRODUCT START-->
                         {% for i in data.getImage %}
 
-                            <div class="modal fade" id="{{ i.titre }}" tabindex="-1" role="dialog">
+                            <div class="modal fade" id="{{ i.id }}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -87,7 +87,7 @@
                                             <img src="{{ asset('uploads/images/' ~ i.path) }}" alt="Category" class="primary-image">
                                             <img src="{{ asset('uploads/images/' ~ i.path) }}" alt="Category" class="secondary-image">
                                         </a>
-                                        <a class="modal-view" href="#" data-bs-toggle="modal" data-bs-target="#{{ i.titre }}">
+                                        <a class="modal-view" href="#" data-bs-toggle="modal" data-bs-target="#{{ i.id }}">
 								<span class="quick-view">
 									<i class="fa fa-external-link"></i>Voir
 								</span>

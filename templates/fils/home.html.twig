@@ -65,7 +65,7 @@
                                     <img src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="primary-image">
                                     <img src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="secondary-image">
                                 </a>
-                                <a class="modal-view" href="#" data-bs-toggle="modal" data-bs-target="#{{ data.libelle }}">
+                                <a class="modal-view" href="#" data-bs-toggle="modal" data-bs-target="#{{ data.id }}">
 								<span class="quick-view">
 									<i class="fa fa-external-link"></i>Voir
 								</span>
@@ -112,7 +112,7 @@
     <div id="quickview-wrapper">
         <!-- Modal -->
         {% for modal in pagination %}
-            <div class="modal fade" id="{{ modal.libelle }}" tabindex="-1" role="dialog">
+            <div class="modal fade" id="{{ modal.id }}" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
