@@ -60,7 +60,7 @@ class SearchType extends AbstractType
                   'expanded'     => false,
                   'placeholder' => 'Choisissez un type',
                   'required'     => true,
-                  // 'attr' => ['class' => 'select2_multiple'],
+                   'attr' => ['class' => 'custom-select select2 border-primary'],
                   'multiple' => false,
                   //'choices_as_values' => true,
 
