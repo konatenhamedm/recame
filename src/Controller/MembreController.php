@@ -35,12 +35,10 @@ class MembreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-//dd($form->get('village')->getViewData());
-
-
             $data = $repository->findLastChrono($form->get('village')->getViewData()[0]);
-            // dd( $data);
-            // }
+
+        if($form->get('type')->getViewData() == "PDF")
+        {
 
             $html = $this->renderView('admin/membre/test.html.twig', [
                 'data' => $data
@@ -62,7 +60,42 @@ class MembreController extends AbstractController
             $mpdf->WriteHTML($html);
             $mpdf->SetFontSize(6);
             $mpdf->Output();
+        }else{
+
+            $myVariableCSV = "Nom ; Prenom ; Contacts ; Email ; Departement ; Village ; Sexe ; Profession\n";
+            //Ajout de données (avec le . devant pour ajouter les données à la variable existante)
+
+            foreach ($data as $item) {
+             //  dd(  $item);
+                $myVariableCSV .= $item['nom'] . ";" . $item['prenoms'] . ";" . $item['contacts'] . ";" . $item['email'] . ";" . $item['libelle'] . ";" . $item['libDepartement']. ";" . $item['sexe']. ";" . $item['profession'] .";\n";
+            }
+
+            //Si l'on souhaite ajouter un espace
+            //$myVariableCSV .= " ; ; ; \n";
+            //Autre donnée
+            ///  $myVariableCSV .= "Chuck; Norris; 80;\n";
+            //On donne la variable en string à la response, nous définissons le code HTTP à 200
+            return new Response(
+                $myVariableCSV,
+                200,
+                [
+                    //Définit le contenu de la requête en tant que fichier Excel
+                    'Content-Type' => 'application/vnd.ms-excel',
+                    //On indique que le fichier sera en attachment donc ouverture de boite de téléchargement ainsi que le nom du fichier
+                    "Content-disposition" => "attachment; filename=Tutoriel.csv"
+                ]
+            );
         }
+
+        }
+     //dd();
+
+
+
+            // dd( $data);
+            // }
+
+
         $pagination = $paginationService->setEntityClass(Membre::class)->getData();
 
         return $this->render('admin/membre/index.html.twig', [

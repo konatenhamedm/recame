@@ -360,6 +360,10 @@ class Membre
         return $this->region;
     }
 
+    public function getNoml(){
+        return $this->region->getLibelle();
+    }
+
     public function setRegion(?Localite $region): self
     {
         $this->region = $region;

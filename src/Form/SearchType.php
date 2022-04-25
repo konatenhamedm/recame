@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Sodium\add;
 
 class SearchType extends AbstractType
 {
@@ -50,9 +51,25 @@ class SearchType extends AbstractType
 
                 // used to render a select box, check boxes or radios
                 'multiple' => true,
-                // 'expanded' => true,
-                'attr' => ['class' => 'form-control select2 border-primary'],
-            ]);
+                 'expanded' => false,
+                 'attr' => ['class' => 'custom-select border-primary'],
+            ])
+          ->add('type',ChoiceType::class,
+              [
+                  'label'=>false,
+                  'expanded'     => false,
+                  'placeholder' => 'Choisir une préocupation',
+                  'required'     => true,
+                  // 'attr' => ['class' => 'select2_multiple'],
+                  'multiple' => false,
+                  //'choices_as_values' => true,
+
+                  'choices'  => array_flip([
+                      'PDF'        => 'PDF',
+                      'EXCEL'       => 'EXCEL',
+
+                  ]),
+              ]);
            /* ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => [

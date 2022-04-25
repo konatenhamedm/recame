@@ -64,7 +64,7 @@ class Services
         return $repo;
     }
     public function listeCategorie(){
-        $repo = $this->em->getRepository(Categorie::class)->findAll();
+        $repo = $this->em->getRepository(Categorie::class)->listeCategorie();
 
         return $repo;
     }

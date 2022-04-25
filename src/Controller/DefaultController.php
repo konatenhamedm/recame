@@ -102,7 +102,7 @@ class DefaultController extends AbstractController
                 'Email' => 'Email',
                 'region' => 'region'
             ],
-            'critereTitre' => 'Departements',
+            'critereTitre' => 'VILLAGES',
             'modal' => '',
             'position' => 4,
             'active' => 7,

@@ -26,7 +26,7 @@
             <div class="row align-items-sm-center">
                 <div class="col-sm-auto">
                     {% if critereTitre == "VILLAGES" %}
-                    <div class="d-flex align-items-center mr-2">
+                 {#   <div class="d-flex align-items-center mr-2">
                         <span class="text-secondary mr-2">{{ critereTitre }}:</span>
 
                         <!-- Select -->
@@ -47,11 +47,11 @@
                                 </option>
                             {% endfor %}
 
-                            {#<option value="Ouattara">Ouattara</option>
-                            <option value="pending">Pending</option>#}
+                            #}{#<option value="Ouattara">Ouattara</option>
+                            <option value="pending">Pending</option>#}{#
                         </select>
                         <!-- End Select -->
-                    </div>
+                    </div>#}
                     {% endif %}
                 </div>
                 {% if critereTitre == "VILLAGES" %}
@@ -76,18 +76,37 @@
                     </div>
                 </div>#}
                     {{ form_start(form) }}
-                    <div class="col-sm-auto">
+
+
+                    <div class="col-sm-auto mt-4">
                         <div class="d-flex align-items-center mr-2">
                             <span class="text-secondary mr-2">VILLAGES:</span>
 
 
-                            {{ form_widget(form.village,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NOM','required':'required'}}) }}
-                            &nbsp;&nbsp;
-                            <button type="submit" class="btn btn-primary" style="height: 40px">
-                                <i class="tio-download-to mr-1 mt-1" ></i> Export
-                            </button>
+                            {{ form_widget(form.village,{'attr':{'id':'userinput1','placeholder':'NOM','required':'required'}}) }}
+                            <div class="col-sm-auto">
+                                <div class="d-flex align-items-center mr-2">
+                                    <span class="text-secondary mr-2">TYPES:</span>
+
+
+                                    {{ form_widget(form.type,{'attr':{'id':'userinput1','placeholder':'NOM','required':'required'}}) }}
+
+                                    <div class="col-sm-auto">
+                                        <div class="d-flex align-items-center mr-2">
+                                            <button type="submit" class="btn btn-primary" style="height: 40px">
+                                                <i class="tio-download-to mr-1 mt-1" ></i> Export
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
+
+                    </div><br>
+
+
 
                     {{ form_end(form) }}
                 {#{% endif %}#}

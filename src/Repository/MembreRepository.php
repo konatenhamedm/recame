@@ -49,9 +49,12 @@ class MembreRepository extends ServiceEntityRepository
     }
 
     public function findLastChrono($id){
+
         return $this->createQueryBuilder("m")
-            ->select("m")
-            ->join("m.departement","d")
+            ->select("m.nom","m.prenoms","m.contacts","m.email","r.libelle","d.libDepartement","m.sexe","p.libelle as profession")
+            ->leftjoin("m.departement","d")
+            ->leftjoin("m.region","r")
+            ->leftjoin("m.profession","p")
             ->where("d.id = :id")
             ->setParameter("id", $id)
             ->getQuery()
