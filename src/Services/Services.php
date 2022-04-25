@@ -81,7 +81,7 @@ class Services
             'user'=>'user',
             'produit'=>'produit',
             'partenaire'=>'partenaire',
-            'catégorie'=>'catégorie',
+            'categorie'=>'categorie',
         ];
      /*   foreach ($this->container as $el=> $params) {
           $resultat=  $params->getDefaults();

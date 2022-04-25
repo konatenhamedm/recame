@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="home", methods={"GET", "POST"})
+     * @Route("/siteweb", name="home", methods={"GET", "POST"})
      * @param Request $request
      * @param CategorieRepository $categorieRepository
      * @return Response
