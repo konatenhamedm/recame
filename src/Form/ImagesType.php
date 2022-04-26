@@ -2,16 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Image;
+use App\Entity\Images;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends AbstractType
+class ImagesType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('path', FileType::class, array(
@@ -20,14 +20,15 @@ class ImageType extends AbstractType
                 'data_class' => null,
                 'mapped' => true,
             ))
-            ->add('titre', TextType::class, ["label" => false,])
-            ->add('description', TextType::class, ["label" => false,]);
+            ->add('libelle', TextType::class, ["label" => false,])
+            /*->add('chambre')*/
+        ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Image::class,
+            'data_class' => Images::class,
         ]);
     }
 }

@@ -1,15 +1,15 @@
 {% extends 'admin/_includes/index.html.twig' %}
 
-{% from 'admin/macros/image.html.twig' import image %}
+{% from 'admin/macros/images.html.twig' import image %}
 
-{% block titre %}Edition{% endblock %}
+{% block titre %}Editer{% endblock %}
 
 {% block page_content %}
     <div class="page-header">
         <div class="row align-items-center">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-no-gutter">
-                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="{{ path('membre') }}">Membre</a></li>
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="{{ path('module') }}">Chambre</a></li>
                     <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Edition</a></li>
                 </ol>
             </nav>
@@ -25,34 +25,43 @@
 						<span class="card-icon">
 												<i class="flaticon2-layers text-primary"></i>
 											</span>
-                <h3 class="card-label">Edition produit</h3>
+                <h3 class="card-label">Edition chambre</h3>
             </div>
 
         </div>
+
         <br>
         <div class="card-body py-0">
             {% form_theme form 'widget/fields-block.html.twig' %}
             {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
             <div class="row">
                 <div class="form-group col-md-4 mb-2">
-                    <label class="sr-onl" for="userinput1">Libelle</label>
-                    {{ form_widget(form.libelle,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NOM','required':'required'}}) }}
+                    <label class="sr-onl" for="userinput1">Image</label>
+                    {{ form_widget(form.image,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Image','required':'required'}}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
                 <div class="form-group col-md-4 mb-2">
-                    <label class="sr-onl" for="userinput1">Categorie</label>
-                    {{ form_widget(form.categorie,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'PRENOMS'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+
                 </div>
                 <div class="form-group col-md-4 mb-2">
-                    <label class="sr-onl" for="userinput1">Description</label>
-                    {{ form_widget(form.description,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'PHOTO'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+
                 </div>
 
             </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-2">
+                    <label class="sr-onl" for="userinput1">Libelle</label>
+                    {{ form_widget(form.libelle,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Libelle','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    <label class="sr-onl" for="userinput1">Prix</label>
+                    {{ form_widget(form.prix,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'prix'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+            </div>
             <hr style="color: blue">
-            <div class="col-lg-12 groupe" id="groupe"  data-prototype="{{ image(form.image.vars.prototype)|e('html_attr') }}">
+            <div class="col-lg-12 groupe" id="groupe"  data-prototype="{{ image(form.images.vars.prototype)|e('html_attr') }}">
                 <div class="form-section  col-md-12">
 
                     <h4 class=""><i class="flaticon2-layers text-primary"></i>Ajoutez des images</h4>
@@ -67,14 +76,11 @@
                 </div>
                 <br>
                 <div class="row" >
-                    <div class="col-md-3">
-                        <label class="sr-onl cacher" for="userinput1" style="margin-left:7%;font-weight: bolder;margin-top: 16px">TITRE</label>
+                    <div class="col-md-7">
+                        <label class="sr-onl cacher" for="userinput1" style="margin-left:7%;font-weight: bolder;margin-top: 16px">Libelle</label>
                     </div>
                     <div class="col-md-4">
-                        <label class="sr-onl cacher" for="userinput1" style="margin-left:4%;font-weight: bolder;margin-top: 16px">DESCRIPTION</label>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="sr-onl cacher" for="userinput1" style="margin-left:1%;font-weight: bolder;margin-top: 16px">IMAGE</label>
+                        <label class="sr-onl cacher" for="userinput1" style="margin-left:4%;font-weight: bolder;margin-top: 16px">Image</label>
                     </div>
                     <div class="col-md-1">
                         {#  <button type="button" class="waves-effect waves-light btn btn-primary  add_intervention" >
@@ -83,7 +89,7 @@
                     </div>
 
                 </div><br>
-                {% for row in form.image %}
+                {% for row in form.images %}
                     <div class="container col-md-12" >
                         {{ image(row|e) }}
                     </div>
@@ -104,6 +110,7 @@
    {% block javascripts %}
        <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
        <script src="{{ asset('assets/admin/js/groupe.js') }}"></script>
+
        {#<script>
            $(document).ready(function () {
                $('.add_icon').click(function () {

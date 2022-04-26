@@ -166,9 +166,9 @@ class DefaultController extends AbstractController
                 'photo' => 'photo',
                 'Nom' => 'Nom',
                 'Prenom' => 'Prenom',
-                'Departement' => 'Departement',
+                'Village' => 'Village',
                 'Email' => 'Email',
-                'region' => 'region'
+                'Departement' => 'Departement'
             ],
             'critereTitre' => 'VILLAGES',
             'modal' => '',

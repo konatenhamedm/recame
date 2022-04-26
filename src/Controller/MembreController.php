@@ -105,7 +105,7 @@ class MembreController extends AbstractController
                 'photo' => 'photo',
                 'Nom' => 'Nom',
                 'Prenom' => 'Prenom',
-                'Departement' => 'Departement',
+                'Village' => 'Village',
                 'Email' => 'Email',
                 'contact' => 'contact'
             ],
