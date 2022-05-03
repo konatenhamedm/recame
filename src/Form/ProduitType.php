@@ -26,16 +26,14 @@ class ProduitType extends AbstractType
                 'entry_options' => [
                     'label' => false
                 ],
-                'attr' => [
-                    'class' => 'col-md-12'
-                ],
+
                 'label' => false,
                 'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
                 'attr' => [
-                    'class' => 'collection',
+                    'class' => 'col-md-12 collection',
                 ],
             ])
             ->add('categorie', EntityType::class, [
@@ -47,7 +45,9 @@ class ProduitType extends AbstractType
                 'choice_label' => 'libelle',
 
             ])
-            ->add('description',TextType::class)
+            ->add('description',TextType::class,[
+                'required'=>false,
+            ])
         ;
     }
 

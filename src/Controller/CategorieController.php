@@ -80,13 +80,12 @@ class CategorieController extends AbstractController
 
         $isAjax = $request->isXmlHttpRequest();
 
-        if($form->isSubmitted())
+        if($form->isSubmitted() && $form->isValid())
         {
             $response = [];
             $statut = 1;
             $redirect = $this->generateUrl('categorie');
 
-            if($form->isValid()){
 
                 $uploadedFile = $form['image']->getData();
 //dd($uploadedFile);
@@ -102,7 +101,6 @@ class CategorieController extends AbstractController
 
                 $this->addFlash('success', $message);
 
-            }
             if ($isAjax) {
                 return $this->json( compact('statut', 'message', 'redirect'));
             } else {
@@ -123,9 +121,10 @@ class CategorieController extends AbstractController
      * @param Request $request
      * @param Categorie $categorie
      * @param EntityManagerInterface $em
-     * @return Response
+     * @param UploaderHelper $uploaderHelper
+     * @return void
      */
-    public function edit(Request $request,Categorie $categorie, EntityManagerInterface  $em): Response
+    public function edit(Request $request,Categorie $categorie, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper): Response
     {
 
         $form = $this->createForm(CategorieType::class,$categorie, [
@@ -145,6 +144,12 @@ class CategorieController extends AbstractController
             $redirect = $this->generateUrl('categorie');
 
             if($form->isValid()){
+                $uploadedFile = $form['image']->getData();
+dd($uploadedFile);
+                if ($uploadedFile) {
+                    $newFilename = $uploaderHelper->uploadImage($uploadedFile);
+                    $categorie->setImage($newFilename);
+                }
                 $em->persist($categorie);
                 $em->flush();
 

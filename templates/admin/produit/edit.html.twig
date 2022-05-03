@@ -84,14 +84,13 @@
 
                 </div><br>
                 {% for row in form.image %}
-                    <div class="container col-md-12" >
+                    <div class="container col-md-12" id="addPhoneFieldPhoneContainer">
                         {{ image(row|e) }}
+
                     </div>
                 {% endfor %}
                 <span class="after"></span>
             </div>
-
-
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Valider</button>
                 <a  class="btn btn-secondary" href="{{ path('produit') }}">Annuler</a>

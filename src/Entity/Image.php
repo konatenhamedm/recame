@@ -20,7 +20,6 @@ class Image
 
     /**
      * @var String
-     * @Assert\NotBlank(message="stp entre une image")
      * @Assert\Image()
      * @ORM\Column(name="image",type="string", length=255)
      */
@@ -53,7 +52,7 @@ class Image
         return $this->path;
     }
 
-    public function setPath(string $path): self
+    public function setPath( $path): self
     {
         $this->path = $path;
 

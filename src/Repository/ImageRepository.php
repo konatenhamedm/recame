@@ -18,7 +18,18 @@ class ImageRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Image::class);
     }
-
+    public function UpadteImage($id,$titre,$path)
+    {
+        return $this->createQueryBuilder('')
+            ->update(Image::class,'i')
+            ->set('i.titre',':titre')
+            ->set('i.path',':path')
+            ->where('i.id = :id')
+            ->setParameters(['titre'=>$titre,'id'=>$id,'path'=>$path])
+            ->getQuery()
+            ->execute()
+            ;
+    }
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */

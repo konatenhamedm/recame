@@ -18,10 +18,11 @@ class ImageType extends AbstractType
                 "label" => false,
                 'required' => false,
                 'data_class' => null,
-                'mapped' => true,
+                'mapped' => false,
+                'attr'=>['class'=>'js-file-attach custom-file-btn-input']
             ))
             ->add('titre', TextType::class, ["label" => false,])
-            ->add('description', TextType::class, ["label" => false,]);
+            ->add('description', TextType::class, ["label" => false, 'required' => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

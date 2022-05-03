@@ -26,8 +26,10 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request, CategorieRepository $categorieRepository)
     {
+        $strs = str_replace(' ', '_', "cat 2");
+       // dd($strs);
         $data = $categorieRepository->listeCategorie();
-
+/*dd( $data);*/
         return $this->render('fils/home.html.twig', [
             'pagination' => $data
         ]);

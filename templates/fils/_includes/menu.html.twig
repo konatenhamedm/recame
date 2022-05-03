@@ -166,42 +166,25 @@
                     <div class="col-lg-12">
                         <div class="mobile-menu">
                             <ul id="mobile-menu">
-                                <li>
-                                    <a href="index.html">Home</a>
-                                    <ul>
-                                        <li><a href="index-2.html">Home page 2</a></li>
-                                        <li><a href="index-3.html">Home page 3</a></li>
+                                <li class="current"><a href="{{ path('home') }}"><span><i
+                                                    class="fa fa-home"></i></span>Home <i
+                                                class="fa fa-arrow-circle-o-right"></i></a>
+                                </li>
+                                <li><a href="{{ path('about') }}"><span><i class="fa fa-briefcase"></i></span>A porpos</a>
+                                </li>
+                                <li><a href="blog_sidebar.html"><span><i
+                                                    class="fa fa-pencil-square-o"></i></span>Catégories <i
+                                                class="fa fa-arrow-circle-o-right"></i></a>
+                                    <ul class="sub-menu">
+
+                                        {% for c in menu.listeCategorie %}
+                                            <li><a href="{{ path('affiche_produits',{'id': c.id }) }}">{{ c.libelle }}</a></li>
+                                        {% endfor %}
+
                                     </ul>
                                 </li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="blog_sidebar.html">Blogs</a>
-                                    <ul>
-                                        <li><a href="blog_sidebar.html">Blog With Sidebar</a></li>
-                                        <li><a href="blog_no_sidebar.html">Blog With Out Sidebar</a></li>
-                                        <li><a href="blog_details.html">Blog details page</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category_grid.html">Shop</a>
-                                    <ul>
-                                        <li><a href="category_grid.html">Men</a></li>
-                                        <li><a href="category_grid.html">Women</a></li>
-                                        <li><a href="category_grid.html">Shoes</a></li>
-                                        <li><a href="category_grid.html">Bags</a></li>
-                                        <li><a href="category_grid.html">Accessories</a></li>
-                                        <li><a href="category_grid.html">Clothings</a></li>
-                                        <li><a href="category_grid.html">Shop full width</a></li>
-                                        <li><a href="category_grid.html">Shop sidebar right</a></li>
-                                        <li><a href="category_grid.html">Shop sidebar left</a></li>
-                                        <li><a href="category_grid.html">Sategory listing</a></li>
-                                        <li><a href="product_details.html">Products detail</a></li>
-                                        <li><a href="#">Checkout</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="#">My account</a></li>
-                                        <li><a href="#">Order tracking</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="category_list.html">Featured</a></li>
-                                <li><a href="contact_us.html">Contact</a></li>
+                                <li><a href="{{ path('contact') }}"><span><i
+                                                    class="fa fa-envelope"></i></span>Contact</a></li>
                             </ul>
                         </div>
                     </div>

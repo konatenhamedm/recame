@@ -21,6 +21,7 @@ class CategorieType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('image', FileType::class, [
                 'mapped' => false,
+                'data_class' => null,
                 'required' => false,
                 'attr'=>['class'=>'js-file-attach custom-file-btn-input']
             ]);
