@@ -180,42 +180,9 @@ class ProduitController extends AbstractController
                 $brochureFile = $form->get('image')->getData();//$_FILES['produit']['tmp_name']['image'];
 //dd($brochureFile);
                  foreach ($brochureFile as $image) {
-                    //  dd($_FILES['produit']);
 
-                    // $uploadedFile = $form['image']->getData();
-
-                 /*    if ($image) {
-                         $newFilename = $uploaderHelper->uploadImage($image->getPath());
-                         $image->setPath($newFilename);
-                     }*/
-                    // dd($image);
-
-                     /*foreach ($_FILES['produit']['tmp_name']['image'] as $e){
-                         foreach ($_FILES['produit']['name']['image'] as $name){
-
-                             $fileName = uniqid();
-                             // dd($name);
-                             $extension = pathinfo($name['path'],PATHINFO_EXTENSION);
-
-                             try {
-                                 $newFilename = $fileName. '.' . $extension;
-                                 // dd($fileName);
-                                 $dir = str_replace("\\",'/',$this->getParameter('images_directory'));
-                                 //   dd($dir);
-                                 //  dd(str_replace("\\",'/',$dir));
-                                 // $file->move($this->getTargetDirectory(), $fileName);
-                                 move_uploaded_file($fileName, $this->getParameter('images_directory').'/'.$newFilename);
-                             } catch (FileException $e) {
-                                 // ... handle exception if something happens during file upload
-                                 return $e->getFile(); // for example
-                             }
-                             //move_uploaded_file($e['path'],$this->getParameter('images_directory').$fileName.'.'.$extension);
-                             $image->setPath($newFilename);
-                         }
-
-                     }*/
                     if ($image->getPath() == null){
-
+                       // dd("konate1");
                       //  dd($_FILES['produit']['tmp_name']['image']);
 
                         foreach ($_FILES['produit']['tmp_name']['image'] as $temp){
@@ -228,7 +195,8 @@ class ProduitController extends AbstractController
                                     $statut = 1;
                                     $this->addFlash('success', $message);
                                 }*/
-                                if (!empty($name['path'])){
+                                //dd($temp['path']);
+                                if (!empty($temp['path']) && !empty($name['path'])){
                                   //  dd($temp['path']);
                                     $fileName = uniqid();
                                     // dd($name);   if ($temp['path'] !== null){
@@ -248,21 +216,15 @@ class ProduitController extends AbstractController
                                         return $e; // for example
                                     }
                                     $image->setPath($newFilename);
-                                }
+                                }/*else{
+                                    dd("konate");
+                                }*/
 
                             }
                         }
 
                     }
-                     /* if($image->getPath() !== "")*/
-                 else
-                     {
-                         // dd("ddd",$_FILES['produit']['tmp_name']['image']);
-                         // $imageRepository->UpadteImage($image->getId(),$image->getTitre(),$image->getPath());
-                         $imageRepository->UpadteImage($image->getId(),$image->getTitre(),$image->getPath());
 
-
-                     }
 
 
                  }

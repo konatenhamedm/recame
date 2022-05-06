@@ -18,11 +18,13 @@
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="{{ asset('assets/css/vendor.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/icon-set/style.css') }}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" integrity="sha256-5veQuRbWaECuYxwap/IOE/DAwNxgm4ikX7nrgsqYp88=" crossorigin="anonymous">
 
 
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="{{ asset('assets/css/theme.minc619.css?v=1.0') }}">
+
+    {% block style %}{% endblock %}
 </head>
 
 <body class="   footer-offset">
@@ -306,13 +308,14 @@
 {% endblock %}
 
 
-{% block javascripts %}
-
-{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js" integrity="sha256-XCdgoNaBjzkUaEJiauEq+85q/xi/2D4NcB3ZHwAapoM=" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
 <script src="{{ asset('assets/admin/js/active.js') }}"></script>
 <!-- ========== END HEADER ========== -->
 
+{% block javascripts %}
+
+{% endblock %}
 <!-- ========== MAIN CONTENT ========== -->
 
 <!-- JS Implementing Plugins -->

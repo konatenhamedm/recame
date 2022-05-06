@@ -64,11 +64,10 @@ class CategorieController extends AbstractController
      * @Route("/categorie/new", name="categorie_new", methods={"GET","POST"})
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @param UploaderHelper $uploaderHelper
-     * @param CategorieRepository $repository
+     * @param UploaderHelper $uploaderHelper 
      * @return Response
      */
-    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper,CategorieRepository $repository): Response
+    public function new(Request $request, EntityManagerInterface  $em,UploaderHelper  $uploaderHelper): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class,$categorie ,[
@@ -82,7 +81,7 @@ class CategorieController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $response = [];
+
             $statut = 1;
             $redirect = $this->generateUrl('categorie');
 
@@ -140,12 +139,12 @@ class CategorieController extends AbstractController
         if($form->isSubmitted())
         {
 
-            $response = [];
+
             $redirect = $this->generateUrl('categorie');
 
             if($form->isValid()){
                 $uploadedFile = $form['image']->getData();
-dd($uploadedFile);
+//dd($uploadedFile);
                 if ($uploadedFile) {
                     $newFilename = $uploaderHelper->uploadImage($uploadedFile);
                     $categorie->setImage($newFilename);
@@ -232,8 +231,12 @@ dd($uploadedFile);
 
     /**
      * @Route("/categorie/{id}/active", name="categorie_active", methods={"GET"})
+     * @param Categorie $categorie
+     * @param SerializerInterface $serializer
+     * @param EntityManagerInterface $entityManager
+     * @return Response
      */
-    public function active($id,Categorie $categorie, SerializerInterface $serializer,EntityManagerInterface $entityManager): Response
+    public function active(Categorie $categorie, SerializerInterface $serializer,EntityManagerInterface $entityManager): Response
     {
 
         if ($categorie->getActive() == 1){

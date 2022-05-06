@@ -62,8 +62,8 @@
                         <div class="single-featured-product">
                             <div class="product_img">
                                 <a href="#">
-                                    <img width="270" height="300" src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="primary-image">
-                                    <img width="270" height="300" src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="secondary-image">
+                                    <img  src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="primary-image">
+                                    <img  src="{{ asset('uploads/images/' ~ data.image) }}" alt="Category" class="secondary-image">
                                 </a>
                                 {#{{ dump(data.libelle |replace({' ': '_'})) }}#}
                                 <a class="modal-view" href="#" data-bs-toggle="modal" data-bs-target="#{{ data.libelle |replace({' ': '_'}) }}">
@@ -124,7 +124,7 @@
                             <div class="modal-product">
                                 <div class="product-images">
                                     <div class="main-image images">
-                                        <img alt="" width="649" height="408" src="{{ asset('uploads/images/' ~ modal.image) }}">
+                                        <img alt=""  src="{{ asset('uploads/images/' ~ modal.image) }}">
                                     </div>
                                     {# {{ dump(modal.getProduits) }}#}
                                     <div class="thumbnail-img">
