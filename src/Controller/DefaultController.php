@@ -50,7 +50,7 @@ class DefaultController extends AbstractController
         return $this->render("calendar/calendar.html.twig",compact('data'));
     }
     /**
-     * @Route("/siteweb", name="home", methods={"GET", "POST"})
+     * @Route("/", name="home", methods={"GET", "POST"})
      * @param Request $request
      * @param CategorieRepository $categorieRepository
      * @return Response
