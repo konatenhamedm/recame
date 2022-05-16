@@ -58,6 +58,12 @@ class AppFixtures extends Fixture
         $parent->setActive(1);
         $manager->persist($parent);
 
+        $parent1 = new ModuleParent();
+        $parent1->setTitre('NOTARI');
+        $parent1->setOrdre(2);
+        $parent1->setActive(1);
+        $manager->persist($parent1);
+
         $user1 = new User();
         $password = "achi";
         $user1->setPassword($this->encode->hashPassword($user1, $password));
@@ -87,8 +93,81 @@ class AppFixtures extends Fixture
         $mod->setActive(1);
         $mod->setIcon($icon);
         $mod->setParent($parent);
-
         $manager->persist($mod);
+
+        $mod2 = new Module();
+        $mod2->setTitre('Simples')
+            ->setOrdre(2)
+            ->setActive(1)
+            ->setIcon($icon)
+            ->setParent($parent);
+        $manager->persist($mod2);
+
+        $mod1 = new Module();
+        $mod1->setTitre('Gestion courriers');
+        $mod1->setOrdre(2);
+        $mod1->setActive(1);
+        $mod1->setIcon($icon);
+        $mod1->setParent($parent1);
+        $manager->persist($mod1);
+
+        $mod4 = new Module();
+        $mod4->setTitre('Ressources humaines');
+        $mod4->setOrdre(2);
+        $mod4->setActive(1);
+        $mod4->setIcon($icon);
+        $mod4->setParent($parent1);
+        $manager->persist($mod4);
+
+        $groupe = new Groupe();
+        $groupe->setIcon($icon1)
+            ->setLien('courierInterne')
+            ->setModule($mod1)
+            ->setOrdre(3)
+            ->setTitre('Courrier Interne');
+        $manager->persist($groupe);
+
+        $groupe1 = new Groupe();
+        $groupe1->setIcon($icon1)
+            ->setLien('courierArrive')
+            ->setModule($mod1)
+            ->setOrdre(1)
+            ->setTitre('Courrier arrivé');
+        $manager->persist($groupe1);
+
+        $groupe2 = new Groupe();
+        $groupe2->setIcon($icon1)
+            ->setLien('courierDepart')
+            ->setModule($mod1)
+            ->setOrdre(2)
+            ->setTitre('Courrier départ');
+        $manager->persist($groupe2);
+
+        $groupe3 = new Groupe();
+        $groupe3->setIcon($icon1)
+            ->setLien('type')
+            ->setModule($mod2)
+            ->setOrdre(1)
+            ->setTitre('Type acte');
+        $manager->persist($groupe3);
+
+        $groupe4 = new Groupe();
+        $groupe4->setIcon($icon1)
+            ->setLien('client')
+            ->setModule($mod4)
+            ->setOrdre(1)
+            ->setTitre('Client');
+        $manager->persist($groupe4);
+
+        $groupe5 = new Groupe();
+        $groupe5->setIcon($icon1)
+            ->setLien('calendar')
+            ->setModule($mod4)
+            ->setOrdre(1)
+            ->setTitre('Evenements');
+        $manager->persist($groupe5);
+
+
           $user = new User();
 
           $user->setNom('Konate')
