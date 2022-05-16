@@ -62,7 +62,11 @@
                         {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
                         {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
 
-                    {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
+
+                    <td table-column-pr-1>
+                        {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -79,8 +79,13 @@
                                         <td class="active">
                                             {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
                                             {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
+                                        <td table-column-pr-1>
+                                            {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+                                            <a class="btn btn-sm btn-secondary" href="{{ path('accuse_edit',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                                                <i class="tio-message"></i>
+                                            </a>
+                                        </td>
 
-                                        {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -138,7 +143,10 @@
                                     {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
                                     {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
 
-                                {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+                                <td table-column-pr-1>
+                                    {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
