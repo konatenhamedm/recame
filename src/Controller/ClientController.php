@@ -103,8 +103,8 @@ class ClientController extends AbstractController
                     $newFilename = $uploaderHelper->uploadImage($uploadedFile);
                     $client->setPhoto($newFilename);
                 }
-               $date = \DateTime::createFromFormat('d-m-Y', date("Y-m-d H:i:s"));
-                $client->setFaitLe($date);
+             /*  $date = \DateTime::format(string $format);
+                $client->setFaitLe($date);*/
                 $client->setActive(1);
                 $em->persist($client);
                 $em->flush();

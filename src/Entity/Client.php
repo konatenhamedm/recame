@@ -270,6 +270,7 @@ class Client
      */
     private $acheteur;
 
+
     public function __construct()
     {
         $this->calendars = new ArrayCollection();
@@ -277,6 +278,7 @@ class Client
         $this->recep = new ArrayCollection();
         $this->vendeur = new ArrayCollection();
         $this->acheteur = new ArrayCollection();
+        $this->faitLe = new \DateTime('now');
     }
 
     public function getId(): ?int
