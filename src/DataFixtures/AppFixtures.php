@@ -96,7 +96,7 @@ class AppFixtures extends Fixture
         $manager->persist($mod);
 
         $mod2 = new Module();
-        $mod2->setTitre('Simples')
+        $mod2->setTitre('Gestion des actes')
             ->setOrdre(2)
             ->setActive(1)
             ->setIcon($icon)
@@ -150,6 +150,14 @@ class AppFixtures extends Fixture
             ->setOrdre(1)
             ->setTitre('Type acte');
         $manager->persist($groupe3);
+
+        $groupe6 = new Groupe();
+        $groupe6->setIcon($icon1)
+            ->setLien('acte')
+            ->setModule($mod2)
+            ->setOrdre(1)
+            ->setTitre('Acte');
+        $manager->persist($groupe6);
 
         $groupe4 = new Groupe();
         $groupe4->setIcon($icon1)
