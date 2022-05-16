@@ -26,7 +26,7 @@
             <div class="form-group col-md-1">
 
                 {{ form_widget(form.existe,{'attr':{'class':'form-control border-primary checkbox','id':'userinput1','placeholder':'NOM'}}) }}
-                {{ form_widget(form.etat,{'attr':{'class':'form-control border-primary checkbox','type':'hidden','id':'userinput1','placeholder':'NOM'}}) }}
+                {{ form_widget(form.etat,{'attr':{'class':'form-control border-primary','type':'hidden','id':'userinput1','placeholder':'NOM'}}) }}
             </div>
             <div class="col-md-6 " style="margin-left: -55px;margin-top: -1px">
 
@@ -154,6 +154,7 @@
     <script>
         $(document).ready(function () {
             $('.autre').hide();
+            $('#courier_arrive_etat').hide();
             /*$('.mot').hide();*/
             $('#courier_arrive_type').on('change', function () {
                 let check = $(".checkbox").get(0).checked;

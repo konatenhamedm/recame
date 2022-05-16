@@ -154,10 +154,12 @@
     <script src="{{ asset('assets/admin/js/groupe.js') }}"></script>
     <script>
         $(document).ready(function () {
+            $('#courier_arrive_etat').hide();
             var verif = $('#courier_arrive_type').val();
             var check = $(".checkbox").get(0).checked;
             if (verif === 'ARRIVE'){
                 $('.autre').hide();
+
                 $('.arrive').show();
             }else{
                 $('.autre').show();
