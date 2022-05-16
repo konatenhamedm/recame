@@ -21,21 +21,6 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('image', CollectionType::class, [
-                'entry_type' => ImageType::class,
-                'entry_options' => [
-                    'label' => false
-                ],
-
-                'label' => false,
-                'by_reference' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'attr' => [
-                    'class' => 'col-md-12 collection',
-                ],
-            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -47,6 +32,18 @@ class ProduitType extends AbstractType
             ])
             ->add('description',TextType::class,[
                 'required'=>false,
+            ])
+            ->add('image', CollectionType::class, [
+                'entry_type' => ImageType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'allow_add' => true,
+                'label' => false,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'prototype' => true,
+
             ])
         ;
     }

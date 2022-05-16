@@ -1,0 +1,121 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}Ajouter{% endblock %}
+{% form_theme form _self %}
+{% block page_content %}
+   {# {% form_theme form1 'widget/input_file.html.twig' %}
+    {% form_theme form2 'widget/fields-block.html.twig' %}#}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-no-gutter">
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="{{ path('module') }}">Produit</a></li>
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Nouveau</a></li>
+                </ol>
+            </nav>
+
+            <div class="col-sm-auto">
+
+            </div>
+        </div>
+    </div>
+    <div class="card card-custom">
+        <div class="card-header">
+            <div class="card-title">
+						<span class="card-icon">
+												<i class="flaticon2-layers text-primary"></i>
+											</span>
+                <h3 class="card-label">Ajouter produit</h3>
+            </div>
+
+        </div>
+
+        <br>
+      {#  {% form_theme form 'widget/fields-block.html.twig' %}#}
+        {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
+        <div class="modal-body ">
+            {# {{ include('includes/ajax/response.html.twig') }} #}
+            <div class="row">
+                <div class="form-group col-12 mb-2">
+
+                    {{ form_widget(form) }}
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger text-left" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary ">Valider</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block _produit_image_widget %}
+    <p>Vous pouvez ajouter une image ici</p>
+   {{ form_widget(form) }}
+
+    <div class="form-group">
+        <button type="button" class="btn btn-primary " id="add_image">Ajouter une image</button>
+    </div>
+{% endblock %}
+
+{% block _produit_image_entry_row %}
+
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _produit_image_entry_widget %}
+   <div class="form-group" id="block_{{id}}">
+       <div class="row" >
+           <div class="col-3">
+               {{ form_widget(form.titre) }}
+           </div>
+
+           <div class="col-4">
+               {# {{ dump(form_widget(form.description)) }}#}
+               {{ form_widget(form.description) }}
+           </div>
+           <div class="col-4">
+               {{ form_widget(form.path) }}
+           </div>
+           <div class="col-1">
+               <button type="button" data-action="delete" data-target="block_{{id}}" class="btn btn-danger " >x</button>
+           </div>
+       </div>
+   </div>
+
+{% endblock %}
+
+ {% block javascripts %}
+     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+     <script>
+         $('#add_image').click(function () {
+             const index = $('#produit_image div.form-group').length;
+
+             const tmpl = $('#produit_image').data('prototype').replace(/__name__/g,index);
+
+             $('#produit_image').append(tmpl);
+
+             handleDelete()
+            // console.log(tmpl);
+         });
+
+         function  handleDelete() {
+             $('button[data-action="delete"]').click(function (e) {
+                    const target = this.dataset.target;
+               //  console.log(target)
+                 //$("#"+target).remove();
+                 $("#"+target).slideUp(1000, function () {
+                     $("#"+target).remove();
+
+                 });
+
+             });
+         }
+         handleDelete();
+
+     </script>
+ {% endblock %}
+
+

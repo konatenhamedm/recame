@@ -1,0 +1,68 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}{{ menu.getRoute }}{% endblock %}
+
+{% block page_content %}
+    {% set new=menu.getRoute %}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <h1 class="page-header-title">Courriers arrivés</h1>
+            </div>
+
+            <div class="col-sm-auto">
+                <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                    <i class="tio-user-add mr-1"></i>Nouveau
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <div class="card mb-3 mb-lg-5">
+        {% include 'admin/tableau/card.html.twig'  with {'titre':titre } %}
+        <div class="table-responsive datatable-custom">
+            {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
+            <tbody class="tbody">
+            {% for data in pagination %}
+
+                <tr>
+                    <td class="table-column-pr-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
+                            <label class="custom-control-label" for="usersDataCheck4"></label>
+                        </div>
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.numero }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.dateReception | date("m-d-Y") }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.objet }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.categorie }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.expediteur.nom }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.user.nom }}
+                    </td>
+                    <td class="active">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                        {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
+
+                    {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
+    </div>
+
+
+{% endblock %}
+

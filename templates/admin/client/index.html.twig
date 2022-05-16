@@ -1,0 +1,102 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}{{ menu.getRoute }}{% endblock %}
+
+{% block page_content %}
+
+    {% set new=menu.getRoute %}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <h1 class="page-header-title">Client</h1>
+
+            </div>
+
+            <div class="col-sm-auto">
+                <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                    <i class="tio-add mr-1"></i>Nouveau
+                </a>
+{#
+                <a class="btn btn-primary btn-md"  href="{{ path('imprimer', {'id': 123, '_format': 'pdf'}) }}" target="__blank">
+                    <span class="d-md-block d-none"><i class="fa fa-print fa-1x"></i> imprimer</span></a>#}
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+    <div class="card mb-3 mb-lg-5">
+        {% include 'admin/tableau/card.html.twig'  with {'titre':new,'position': position,'data':menu.getDepartements,'critereTitre':critereTitre,'active':active } %}
+        <div class="table-responsive datatable-custom">
+            {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
+            <tbody class="tbody">
+            {% for data in pagination %}
+
+                <tr class="tr">
+                    <td class="table-column-pr-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
+                            <label class="custom-control-label" for="usersDataCheck4"></label>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="avatar avatar-sm avatar-circle mr-2">
+                            <img class="avatar-img" src="{{ asset('uploads/images/' ~ data.photo) }}" alt="Image Description">
+                        </div>
+                       {# {{ data.photo }}#}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.nom }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.prenom }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.email }}
+                    </td>
+                    <td class="table-column-pr-0">
+                        {{ data.profession }}
+                    </td>
+                    <td class="active">
+                        {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                        {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
+
+                    {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':menu.getRoute ,'modal':modal} %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#village').select2();
+            $('#village').select();
+        });
+        $(document).ready(function () {
+
+            $("#VILLAGES").change(function (e) {
+              //  e.preventDefault();
+
+             //   alert('ffff')
+                var a = $(this).val();
+
+
+               $.ajax({
+                    url:        '/admin/membre',
+                    type:       'POST',
+                    data:     {id: a },
+                    dataType:   'json',
+                });
+
+
+            });
+        })
+       // $('select').select2();
+    </script>
+
+{% endblock %}

@@ -34,7 +34,7 @@ class CalendarController extends AbstractController
                 //,'tout'=> 'tout'
             ],
             'modal' => 'modal',
-            'titre' => 'Liste des calendars',
+            'titre' => 'Liste des evenement',
             'critereTitre'=>'',
 
         ]);
@@ -53,6 +53,7 @@ class CalendarController extends AbstractController
 
         return $this->render('admin/calendar/voir.html.twig', [
             'calendar' => $calendar,
+            'titre' => 'Evenement',
             'form' => $form->createView(),
         ]);
     }
@@ -99,6 +100,7 @@ class CalendarController extends AbstractController
         }
 
         return $this->render('admin/calendar/new.html.twig', [
+            'titre' => 'Evenement',
             'calendar' => $calendar,
             'form' => $form->createView(),
         ]);
@@ -151,6 +153,7 @@ class CalendarController extends AbstractController
         }
 
         return $this->render('admin/calendar/edit.html.twig', [
+            'titre' => 'Evenement',
             'calendar' => $calendar,
             'form' => $form->createView(),
         ]);

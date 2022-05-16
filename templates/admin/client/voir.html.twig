@@ -1,0 +1,195 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}Détails{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <div class="row align-items-center">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-no-gutter">
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="{{ path('module') }}">Membre</a></li>
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Détails</a></li>
+            </ol>
+        </nav>
+
+        <div class="col-sm-auto">
+
+        </div>
+    </div>
+</div>
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+						<span class="card-icon">
+												<i class="flaticon2-layers text-primary"></i>
+											</span>
+            <h3 class="card-label">Détails membre</h3>
+        </div>
+
+    </div>
+
+    <br>
+    <div class="card-body py-0">
+        {% form_theme form 'widget/fields-block.html.twig' %}
+        {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
+
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+
+            </div>
+            <div class="form-group col-md-4 mb-2">
+
+            </div>
+            <div class="form-group col-md-4 mb-2">
+              {#  <label class="sr-onl" for="userinput1">PHOTO</label>#}
+                {{ form_widget(form.photo,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'PHOTO','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                <div class="avatar avatar-sm avatar-circle mr-2">
+                    <img class="avatar-img" src="{{ asset('uploads/images/' ~ membre.photo) }}" alt="Image Description">
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">N°</label>
+               {# {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'N°','required':'required'}}) }}#}
+                 <input type="text" id="userinput1" value="{{ membre.numero }}" class="form-control border-primary" placeholder="Compte contribuable" name="name">
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">CODE DE PARRAINNAGE</label>
+                {{ form_widget(form.codeParrainnage,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'CODE DE PARRAINNAGE'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">CELLULE</label>
+                {{ form_widget(form.cellule,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'CELLULE','required':'required'}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">LOCALITE:</label>
+                {{ form_widget(form.region,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Localite','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">DEPARTEMENT</label>
+                {{ form_widget(form.departement,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'DEPARTEMENT','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">QUARTIER</label>
+                {{ form_widget(form.quartier,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'QUARTIER','required':'required'}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">NOM</label>
+                {{ form_widget(form.nom,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NOM','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">PRENOMS</label>
+                {{ form_widget(form.prenoms,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'PRENOMS'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">DATE DE NAISSANCE</label>
+                {{ form_widget(form.dateNaissance,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'DATE DE NAISSANCE','required':'required'}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">LIEU DE NAISSANCE </label>
+                {{ form_widget(form.lieuNaissance,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'LIEU DE NAISSANCE','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">SEXE</label>
+                {{ form_widget(form.sexe,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'SEXE'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">NIVEAU D’ETUDES </label>
+                {{ form_widget(form.niveauEtude,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'NIVEAU D’ETUDES '}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">NATURE DE LA PIECE D’IDENTITE </label>
+                {{ form_widget(form.naturePiece,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NATURE DE LA PIECE D’IDENTITE','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">NUMERO DE LA PIECE D’IDENTITE</label>
+                {{ form_widget(form.numeroPiece,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NUMERO DE LA PIECE D’IDENTITE'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">LIEU DE VOTE </label>
+                {{ form_widget(form.lieuVote,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'LIEU DE VOTE','required':'required'}}) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">NUMERO CARTE D’ELECTEUR </label>
+                {{ form_widget(form.numeroCarteElecteur,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'NUMERO CARTE D’ELECTEUR ','required':'required'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput2">CONTACTS </label>
+                {{ form_widget(form.contacts,{'attr':{'class':'form-control border-primary','id':'userinput2','placeholder':'CONTACTS','required':'required'}}) }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">EMAIL</label>
+                {{ form_widget(form.email,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'EMAIl'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">VOTRE PREOCCUPATION</label>
+                {{ form_widget(form.preocupation,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'VOTRE PREOCCUPATION'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">PROFESSION/FONCTION</label>
+                {{ form_widget(form.profession,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'PROFESSION/FONCTION'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                <label class="sr-onl" for="userinput1">Fait à Abidjan,</label>
+                {{ form_widget(form.dateCreation,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Fait à Abidjan'}}) }}
+                {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+            </div>
+
+
+            <div class="card-footer">
+              {#  <button type="submit" class="btn btn-primary mr-2">Valider</button>#}
+                <a  class="btn btn-secondary" href="{{ path('membre') }}">Annuler</a>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/region.js') }}"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#membre_photo').hide();
+            })
+           // $('select').select2();
+        </script>
+    {% endblock %}

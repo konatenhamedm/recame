@@ -1,0 +1,156 @@
+{% extends 'admin/_includes/index.html.twig' %}
+
+{% block titre %}{{ menu.getRoute }}{% endblock %}
+
+{% block page_content %}
+    {% set new=menu.getRoute %}
+    {% set new1="courierArrive" %}
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <h1 class="page-header-title">Courriers departs</h1>
+            </div>
+
+            <div class="col-sm-auto">
+                <a class="btn btn-primary" {% if new !="admin" %} href="{{ path( new1 ~'_new') }}" {% endif%} {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                    <i class="tio-user-add mr-1"></i>Nouveau
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Card -->
+
+    <div class="card mb-7">
+        <!-- Header -->
+        <div class="card-header">
+            <!-- Nav -->
+            <ul class="nav nav-segment" id="navTab1" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="nav-resultTab1" data-toggle="pill" href="#nav-result1" role="tab" aria-controls="nav-result1" aria-selected="true">En attente de traitement</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-htmlTab1" data-toggle="pill" href="#nav-html1" role="tab" aria-controls="nav-html1" aria-selected="false">Finaliés</a>
+                </li>
+            </ul>
+            {% include 'admin/tableau/card.html.twig'  with {'titre':'' } %}
+            <!-- End Nav -->
+        </div>
+        <!-- End Header -->
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="navTabContent1">
+            <div class="tab-pane fade p-4 show active" id="nav-result1" role="tabpanel" aria-labelledby="nav-resultTab1">
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="nav-one-eg1" role="tabpanel" aria-labelledby="nav-one-eg1-tab">
+                        <div class="card mb-3 mb-lg-5">
+                            {#{% include 'admin/tableau/card.html.twig'  with {'titre':titre } %}#}
+                            <div class="table-responsive datatable-custom">
+                                {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
+                                <tbody class="tbody">
+                                {% for data in depart %}
+{#{{ dump(data.etat) }}#}
+                                    <tr>
+                                        <td class="table-column-pr-0">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
+                                                <label class="custom-control-label" for="usersDataCheck4"></label>
+                                            </div>
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.numero }}
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.dateReception | date("m-d-Y") }}
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.objet }}
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.categorie }}
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.exp.nom }}
+                                        </td>
+                                        <td class="table-column-pr-0">
+                                            {{ data.recep.nom }}
+                                        </td>
+                                        <td class="active">
+                                            {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                                            {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
+
+                                        {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                </table>
+                            </div>
+                            {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-two-eg1" role="tabpanel" aria-labelledby="nav-two-eg1-tab">
+                        <p>Second tab content...</p>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-three-eg1" role="tabpanel" aria-labelledby="nav-three-eg1-tab">
+                        <p>Third tab content...</p>
+                    </div>
+                </div>
+                <!-- End Tab Content -->
+            </div>
+
+            <div class="tab-pane fade" id="nav-html1" role="tabpanel" aria-labelledby="nav-htmlTab1">
+                <div class="card mb-3 mb-lg-5">
+                    {#{% include 'admin/tableau/card.html.twig'  with {'titre':titre } %}#}
+                    <div class="table-responsive datatable-custom">
+                        {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
+                        <tbody class="tbody">
+                        {% for data in finalise %}
+
+                            <tr>
+                                <td class="table-column-pr-0">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
+                                        <label class="custom-control-label" for="usersDataCheck4"></label>
+                                    </div>
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.numero }}
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.dateReception | date("m-d-Y") }}
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.objet }}
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.categorie }}
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.exp.nom }}
+                                </td>
+                                <td class="table-column-pr-0">
+                                    {{ data.recep.nom }}
+                                </td>
+                                <td class="active">
+                                    {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
+                                    {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
+
+                                {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                    {{ include ('admin/tableau/tableau_card_footer.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <!-- End Tab Content -->
+    </div>
+
+
+{% endblock %}
+

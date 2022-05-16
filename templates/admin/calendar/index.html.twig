@@ -7,7 +7,7 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col-sm mb-2 mb-sm-0">
-                <h1 class="page-header-title">Departement</h1>
+                <h1 class="page-header-title">Evenements</h1>
             </div>
 
             <div class="col-sm-auto">
@@ -19,7 +19,7 @@
     </div>
     <!-- Card -->
     <div class="card mb-3 mb-lg-5">
-        {% include 'admin/tableau/card.html.twig'  with {'titre':new } %}
+        {% include 'admin/tableau/card.html.twig'  with {'titre':titre } %}
         <div class="table-responsive datatable-custom">
             {% include 'admin/tableau/tableau_header.html.twig' with {'tableau':tableau } %}
             <tbody class="tbody">

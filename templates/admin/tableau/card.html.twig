@@ -3,8 +3,9 @@
     <div class="row justify-content-between align-items-center flex-grow-1">
         <div class="col-12 col-md">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 class="card-header-title">Liste des {{ titre  }}s</h5>
-
+                {% if titre != '' %}
+                <h5 class="card-header-title">{{ titre  }}s</h5>
+                {% endif %}
                 <!-- Datatable Info -->
                 <div id="datatableCounterInfo" style="display: none;">
                     <div class="d-flex align-items-center">

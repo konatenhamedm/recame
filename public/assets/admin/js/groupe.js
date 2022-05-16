@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     // setup an "add a tag" link
     var $addTagButton = $('.add_groupe');
+
     /*var $after = $('tr');*/
     /*var $newLinkLi = $('<li></li>').append($addTagButton);*/
 
@@ -31,14 +32,14 @@ $(document).ready(function () {
         newForm = newForm.replace(/__name__/g, index);
         $collectionHolder.data('index', index + 1);
 
-        var $card = $('<div class="container col-md-12"></div>')
+        var $card = $('<span class="container col-md-12"></span>')
         /*  var $cardbody = $('<div class="row"></div>').append(newForm);*/
 
         $card.append(newForm);
 
         addRemoveButton($card);
-
-        $collectionHolder.find('.after').before($card);
+        $collectionHolder.children("input[type='hidden']:first").before($card)
+        //$collectionHolder.find('.after').before($card);
 
     }
 

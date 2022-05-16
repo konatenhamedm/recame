@@ -62,6 +62,11 @@ class Calendar
      */
     private $active;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="calendars")
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +176,18 @@ class Calendar
     public function setActive(string $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

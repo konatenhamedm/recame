@@ -1,19 +1,72 @@
 {% block page_content %}
     {% form_theme form 'widget/fields-block.html.twig' %}
-    <div class="modal-header">
-        <h4 id="editUserModalTitle" class="modal-title">Ajouter calendrie</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <div class="modal-header bg-primary">
+        <h2 id="editUserModalTitle" class="modal-title " style="margin-top: -15px;color: white">NOUVEAU-{{ titre | upper  }}
+        </h2>
+        <button type="button" class="close" data-dismiss="modal" style="margin-top: -15px;color: white"
+                aria-hidden="true">×
+        </button>
     </div>
-    <hr>
     {{ form_start(form, {'attr': {'role':'form', 'class': 'form'}}) }}
     <div class="modal-body ">
         {# {{ include('includes/ajax/response.html.twig') }} #}
         <div class="row">
-            <div class="form-group col-12 mb-2">
+            <div class="form-group col-md-1">
 
-                {{ form_widget(form)}}
+                {{ form_widget(form.all_day,{'attr':{'class':'form-control border-primary checkbox','id':'userinput1','placeholder':'All days'}}) }}
 
             </div>
+            <div class="col-md-6 " style="margin-left: -25px;margin-bottom: -15px">
+
+                <span style="font-weight: bolder">All days</span>
+            </div>
+
+        </div>
+
+        <div class="contenu" style="margin-top: -10px">
+            <div class="row">
+                <div class="form-group col-md-6 ">
+                    <label class="sr-onl" for="userinput1">Titre</label>
+                    {{ form_widget(form.title,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Titre','required':'required' }}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="sr-onl" for="userinput1">Description</label>
+                    {{ form_widget(form.description,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Type de Acte' }}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 ">
+                    <label class="sr-onl" for="userinput1">Debut</label>
+                    {{ form_widget(form.start,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Debut'}}) }}
+
+                </div>
+                <div class="form-group col-md-6 ">
+                    <label class="sr-onl" for="userinput1">Fin</label>
+                    {{ form_widget(form.end,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Fin','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4 ">
+                    <label class="sr-onl" for="userinput1">Couleur fond</label>
+                    {{ form_widget(form.background_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Vendeur','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-4 ">
+                    <label class="sr-onl" for="userinput1">Couleur de la bordure</label>
+                    {{ form_widget(form.border_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Couleur de la bordure','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+                <div class="form-group col-md-4 ">
+                    <label class="sr-onl" for="userinput1">Couleur du texte</label>
+                    {{ form_widget(form.text_color,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Couleur du texte','required':'required'}}) }}
+                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="modal-footer">

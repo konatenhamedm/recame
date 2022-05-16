@@ -67,6 +67,11 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/produit/new", name="produit_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UploaderHelper $uploaderHelper
+     * @param ProduitRepository $repository
+     * @return Response
      */
     public function new(Request $request, EntityManagerInterface $em, UploaderHelper $uploaderHelper, ProduitRepository $repository): Response
     {
@@ -88,38 +93,13 @@ class ProduitController extends AbstractController
 
             if ($form->isValid()) {
                 $brochureFile = $form->get('image')->getData(); //get('image_prod')->getData();
-
+                // dd($brochureFile);
                 foreach ($brochureFile as $image) {
-                    /*dd($image);*/
-                    if ($image->getPath() == null){
-
-                        // dd($image->getPath() );
-
-                        foreach ($_FILES['produit']['tmp_name']['image'] as $temp){
-
-                            foreach ($_FILES['produit']['name']['image'] as $name){
-                                //dd($_FILES['produit']['name']['image'] );
-
-                                    $fileName = uniqid();
-                                    // dd($name);   if ($temp['path'] !== null){
-                                    $extension = pathinfo($name['path'],PATHINFO_EXTENSION);
-                                    // $newFilename = $fileName. '.' . $extension;
-                                     // dd($extension);
-                                    try {
-                                        $newFilename = $fileName. '.' . $extension;
-
-                                        move_uploaded_file($temp['path'], $this->getParameter('images_directory').'/'.$newFilename);
-                                    } catch (FileException $e) {
-                                        // ... handle exception if something happens during file upload
-                                        return $e; // for example
-                                    }
-                                    $image->setPath($newFilename);
-
-
-                            }
-                        }
-
-                    }
+                    $file = new File($image->getPath());
+                    $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                    // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $newFilename);
+                    $image->setPath($newFilename);
                 }
                 $produit->setActive(1);
                 $em->persist($produit);
@@ -338,6 +318,76 @@ class ProduitController extends AbstractController
             'active' => $parent->getActive(),
         ], 200);
 
+    }
+
+    /**
+     * @Route("/produit/new1", name="produit_new1", methods={"GET","POST"})
+     */
+    public function new1(Request $request, EntityManagerInterface $em, UploaderHelper $uploaderHelper, ProduitRepository $repository): Response
+    {
+        $produit = new Produit();
+
+      /*  $image = new Image();
+        $image->setPath('b95ee6238b459415defc2c95443ebe74.jpg')
+            ->setTitre("frrrr")
+            ->setDescription("rrrrr");
+
+        $image1 = new Image();
+
+        $image1->setPath("b95ee6238b459415defc2c95443ebe74.jpg")
+            ->setTitre("frrrr")
+            ->setDescription("rrrrr");
+        $produit->addImage($image)
+                ->addImage($image1)
+        ;*/
+
+        $form = $this->createForm(ProduitType::class, $produit, [
+            'method' => 'POST',
+            'action' => $this->generateUrl('produit_new')
+        ]);
+
+        $form->handleRequest($request);
+
+        $isAjax = $request->isXmlHttpRequest();
+
+        if ($form->isSubmitted()) {
+            $response = [];
+            $statut = 1;
+            $redirect = $this->generateUrl('produit');
+
+            if ($form->isValid()) {
+
+                $brochureFile = $form->get('image')->getData(); //get('image_prod')->getData();
+             // dd($brochureFile);
+                foreach ($brochureFile as $image) {
+                    $file = new File($image->getPath());
+                    $newFilename = md5(uniqid()) . '.' . $file->guessExtension();
+                    // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($this->getParameter('images_directory'), $newFilename);
+                    $image->setPath($newFilename);
+                }
+                $produit->setActive(1);
+                $em->persist($produit);
+                $em->flush();
+
+                $message = 'Opération effectuée avec succès';
+
+                $this->addFlash('success', $message);
+
+            }
+            if ($isAjax) {
+                return $this->json(compact('statut', 'message', 'redirect'));
+            } else {
+                if ($statut == 1) {
+                    return $this->redirect($redirect);
+                }
+            }
+        }
+
+        return $this->render('admin/produit/index1.html.twig', [
+            'produit' => $produit,
+            'form' => $form->createView(),
+        ]);
     }
 }
   

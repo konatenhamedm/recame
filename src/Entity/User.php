@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -51,6 +53,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="integer")
      */
     private $active;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CourierArrive::class, mappedBy="user")
+     */
+    private $courierArrives;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CourierArrive::class, mappedBy="exp")
+     */
+    private $exp;
+
+    public function __construct()
+    {
+        $this->courierArrives = new ArrayCollection();
+        $this->exp = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -173,6 +191,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActive(int $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CourierArrive>
+     */
+    public function getCourierArrives(): Collection
+    {
+        return $this->courierArrives;
+    }
+
+    public function addCourierArrife(CourierArrive $courierArrife): self
+    {
+        if (!$this->courierArrives->contains($courierArrife)) {
+            $this->courierArrives[] = $courierArrife;
+            $courierArrife->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourierArrife(CourierArrive $courierArrife): self
+    {
+        if ($this->courierArrives->removeElement($courierArrife)) {
+            // set the owning side to null (unless already changed)
+            if ($courierArrife->getUser() === $this) {
+                $courierArrife->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CourierArrive>
+     */
+    public function getExp(): Collection
+    {
+        return $this->exp;
+    }
+
+    public function addExp(CourierArrive $exp): self
+    {
+        if (!$this->exp->contains($exp)) {
+            $this->exp[] = $exp;
+            $exp->setExp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExp(CourierArrive $exp): self
+    {
+        if ($this->exp->removeElement($exp)) {
+            // set the owning side to null (unless already changed)
+            if ($exp->getExp() === $this) {
+                $exp->setExp(null);
+            }
+        }
 
         return $this;
     }

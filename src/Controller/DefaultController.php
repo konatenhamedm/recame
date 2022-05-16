@@ -50,7 +50,7 @@ class DefaultController extends AbstractController
         return $this->render("calendar/calendar.html.twig",compact('data'));
     }
     /**
-     * @Route("/", name="home", methods={"GET", "POST"})
+     * @Route("/siteweb", name="home", methods={"GET", "POST"})
      * @param Request $request
      * @param CategorieRepository $categorieRepository
      * @return Response
@@ -85,8 +85,6 @@ class DefaultController extends AbstractController
     public function afficheProduitCategorie($id, ProduitRepository $produitRepository): Response
     {
         $data = $produitRepository->affiche_produit_all($id);
-
-
         return $this->render('fils/affiche_produit_dune_categorie.html.twig', [
             'data' => $data
         ]);

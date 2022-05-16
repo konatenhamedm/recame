@@ -30,9 +30,14 @@
 
 {% endblock %}
 {% block javascripts %}
-
+    <script src="{{ asset('assets/HoldOn.min.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+
+
   window.onload =(e) => {
+
+
       console.log(e)
      let calendarElt = document.querySelector("#calendrier")
       let calendar = new FullCalendar.Calendar(calendarElt,{
@@ -60,6 +65,8 @@
           editable:true,
           eventResizableFromStart:true,
           eventClick: function(calEvent, jsEvent, view, resourceObj) {
+           console.log(calEvent)
+
               /*Open Sweet Alert*/
               swal({
                   title: calEvent.title,//Event Title
@@ -69,16 +76,24 @@
           }
       });
 
-      calendar.on('dateClick', function(info) {
+   /*   calendar.on('dateClick', function(info) {
           birthday = new Date();
           year = new Date(info.start).getFullYear();
           month = new Date(info.start).getMonth();
           day = new Date(info.start).getDate();
           //console.log(info);
           alert('clicked on ' + info.dateStr);
-      });
+      });*/
       calendar.on('eventChange',(e)=>{
          let url =  `/api/${e.event.id}/edit`
+          var options = {
+              theme:"sk-rect",
+              message:'some cool message for your user here ! Or where the logo is ! Your skills are the only limit. ',
+              backgroundColor:"#1847B1",
+              textColor:"white"
+          };
+
+          HoldOn.open(options);
 
           let donnees = {
              "title":e.event.title,
@@ -94,7 +109,10 @@
           let xhr = new XMLHttpRequest()
            xhr.open("PUT",url)
            xhr.send(JSON.stringify(donnees))
-
+          const myTimeout = setTimeout(myGreeting, 5000);
+          function myGreeting() {
+              HoldOn.close();
+          }
       });
       /*calendar.on('dateClick', function(info) {
           console.log('clicked on ' + info.dateStr);

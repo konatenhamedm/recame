@@ -27,8 +27,16 @@ class Services
 
     public function getRoute()
     {
+        $route = "";
+
+        if (($this->route === "courierDepart") || ($this->route === "courierInterne")){
+            $route = "courierArrive";
+        }else{
+            $route = $this->route;
+        }
+
 //dd($this->route);
-        return $this->route;
+        return $route;
     }
 
     public function listeModule()
@@ -82,6 +90,13 @@ class Services
             'produit'=>'produit',
             'partenaire'=>'partenaire',
             'categorie'=>'categorie',
+            'acte'=>'acte',
+            'typeActe'=>'typeActe',
+            'client'=>'client',
+            'courierArrive'=>'courierArrive',
+            'courierDepart'=>'courierDepart',
+            'courierInterne'=>'courierInterne',
+            'calendar'=>'calendar',
         ];
      /*   foreach ($this->container as $el=> $params) {
           $resultat=  $params->getDefaults();
