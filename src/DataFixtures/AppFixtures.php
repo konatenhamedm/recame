@@ -58,14 +58,14 @@ class AppFixtures extends Fixture
         $parent->setActive(1);
         $manager->persist($parent);
 
-        $user = new User();
+        $user1 = new User();
         $password = "achi";
-        $user->setPassword($this->encode->hashPassword($user, $password));
-        $user->setActive(1);
-        $user->setNom("Achi");
-        $user->setPrenoms("Achi");
-        $user->setEmail("achi@gmail.com");
-        $manager->persist($user);
+        $user1->setPassword($this->encode->hashPassword($user1, $password));
+        $user1->setActive(1);
+        $user1->setNom("Achi");
+        $user1->setPrenoms("Achi");
+        $user1->setEmail("achi@gmail.com");
+        $manager->persist($user1);
 
         $icon1 = new Icons();
 
@@ -94,9 +94,9 @@ class AppFixtures extends Fixture
           $user->setNom('Konate')
               ->setemail('konatenhamed@gmail.com')
               ->setPrenoms('Hamed')
-              ->setPassword('$2y$13$qo4/UPpc/bBO5ru6zXxnFuDwJxxnf5x1BbqvX5ugyLodW9rzqSY2S')
+              ->setPassword($this->encode->hashPassword($user, "konate"))
               ->setActive(1);
-
+        $manager->persist($user);
         /*  $mod = new Module();
           for ($i = 1; $i <= 2000; $i++) {
            $group[$i] = new Groupe();
