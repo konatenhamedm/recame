@@ -143,13 +143,13 @@ class AppFixtures extends Fixture
             ->setTitre('Courrier départ');
         $manager->persist($groupe2);
 
-        $groupe3 = new Groupe();
+ /*       $groupe3 = new Groupe();
         $groupe3->setIcon($icon1)
             ->setLien('type')
             ->setModule($mod2)
             ->setOrdre(1)
             ->setTitre('Type acte');
-        $manager->persist($groupe3);
+        $manager->persist($groupe3);*/
 
         $groupe6 = new Groupe();
         $groupe6->setIcon($icon1)
