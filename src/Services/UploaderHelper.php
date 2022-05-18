@@ -22,6 +22,7 @@ class UploaderHelper
         $file->move($this->getTargetDir(), $fileName);
         return $fileName;
     }
+
     public function getTargetDir() {
         return $this->targetDir;
     }

@@ -45,6 +45,16 @@ class ActeRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getFichier($value){
+        return $this->createQueryBuilder("a")
+            ->select("f.path","f.titre")
+            ->innerJoin('a.fichiers','f')
+            ->where('a.id=:id')
+            ->setParameter('id', $value)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Acte[] Returns an array of Acte objects
 //     */

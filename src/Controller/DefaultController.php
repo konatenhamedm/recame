@@ -61,7 +61,7 @@ class DefaultController extends AbstractController
        // dd($strs);
         $data = $categorieRepository->listeCategorie();
 /*dd( $data);*/
-        return $this->render('fils/home.html.twig', [
+        return $this->render('admin/produit/test.html.twig', [
             'pagination' => $data
         ]);
     }

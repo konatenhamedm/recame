@@ -41,12 +41,20 @@
                          <td>{{ data.description  }}
                         {#{{ data.all_day }}#}
                     </td>
-                    <td class="active">
+                    {#<td class="active">
                         {% if data.active == 1 %}<span class="legend-indicator bg-success"></span><span class="el">Activé</span>
                         {% else%}<span class="legend-indicator bg-danger"></span><span class="el">Désactivé</span> {% endif %}</td>
-
+#}
                     <td table-column-pr-1>
-                        {% include 'admin/tableau/action.html.twig' with {'data':data ,'module':new ,'modal':modal} %}
+                        <a title="Détails" class="btn btn-sm btn-primary" href="{{ path( new ~ '_show',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                            <i class="tio-visible-outlined"></i>
+                        </a>
+                        <a title="Editer" class="btn btn-sm btn-white" href="{{ path( new ~ '_edit',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                            <i class="tio-edit"></i>
+                        </a>
+                        <a title="Supprime" class="btn btn-sm btn-danger" href="{{ path( new ~ '_edit',{'id':data.id}) }}" {% if modal=="modal" %} data-toggle="modal" data-target="#editUserModal" {% endif %}>
+                            <i class="tio-delete"></i>
+                        </a>
 
                     </td>
                 </tr>

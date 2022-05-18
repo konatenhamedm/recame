@@ -42,7 +42,7 @@ class Services
     public function listeModule()
     {
         $repo = $this->em->getRepository(Groupe::class)->afficheModule();
-
+//dd($repo);
         return $repo;
     }
 

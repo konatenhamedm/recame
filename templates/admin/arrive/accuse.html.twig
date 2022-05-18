@@ -1,17 +1,17 @@
 {% extends 'admin/_includes/index1.html.twig' %}
 
-{% form_theme form _self %}
+{#{% form_theme form _self %}#}
    {% block style %}
        <style>
            .checkbox {
                height: 20px;
-               margin-left: -23px
+               margin-left: -38px
            }
        </style>
    {% endblock %}
 {% from 'admin/macros/fichier-accuse.html.twig' import image %}
 {% block page_content1 %}
-    {# {% form_theme form 'widget/fields-block.html.twig' %}#}
+    {% form_theme form 'widget/fields-block.html.twig' %}
     <div class="modal-header bg-primary">
         <h2 id="editUserModalTitle" class="modal-title " style="margin-top: -15px;color: white">NOUVEAU-{{ titre | upper  }}
         </h2>
@@ -28,7 +28,7 @@
                 {{ form_widget(form.etat,{'attr':{'class':'form-control border-primary checkbox','id':'userinput1','placeholder':'Etat'}}) }}
 
             </div>
-            <div class="col-md-6 " style="margin-left: -55px;margin-top: -1px">
+            <div class="col-md-6 " style="margin-left: -59px;margin-top: 2px">
 
                 <h3 style="font-weight: bolder">Finaliser le courrier</h3>
             </div>
@@ -67,11 +67,7 @@
                     {{ form_widget(form.numero,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Numero'}}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="sr-onl" for="userinput1">Réference</label>
-                    {{ form_widget(form.reference,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Réference'}}) }}
 
-                </div>
 
             </div>
             <div class="row">
@@ -81,11 +77,7 @@
                     {{ form_widget(form.existe,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'rangement'}}) }}
                     {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
                 </div>
-                <div class="form-group col-md-6 ">
-                    <label class="sr-onl" for="userinput1">Type</label>
-                    {{ form_widget(form.type,{'attr':{'class':'form-control border-primary','id':'userinput1','placeholder':'Type','required':'required'}}) }}
-                    {# <input type="text" id="userinput1" class="form-control border-primary" placeholder="Compte contribuable" name="name">#}
-                </div>
+
             </div>
             <div class="row">
                 <div class="form-group col-md-12 ">

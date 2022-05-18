@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Groupe;
+use App\Entity\Icons;
 use App\Entity\Module;
 use App\Entity\ModuleParent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -33,20 +34,43 @@ class GroupeRepository extends ServiceEntityRepository
 
     public function afficheModule()
     {
+   /*     return $this->getEntityManager()
+            ->createQuery(
+                '  SELECT g.titre as groupe,m.titre as module,p.titre as parent,m.ordre,i.code as icon,g.module
+            FROM 
+           App\Entity\Groupe g
+           ,App\Entity\Module as m 
+            ,App\Entity\ModuleParent as p 
+            ,App\Entity\Icons as i 
+            where g.module=m.id and m.parent=p.id and m.icon=i.id
+            group by m.id
+            order by m.ordre')->getResult();*/
+
+
+   /*     return $this->createQueryBuilder('g')
+            ->select('g.titre as groupe','m.titre as module','p.titre as parent','m.ordre','i.code as icon')
+            ->innerJoin(Module::class,'m','WITH','g.module=m.id')
+            ->innerJoin(ModuleParent::class,'p','WITH','m.parent=p.id')
+            ->leftJoin(Icons::class,'i','WITH','m.icon=i.id')
+            ->groupBy('m.id')
+            ->orderBy('m.ordre')
+            ->getQuery()
+            ->getResult()
+            ;*/
+
         $conn = $this->getEntityManager()
             ->getConnection();
         $sql = "
-            SELECT g.titre as groupe,m.titre as module,p.titre as parent,m.ordre,i.code as icon,g.module_id 
+            SELECT m.id as sd,g.titre as groupe,m.titre as module,p.titre as parent,m.ordre,i.code as icon,g.module_id 
             FROM groupe g
             INNER JOIN module as m on g.module_id=m.id
             INNER JOIN module_parent as p on m.parent_id=p.id
             left JOIN icons as i on m.icon_id=i.id
-            group by m.id
-            order by m.ordre
-           
+            Group by sd
+           order by m.ordre
             ";
         $stmt = $conn->executeQuery($sql);
-        return $stmt->fetchAll();
+        return $stmt->fetchAllAssociative();
 
     }
 

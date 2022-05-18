@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CourierArrive;
+use App\Entity\Fichier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -38,6 +39,16 @@ class CourierArriveRepository extends ServiceEntityRepository
             ->select("count(a.id)")
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function getFichier($value){
+        return $this->createQueryBuilder("a")
+            ->select("f.path","f.titre")
+            ->innerJoin('a.fichiers','f')
+            ->where('a.id=:id')
+            ->setParameter('id', $value)
+            ->getQuery()
+            ->getResult();
     }
 
     /**

@@ -62,14 +62,32 @@ class Acte
      */
     private $fichiers;
 
+
+
     /**
-     * @ORM\ManyToOne(targetEntity=TypeActe::class, inversedBy="actes")
+     * @ORM\Column(type="text")
+     */
+    private $detail;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $details;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Archive::class, mappedBy="acte")
+     */
+    private $archives;
 
     public function __construct()
     {
         $this->fichiers = new ArrayCollection();
+        $this->archives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,14 +208,69 @@ class Acte
         return $this;
     }
 
-    public function getType(): ?TypeActe
+
+    public function getDetail(): ?string
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(string $detail): self
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
+
+        return $this;
+    }
+
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(?TypeActe $type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Archive>
+     */
+    public function getArchives(): Collection
+    {
+        return $this->archives;
+    }
+
+    public function addArchive(Archive $archive): self
+    {
+        if (!$this->archives->contains($archive)) {
+            $this->archives[] = $archive;
+            $archive->setActe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArchive(Archive $archive): self
+    {
+        if ($this->archives->removeElement($archive)) {
+            // set the owning side to null (unless already changed)
+            if ($archive->getActe() === $this) {
+                $archive->setActe(null);
+            }
+        }
 
         return $this;
     }

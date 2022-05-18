@@ -33,11 +33,12 @@ class ClientController extends AbstractController
         return $this->render('admin/client/index.html.twig', [
             'pagination' => $pagination,
             'tableau' => [
-                'photo' => 'photo',
+
                 'Nom' => 'Nom',
                 'Prenoms' => 'Prenoms',
                 'email' => 'email',
                 'profession' => 'profession',
+                'Téléphone' => 'Téléphone',
             ],
             'critereTitre'=>'',
             'modal' => '',
@@ -67,6 +68,15 @@ class ClientController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/modal/show", name="modal_show", methods={"GET","POST"})
+     */
+    public function modal(): Response
+    {
+
+
+        return $this->render('admin/client/modal.html.twig');
+    }
 
     /**
      * @Route("/client/new", name="client_new", methods={"GET","POST"})
@@ -85,41 +95,61 @@ class ClientController extends AbstractController
         ]);
 
         //$numero = 'RCM-' . $repository->getNombre();
-
+        $statut=0;
+        $statuts=0;
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
 
         if ($form->isSubmitted()) {
-            $statut = 1;
-           // dd($form->getData());
+            //dd($isAjax);
+            // dd($form->getData());
             $redirect = $this->generateUrl('client');
 
+
+            /*$extension = strtolower(pathinfo($uploaderHelper->upload($uploadedFile), PATHINFO_EXTENSION));
+            $valide = array('jpg', 'png', 'jpeg');
+                $res ="";
+            if(in_array($extension, $valide))
+            {
+                $res ="YES";
+            }else{
+                $res ="No";
+
+             }*/
+      //  dd($res);
             if ($form->isValid()) {
 
                 $uploadedFile = $form['photo']->getData();
+                    if ($uploadedFile) {
+                        $newFilename = $uploaderHelper->uploadImage($uploadedFile);
+                        $client->setPhoto($newFilename);
+                   }
+               /*  }else{
+                    return $this->redirect($this->generateUrl('modal_show'));
+                }*/
 
-                if ($uploadedFile) {
-                    $newFilename = $uploaderHelper->uploadImage($uploadedFile);
-                    $client->setPhoto($newFilename);
-                }
              /*  $date = \DateTime::format(string $format);
                 $client->setFaitLe($date);*/
                 $client->setActive(1);
                 $em->persist($client);
                 $em->flush();
-
+                $statut = 1;
+                $statuts = 2;
                 $message = 'Opération effectuée avec succès';
 
                 $this->addFlash('success', $message);
 
             }
+
+           // dd($isAjax);
             if ($isAjax) {
                 return $this->json(compact('statut', 'message', 'redirect'));
             } else {
                 if ($statut == 1) {
-                    return $this->redirect($redirect);
+                    return $this->redirectToRoute('client');
                 }
+
             }
         }
 
@@ -159,6 +189,7 @@ class ClientController extends AbstractController
 
                 $uploadedFile = $form['photo']->getData();
                 if ($uploadedFile) {
+
                     $newFilename = $uploaderHelper->uploadImage($uploadedFile);
                     $client->setPhoto($newFilename);
                 }
@@ -188,6 +219,10 @@ class ClientController extends AbstractController
 
     /**
      * @Route("/client/delete/{id}", name="client_delete", methods={"POST","GET","DELETE"})
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Client $client
+     * @return Response
      */
     public function delete(Request $request, EntityManagerInterface $em, Client $client): Response
     {
@@ -206,8 +241,8 @@ class ClientController extends AbstractController
             ->getForm();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()==false) {
+            //dd($form->isSubmitted());
             $em->remove($client);
             $em->flush();
 
@@ -226,7 +261,7 @@ class ClientController extends AbstractController
             if (!$request->isXmlHttpRequest()) {
                 return $this->redirect($redirect);
             } else {
-                return $this->json($response);
+                return $this->redirectToRoute('client');
             }
 
 

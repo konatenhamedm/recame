@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -39,40 +40,76 @@ class ClientType extends AbstractType
                     'constraints'=>new NotBlank(['message'=>'Selectionnez un village']),
                 ])   ;*/
             })
-            ->add('nom')
+            ->add('nom',TextType::class,[
+                'required'=>true
+            ])
             ->add('photo', FileType::class, array(
                 'mapped' => false,
                 'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ],
 
             ))
             ->add('emailConjoint',EmailType::class,[
                 'required'=>false
             ])
-            ->add('prenom')
+            ->add('prenom',TextType::class,[
+                'required'=>true
+            ])
             ->add('dateNaissance', DateType::Class, [
                 "label" => "Date de naissance",
-                "required" => false,
+                "required" => true,
                 "widget" => 'single_text',
                 "input_format" => 'Y-m-d',
                 "by_reference" => true,
                 "empty_data" => '',
             ])
-            ->add('lieuNaissance')
-            ->add('profession')
-            ->add('domicile')
-            ->add('pere')
-            ->add('mere')
-            ->add('etatBienVendu')
-            ->add('adresse')
-            ->add('telDomicile')
-            ->add('telBureau')
-            ->add('telPortable')
+            ->add('lieuNaissance',TextType::class,[
+                'required'=>true
+            ])
+            ->add('profession',TextType::class,[
+                'required'=>false
+            ])
+            ->add('domicile',TextType::class,[
+                'required'=>false
+            ])
+            ->add('pere',TextType::class,[
+                'required'=>false
+            ])
+            ->add('mere',TextType::class,[
+                'required'=>false
+            ])
+            ->add('etatBienVendu',TextType::class,[
+                'required'=>false
+            ])
+            ->add('adresse',TextType::class,[
+                'required'=>false
+            ])
+            ->add('telDomicile',TextType::class,[
+                'required'=>false
+            ])
+            ->add('telBureau',TextType::class,[
+                'required'=>false
+            ])
+            ->add('telPortable',TextType::class,[
+                'required'=>true
+            ])
             ->add('email',EmailType::class)
-            ->add('nationalite')
+            ->add('nationalite',TextType::class,[
+                'required'=>false
+            ])
             ->add('situation', ChoiceType::class,
                 [
                     'expanded' => false,
-                    'placeholder' => 'Situation',
+                   /* 'placeholder' => 'Situation',*/
                     'required' => true,
                     // 'attr' => ['class' => 'select2_multiple'],
                     'multiple' => false,
@@ -83,6 +120,23 @@ class ClientType extends AbstractType
                         'EPOUX' => 'EPOUX (SE)',
                         'VEUF' => 'VEUF (VE)',
                         'DIVORCE' => 'DIVORCE (E)',
+
+                    ]),
+                ])
+
+            ->add('etat', ChoiceType::class,
+                [
+                    'expanded' => false,
+                    /* 'placeholder' => 'Situation',*/
+                    'required' => true,
+                    // 'attr' => ['class' => 'select2_multiple'],
+                    'multiple' => false,
+                    //'choices_as_values' => true,
+
+                    'choices' => array_flip([
+                        'DIVORCE' => 'EN CAS DE DIVORCE ',
+                        'DECES' => 'EN CAS DE DECES DU CONJOINT',
+
 
                     ]),
                 ])

@@ -41,42 +41,42 @@ class Client
     private $lieuNaissance;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $profession;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $domicile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $pere;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $mere;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $etatBienVendu;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $telDomicile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $telBureau;
 
@@ -86,17 +86,17 @@ class Client
     private $telPortable;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $nationalite;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $situation;
 
@@ -232,6 +232,14 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  * @Assert\Image(
+     *     allowLandscape = false,
+     *     allowPortrait = false
+     * )
+     * * @Assert\File(
+     *     mimeTypes = {"image/png", "image/jpeg"},
+     *     mimeTypesMessage = "You can only be allowed to upload Image file"
+     * )
      */
     private $photo;
 
@@ -261,14 +269,9 @@ class Client
     private $recep;
 
     /**
-     * @ORM\OneToMany(targetEntity=TypeActe::class, mappedBy="vendeur")
+     * @ORM\Column(type="string", length=255)
      */
-    private $vendeur;
-
-    /**
-     * @ORM\OneToMany(targetEntity=TypeActe::class, mappedBy="acheteur")
-     */
-    private $acheteur;
+    private $etat;
 
 
     public function __construct()
@@ -276,8 +279,6 @@ class Client
         $this->calendars = new ArrayCollection();
         $this->expediteur = new ArrayCollection();
         $this->recep = new ArrayCollection();
-        $this->vendeur = new ArrayCollection();
-        $this->acheteur = new ArrayCollection();
         $this->faitLe = new \DateTime('now');
     }
 
@@ -916,63 +917,17 @@ class Client
         return $this;
     }
 
-    /**
-     * @return Collection<int, TypeActe>
-     */
-    public function getVendeur(): Collection
+    public function getEtat(): ?string
     {
-        return $this->vendeur;
+        return $this->etat;
     }
 
-    public function addVendeur(TypeActe $vendeur): self
+    public function setEtat(string $etat): self
     {
-        if (!$this->vendeur->contains($vendeur)) {
-            $this->vendeur[] = $vendeur;
-            $vendeur->setVendeur($this);
-        }
+        $this->etat = $etat;
 
         return $this;
     }
 
-    public function removeVendeur(TypeActe $vendeur): self
-    {
-        if ($this->vendeur->removeElement($vendeur)) {
-            // set the owning side to null (unless already changed)
-            if ($vendeur->getVendeur() === $this) {
-                $vendeur->setVendeur(null);
-            }
-        }
 
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, TypeActe>
-     */
-    public function getAcheteur(): Collection
-    {
-        return $this->acheteur;
-    }
-
-    public function addAcheteur(TypeActe $acheteur): self
-    {
-        if (!$this->acheteur->contains($acheteur)) {
-            $this->acheteur[] = $acheteur;
-            $acheteur->setAcheteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAcheteur(TypeActe $acheteur): self
-    {
-        if ($this->acheteur->removeElement($acheteur)) {
-            // set the owning side to null (unless already changed)
-            if ($acheteur->getAcheteur() === $this) {
-                $acheteur->setAcheteur(null);
-            }
-        }
-
-        return $this;
-    }
 }

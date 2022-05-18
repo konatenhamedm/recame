@@ -24,13 +24,12 @@ class CourierArriveType extends AbstractType
     {
         $builder
             ->add('existe', CheckboxType::class, [
-
+                'label'=>false,
                 'required' => false,
             ])
             ->add('numero')
-            ->add('reference')
             ->add('etat',CheckboxType::class, [
-
+                'label'=>false,
         'required' => false,
     ])
             ->add('rangement')
@@ -43,7 +42,7 @@ class CourierArriveType extends AbstractType
                 "empty_data" => '',
             ])
             ->add('objet', TextType::class)
-            ->add('type', ChoiceType::class,
+          /*  ->add('type', ChoiceType::class,
                 [
                     'expanded' => false,
                     'required' => true,
@@ -58,7 +57,7 @@ class CourierArriveType extends AbstractType
 
 
                     ]),
-                ])
+                ])*/
             ->add('user', EntityType::class, [
                 'required' => false,
                 'class' => User::class,

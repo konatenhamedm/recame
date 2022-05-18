@@ -39,77 +39,13 @@ class CourierArriveController extends AbstractController
                 'numero' => 'numero',
                 'Date_de_réception' => 'Date_de_réception',
                 'Objet' => 'Objet',
-                'Categorie' => 'Categorie',
                 'Expediteur' => 'Expediteur',
-                'Destinataire' => 'Destinataire'
             ],
             'critereTitre' => '',
             'modal' => 'modal',
             'position' => 4,
             'active' => 7,
-            'titre' => 'Liste des courriers arrivé',
-
-        ]);
-    }
-
-    /**
-     * @Route("/courrier-depart", name="courierDepart")
-     * @param CourierArriveRepository $repository
-     * @return Response
-     */
-    public function depart(CourierArriveRepository $repository): Response
-    {
-
-        $depart = $repository->findBy(['type'=>'DEPART','etat'=>0]);
-        $depart_finalise = $repository->findBy(['type'=>'DEPART','etat'=>1]);
-
-        return $this->render('admin/depart/index.html.twig', [
-            'depart' => $depart,
-            'finalise' => $depart_finalise,
-            'tableau' => [
-                'numero' => 'numero',
-                'Date_de_réception' => 'Date_de_réception',
-                'Objet' => 'Objet',
-                'Categorie' => 'Categorie',
-                'Expediteur' => 'Expediteur',
-                'Destinataire' => 'Destinataire'
-            ],
-            'critereTitre' => '',
-            'modal' => 'modal',
-            'position' => 4,
-            'active' => 7,
-            'titre' => 'Liste des courriers depart',
-
-        ]);
-    }
-
-    /**
-     * @Route("/courrier-interne", name="courierInterne")
-     * @param CourierArriveRepository $repository
-     * @return Response
-     */
-    public function interne(CourierArriveRepository $repository): Response
-    {
-
-        $interne = $repository->findBy(['type'=>'INTERNE','etat'=>0]);
-        $interne_finalise = $repository->findBy(['type'=>'INTERNE','etat'=>1]);
-
-        return $this->render('admin/interne/index.html.twig', [
-            'interne' => $interne,
-            'finalise' => $interne_finalise,
-            'tableau' => [
-                'numero' => 'numero',
-                'Date_de_réception' => 'Date_de_réception',
-                'Objet' => 'Objet',
-                'Categorie' => 'Categorie',
-                'Expediteur' => 'Expediteur',
-                'Destinataire' => 'Destinataire'
-            ],
-            'critereTitre' => '',
-            'modal' => 'modal',
-            'position' => 4,
-            'active' => 7,
-            'titre' => 'Liste des courriers interne',
+            'titre' => 'Liste des courriers arrivés',
 
         ]);
     }
@@ -119,9 +55,9 @@ class CourierArriveController extends AbstractController
      * @param CourierArrive $courierArrive
      * @return Response
      */
-    public function show(CourierArrive $courierArrive): Response
+    public function show(CourierArrive $courierArrive,$id,CourierArriveRepository $repository): Response
     {
-        $type = $courierArrive->getType();
+        //$type = $courierArrive->getType();
 
         $form = $this->createForm(CourierArriveType::class, $courierArrive, [
 
@@ -132,7 +68,8 @@ class CourierArriveController extends AbstractController
         ]);
 
         return $this->render('admin/arrive/voir.html.twig', [
-            'titre'=>$type,
+            'titre'=>'ARRIVE',
+            'data'=>$repository->getFichier($id),
             'courierArrive' => $courierArrive,
             'form' => $form->createView(),
         ]);
@@ -161,17 +98,11 @@ class CourierArriveController extends AbstractController
 
         $form->handleRequest($request);
 
-        $route ="courierArrive";
-        if ($form->getData()->getType() === "DEPART")
-            $route='courierDepart';
-        if ($form->getData()->getType() === "INTERNE")
-            $route='courierInterne';
-
         $isAjax = $request->isXmlHttpRequest();
-       $type = $form->getData()->getType();
+      // $type = $form->getData()->getType();
         if ($form->isSubmitted()) {
             $statut = 1;
-            $redirect = $this->generateUrl($route);
+            $redirect = $this->generateUrl('courierArrive');
             $brochureFile = $form->get('fichiers')->getData();
 
         //    dd($brochureFile);
@@ -186,6 +117,7 @@ class CourierArriveController extends AbstractController
                     $image->setPath($newFilename);
                 }
                 $courierArrive->setEtat(false);
+                $courierArrive->setType('ARRIVE');
                 $courierArrive->setCategorie('COURRIER');
                 $courierArrive->setActive(1);
                 $em->persist($courierArrive);
@@ -206,7 +138,7 @@ class CourierArriveController extends AbstractController
         }
 
         return $this->render('admin/arrive/new.html.twig', [
-            'titre'=>$type,
+            'titre'=>'ARRIVE',
             'courierArrive' => $courierArrive,
             'form' => $form->createView(),
         ]);
@@ -219,13 +151,9 @@ class CourierArriveController extends AbstractController
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(Request $request, CourierArrive $courierArrive, EntityManagerInterface $em): Response
+    public function edit(Request $request, CourierArrive $courierArrive, EntityManagerInterface $em,$id,CourierArriveRepository $repository): Response
     {
-      $route ="courierArrive";
-      if ($courierArrive->getType() === "DEPART")
-          $route='courierDepart';
-        if ($courierArrive->getType() === "INTERNE")
-            $route='courierInterne';
+
 
         $form = $this->createForm(CourierArriveType::class, $courierArrive, [
             'method' => 'POST',
@@ -236,10 +164,10 @@ class CourierArriveController extends AbstractController
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
-        $type = $form->getData()->getType();
+       // $type = $form->getData()->getType();
         if ($form->isSubmitted()) {
 
-            $redirect = $this->generateUrl($route);
+            $redirect = $this->generateUrl('courierArrive');
             $brochureFile = $form->get('fichiers')->getData();
 
             if ($form->isValid()) {
@@ -270,7 +198,8 @@ class CourierArriveController extends AbstractController
         }
 
         return $this->render('admin/arrive/edit.html.twig', [
-            'titre'=>$type,
+            'titre'=>'ARRIVE',
+            'data'=>$repository->getFichier($id),
             'courierArrive' => $courierArrive,
             'form' => $form->createView(),
         ]);
@@ -285,15 +214,9 @@ class CourierArriveController extends AbstractController
      */
     public function accuse(Request $request, CourierArrive $courierArrive, EntityManagerInterface $em): Response
     {
-        $route ="courierArrive";
-        if ($courierArrive->getType() === "DEPART")
-            $route='courierDepart';
-        if ($courierArrive->getType() === "INTERNE")
-            $route='courierInterne';
-
         $form = $this->createForm(CourierArriveType::class, $courierArrive, [
             'method' => 'POST',
-            'action' => $this->generateUrl('courierArrive_edit', [
+            'action' => $this->generateUrl('accuse_edit', [
                 'id' => $courierArrive->getId(),
             ])
         ]);
@@ -306,10 +229,10 @@ class CourierArriveController extends AbstractController
         $form->handleRequest($request);
 
         $isAjax = $request->isXmlHttpRequest();
-        $type = $form->getData()->getType();
+      //  $type = $form->getData()->getType();
         if ($form->isSubmitted()) {
 
-            $redirect = $this->generateUrl($route);
+            $redirect = $this->generateUrl('courierArrive');
             $brochureFile = $form->get('fichiers')->getData();
 
             if ($form->isValid()) {
@@ -481,16 +404,15 @@ class CourierArriveController extends AbstractController
     public function existe(CourierArriveRepository $repository,Request $request): Response
     {
         $response = new Response();
+        $format="";
+        $nombre = $repository->getNombre();
+        $date = date('y');
+        $format = $date.'-'.$nombre.' '.'A';
+
         if ($request->isXmlHttpRequest()) {
-            $nombre = $repository->getNombre();
-            $type = $request->get('type');
-            $date = date('y');
-            if ($type === "ARRIVE")
-                 $format = $date.'-'.$nombre.' '.'A';
-            if ($type === "DEPART")
-                $format = $date.'-'.$nombre.' '.'D';
-            if ($type === "INTERNE")
-                $format = $date.'-'.$nombre.' '.'I';
+
+
+
 
             $arrayCollection[] = array(
                 'nom' =>  $format,

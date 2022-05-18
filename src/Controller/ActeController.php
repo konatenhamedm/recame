@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Acte;
 use App\Form\ActeType;
 use App\Repository\ActeRepository;
+use App\Repository\CourierArriveRepository;
 use App\Services\PaginationService;
 use App\Services\UploaderHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,9 +56,9 @@ class ActeController extends AbstractController
      * @param Acte $acte
      * @return Response
      */
-    public function show(acte $acte): Response
+    public function show(acte $acte,$id,CourierArriveRepository $repository): Response
     {
-        $type = $acte->getType();
+      /*  $type = $acte->getType();*/
 
         $form = $this->createForm(ActeType::class, $acte, [
 
@@ -68,6 +70,7 @@ class ActeController extends AbstractController
 
         return $this->render('admin/acte/voir.html.twig', [
             'titre'=>'ACTE',
+            'data'=>$repository->getFichier($id),
             'acte' => $acte,
             'form' => $form->createView(),
         ]);
@@ -94,7 +97,7 @@ class ActeController extends AbstractController
 
 
         $isAjax = $request->isXmlHttpRequest();
-       $type = $form->getData()->getType();
+      /* $type = $form->getData()->getType();*/
         if ($form->isSubmitted()) {
             $statut = 1;
             $redirect = $this->generateUrl('acte');
@@ -103,10 +106,10 @@ class ActeController extends AbstractController
         //    dd($brochureFile);
             if ($form->isValid()) {
                 $nombre = $repository->getNombre();
-                $type = $request->get('type');
+              /*  $type = $request->get('type');*/
                 $date = date('y');
 
-                    $format = $date.'-'.$nombre.' '.'ACTE';
+                 //   $format = $date.'-'.$nombre.' '.'ACTE';
 
                 foreach ($brochureFile as $image) {
                     $file = new File($image->getPath());
@@ -115,7 +118,9 @@ class ActeController extends AbstractController
                     $file->move($this->getParameter('images_directory'), $newFilename);
                     $image->setPath($newFilename);
                 }
-                $acte->setNumero($format);
+                $acte
+                    ->setType('VENTE')
+                ;
                 $acte->setActive(1);
                 $em->persist($acte);
                 $em->flush();
@@ -142,13 +147,27 @@ class ActeController extends AbstractController
     }
 
     /**
+     * @Route("/typeacte/choice", name="choice_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function typeActe(Request $request): Response
+    {
+
+        return $this->render('admin/acte/type.html.twig', [
+            'titre'=>'TYPE ACTE',
+
+        ]);
+    }
+
+    /**
      * @Route("/acte/{id}/edit", name="acte_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Acte $acte
      * @param EntityManagerInterface $em
      * @return Response
      */
-    public function edit(Request $request,Acte $acte, EntityManagerInterface $em): Response
+    public function edit(Request $request,Acte $acte, EntityManagerInterface $em,$id,CourierArriveRepository $repository): Response
     {
 
 
@@ -196,6 +215,7 @@ class ActeController extends AbstractController
 
         return $this->render('admin/acte/edit.html.twig', [
             'titre'=>'ACTE',
+            'data'=>$repository->getFichier($id),
             'acte' => $acte,
             'form' => $form->createView(),
         ]);

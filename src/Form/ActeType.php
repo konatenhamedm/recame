@@ -4,14 +4,15 @@ namespace App\Form;
 
 use App\Entity\Acte;
 use App\Entity\Client;
-use App\Entity\TypeActe;
 use \App\Form\FichierActeType;
 use Doctrine\ORM\EntityRepository;
+use Mpdf\Tag\TextArea;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +31,7 @@ class ActeType extends AbstractType
                 "empty_data" => '',
             ])
             ->add('objet',TextType::class)
+            ->add('numero',TextType::class)
             ->add('fichiers', CollectionType::class, [
                 'entry_type' => FichierActeType::class,
                 'entry_options' => [
@@ -43,6 +45,9 @@ class ActeType extends AbstractType
 
             ])
             ->add('montant',MoneyType::class)
+            ->add('detail',TextareaType::class,[
+                'attr' => ['rows' => '4']
+            ])
             ->add('vendeur', EntityType::class, [
                 'required' => false,
                 'class' => Client::class,
@@ -65,7 +70,7 @@ class ActeType extends AbstractType
                 'choice_label' => 'nom',
 
             ])
-            ->add('type',EntityType::class, [
+           /* ->add('type',EntityType::class, [
                 'required' => false,
                 'class' => TypeActe::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -75,7 +80,7 @@ class ActeType extends AbstractType
                 'label' => 'Type acte',
                 'choice_label' => 'titre',
 
-            ])
+            ])*/
         ;
     }
 

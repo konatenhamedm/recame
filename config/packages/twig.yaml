@@ -1,5 +1,5 @@
 twig:
-    form_themes: ['widget/fields-block.html.twig']
+    form_themes: ['bootstrap_5_layout.html.twig']
     default_path: '%kernel.project_dir%/templates'
     globals:
         menu: '@App\Services\Services'
